@@ -24,6 +24,7 @@ from agent_memory.context import Context, pack
 from agent_memory.datasets import Question
 from agent_memory.retrieval import History, Plan, Strategy
 from agent_memory.store import MemoryStore
+from agent_memory.temporal import query_window
 
 BUDGETS = (256, 512, 1024, 2048, 4096, 8192)
 TOP_K = (1, 3, 5, 10, 20)
@@ -98,6 +99,7 @@ def evaluate(
             "split": split_of(q),
             "cluster": cluster_of(q),
             "qtype": q.qtype,
+            "time_expr": query_window(q.question, q.now) is not None,
         }
         for name, strategy in strategies.items():
             plan = strategy(h, q.question, q.now, q.qid)

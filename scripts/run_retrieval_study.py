@@ -45,6 +45,7 @@ from agent_memory.forget import apply, older_than, phatic, role
 from agent_memory.report import budget_to_reach, compare, summarise
 from agent_memory.retrieval import History
 from agent_memory.stats import bootstrap_mean
+from agent_memory.temporal import query_window
 from agent_memory.text import count_tokens
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -198,6 +199,16 @@ def main_stage(cfg: R.RetrieverConfig, half_life: float, lme_limit: int | None) 
             if c["qtype"] == "knowledge-update"
         ],
         "budget_to_reach": budget_to_reach(by_budget, 0.5) + budget_to_reach(by_budget, 0.8),
+        # the window boost can only act on questions that name a time
+        "time_expression_questions": [
+            c
+            for a, b in (("store", "store-no-window"), ("store", "bm25_turns"))
+            if b in strats
+            for split in ("test", "dev")
+            for c in compare(
+                [r for r in all_rows if r["time_expr"]], a, b, value=HEADLINE_BUDGET, split=split
+            )
+        ],
     }
     write("retrieval.json", out)
 
@@ -294,12 +305,14 @@ def diagnostics_stage(lme_limit: int | None) -> None:
     for ds, qs in (("locomo", load_locomo()), ("longmemeval", lme(lme_limit))):
         vis: dict[str, list[float]] = defaultdict(list)
         loc: dict[str, Counter] = defaultdict(Counter)
+        timed: dict[str, list[bool]] = defaultdict(list)
         sizes: list[int] = []
         seen: set[int] = set()
         for q in qs:
             if id(q.history) not in seen:
                 seen.add(id(q.history))
                 sizes.append(sum(count_tokens(t.text) for s in q.history for t in s.turns))
+            timed[q.qtype].append(query_window(q.question, q.now) is not None)
             if (v := lexical_visibility(q)) is not None:
                 vis[q.qtype].append(v)
             if (where := answer_location(q)) is not None:
@@ -320,6 +333,9 @@ def diagnostics_stage(lme_limit: int | None) -> None:
                         "n": len(v),
                     }
                     for qt, v in sorted(vis.items())
+                },
+                "names_a_time": {
+                    qt: {"rate": round(mean(v), 4), "n": len(v)} for qt, v in sorted(timed.items())
                 },
                 "answer_location": {
                     qt: {k: round(n / sum(c.values()), 4) for k, n in sorted(c.items())}

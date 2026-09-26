@@ -161,26 +161,54 @@ def _locomo_evidence(ev: list[str]) -> list[str]:
     return out
 
 
-def iter_json_array(path: Path) -> Iterator[dict]:
-    """Decode a top-level JSON array one element at a time.
+_SEPARATORS = frozenset(" \t\r\n,")
 
-    LongMemEval_S is 277 MB; `json.load` on it builds well over a gigabyte of Python
-    objects. Decoding element by element keeps only the file text plus one question
-    alive at a time.
+
+def iter_json_array(path: Path, chunk: int = 1 << 22) -> Iterator[dict]:
+    """Decode a top-level JSON array of objects one element at a time, reading the file
+    in chunks.
+
+    LongMemEval_S is 277 MB: `json.load` builds well over a gigabyte of Python objects,
+    and even holding the text as one `str` can cost 4 bytes a character once a single
+    emoji appears in it. Here only a few megabytes of text and one question are alive
+    at a time.
     """
-    text = path.read_text("utf-8")
     dec = json.JSONDecoder()
-    i = text.index("[") + 1
-    n = len(text)
-    while True:
-        while i < n and text[i] in " \t\r\n,":
-            i += 1
-        if i >= n:
-            raise ValueError(f"{path}: unterminated JSON array")
-        if text[i] == "]":
-            return
-        obj, i = dec.raw_decode(text, i)
-        yield obj
+    with path.open(encoding="utf-8") as fh:
+        buf, pos = fh.read(chunk), 0
+
+        def refill() -> bool:
+            nonlocal buf, pos
+            more = fh.read(chunk)
+            buf, pos = buf[pos:] + more, 0
+            return bool(more)
+
+        while True:  # find the opening bracket
+            start = buf.find("[", pos)
+            if start >= 0:
+                pos = start + 1
+                break
+            pos = len(buf)
+            if not refill():
+                raise ValueError(f"{path}: no JSON array found")
+        while True:
+            while True:  # skip separators, refilling as needed
+                while pos < len(buf) and buf[pos] in _SEPARATORS:
+                    pos += 1
+                if pos < len(buf) or not refill():
+                    break
+            if pos >= len(buf):
+                raise ValueError(f"{path}: unterminated JSON array")
+            if buf[pos] == "]":
+                return
+            try:
+                obj, end = dec.raw_decode(buf, pos)
+            except json.JSONDecodeError:
+                if not refill():  # the element is cut off by the end of the buffer
+                    raise ValueError(f"{path}: malformed or truncated JSON") from None
+                continue
+            yield obj
+            pos = end
 
 
 def iter_longmemeval(path: Path | None = None) -> Iterator[Question]:

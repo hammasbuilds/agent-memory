@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 import pytest
@@ -32,15 +33,18 @@ def test_longmemeval_loader(lme_file):
     assert abst.evidence_turns == frozenset()
 
 
-def test_iter_json_array_handles_whitespace_and_empty(tmp_path):
+@pytest.mark.parametrize("chunk", [1, 3, 7, 1 << 22])
+def test_iter_json_array_across_chunk_boundaries(tmp_path, chunk):
     p = tmp_path / "a.json"
-    p.write_text(' \n[ {"a": 1} ,\n {"b": [2, 3]} ]\n', "utf-8")
-    assert list(iter_json_array(p)) == [{"a": 1}, {"b": [2, 3]}]
+    items = [{"a": 1, "s": "café \U0001f600"}, {"b": [2, 3], "c": {"d": "]"}}]
+    p.write_text(" \n[ " + " ,\n ".join(json.dumps(i) for i in items) + " ]\n", "utf-8")
+    assert list(iter_json_array(p, chunk)) == items
     p.write_text("[]", "utf-8")
-    assert list(iter_json_array(p)) == []
-    p.write_text('[{"a": 1},', "utf-8")
-    with pytest.raises(ValueError):
-        list(iter_json_array(p))
+    assert list(iter_json_array(p, chunk)) == []
+    for broken in ('[{"a": 1},', '[{"a": 1', "no array"):
+        p.write_text(broken, "utf-8")
+        with pytest.raises(ValueError):
+            list(iter_json_array(p, chunk))
 
 
 def test_missing_data_points_at_the_fetch_script(tmp_path, monkeypatch):
