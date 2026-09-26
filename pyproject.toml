@@ -1,0 +1,38 @@
+[project]
+name = "agent-memory"
+version = "0.1.0"
+description = "A persistent cross-session memory layer for agents - SQLite store, BM25 from scratch, temporal queries, fact supersession - measured on LoCoMo and LongMemEval."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Muhammad Hammas" }]
+keywords = ["agent-memory", "long-term-memory", "bm25", "retrieval", "sqlite", "locomo", "longmemeval"]
+# No runtime dependencies: sqlite3, urllib, json and math from the standard library.
+dependencies = []
+
+[project.scripts]
+agent-memory = "agent_memory.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff==0.16.7"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_memory"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]  # verbatim conversation lines as test data
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
