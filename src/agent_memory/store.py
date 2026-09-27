@@ -89,7 +89,13 @@ def _key(s: str) -> str:
 
 
 class MemoryStore:
-    """A cross-session memory backed by one SQLite file (or ':memory:')."""
+    """A cross-session memory backed by one SQLite file (or ':memory:').
+
+    Time is kept as naive UTC. A timezone-aware datetime passed in anywhere (turn times,
+    `valid_from`, `now`) is converted to UTC first; a naive one is taken to be UTC
+    already, so pass aware datetimes unless your clock really is UTC. When `now` is
+    omitted it is the current UTC time.
+    """
 
     def __init__(self, path: str | Path = ":memory:", config: RetrieverConfig | None = None):
         self.db = sqlite3.connect(str(path))

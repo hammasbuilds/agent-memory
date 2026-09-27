@@ -15,6 +15,8 @@ agent-memory = "agent_memory.cli:main"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff==0.16.7"]
+# only for scripts/calibrate_tokens.py (reference tokenisers; no model weights)
+calibration = ["tiktoken>=0.7", "tokenizers>=0.19"]
 
 [build-system]
 requires = ["hatchling"]

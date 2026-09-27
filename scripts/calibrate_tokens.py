@@ -14,8 +14,11 @@ any model weights:
                 tokenise as it would for the answer arm's qwen2.5:14b-instruct; that is
                 an assumption, not something this script checks.
 
-    PYTHONPATH=src /path/to/python-with-tiktoken-and-tokenizers \
-        scripts/calibrate_tokens.py --qwen /path/to/qwen2.5-tokenizer.json.gz
+Both libraries are in the optional `calibration` dependency group (a plain `uv sync`
+does not install them):
+
+    uv run --group calibration python scripts/calibrate_tokens.py \
+        --qwen /path/to/qwen2.5-coder-tokenizer.json.gz
 
 Writes results/token_calibration.json.
 """
