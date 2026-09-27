@@ -10,21 +10,20 @@ agent-memory --db mem.db history sam employer
 from __future__ import annotations
 
 import argparse
-import hashlib
-import json
 import sys
 from datetime import datetime
 from pathlib import Path
 
 from agent_memory.datasets import Session, Turn, iter_longmemeval, load_locomo
 from agent_memory.forget import POLICY_HELP, parse_policy
+from agent_memory.jsonl import read_jsonl
 from agent_memory.store import MemoryStore
-from agent_memory.temporal import naive
+from agent_memory.temporal import naive, utc_now
 
 
 def _when(s: str | None) -> datetime:
     if s is None:
-        return datetime.now()
+        return utc_now()
     try:
         return naive(datetime.fromisoformat(s))
     except ValueError:
@@ -41,37 +40,9 @@ def _positive(s: str) -> int:
     return n
 
 
-def _read_jsonl(path: Path) -> list[Session]:
-    """Lines of {"session": id, "time": ISO, "speaker": name, "text": ...}."""
-    turns: dict[str, list[Turn]] = {}
-    starts: dict[str, datetime] = {}
-    repeats: dict[tuple[str, str], int] = {}
-    for n, raw in enumerate(path.read_text("utf-8").splitlines(), 1):
-        if not raw.strip():
-            continue
-        try:
-            rec = json.loads(raw)
-            sid, speaker, text = str(rec["session"]), str(rec["speaker"]), str(rec["text"])
-            ts = naive(datetime.fromisoformat(rec["time"]))
-        except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
-            raise SystemExit(
-                f"{path}:{n}: expected JSON with session, time (ISO), speaker, text ({e})"
-            ) from None
-        # The id is a hash of what was said, when and by whom (plus a counter for exact
-        # repeats), so re-ingesting a file is a no-op and a second file that continues
-        # a session cannot collide with the first.
-        key = f"{ts.isoformat()}|{speaker}|{text}"
-        repeats[(sid, key)] = repeats.get((sid, key), 0) + 1
-        digest = hashlib.sha1(f"{key}|{repeats[(sid, key)]}".encode()).hexdigest()[:12]
-        seq = len(turns.setdefault(sid, []))
-        turns[sid].append(Turn(f"{sid}:{digest}", sid, speaker, text, ts, seq))
-        starts[sid] = min(starts.get(sid, ts), ts)
-    return [Session(sid, starts[sid], tuple(ts)) for sid, ts in turns.items()]
-
-
 def _sessions(args: argparse.Namespace) -> list[Session]:
     if args.format == "jsonl":
-        return _read_jsonl(args.file)
+        return read_jsonl(args.file)
     if args.format == "locomo":
         qs = load_locomo(args.file)
         pick = args.pick or qs[0].qid.split(":")[0]
@@ -89,12 +60,11 @@ def cmd_ingest(store: MemoryStore, args: argparse.Namespace) -> None:
     if not args.file.exists():
         raise SystemExit(f"{args.file}: no such file")
     sessions = _sessions(args)
-    added = store.ingest(sessions)
-    total = sum(len(s.turns) for s in sessions)
-    print(
-        f"ingested {added} new turns from {len(sessions)} sessions"
-        f" ({total - added} skipped: already stored)"
-    )
+    got = store.ingest(sessions)
+    skipped = f"{got.already_stored} skipped: already stored"
+    if got.empty:
+        skipped += f"; {got.empty} skipped: empty text"
+    print(f"ingested {got.added} new turns from {len(sessions)} sessions ({skipped})")
 
 
 def _print_turns(turns: list[Turn]) -> None:
@@ -210,7 +180,7 @@ def build_parser() -> argparse.ArgumentParser:
         s.add_argument(
             "--now",
             help="ISO time the question is asked (default: now); "
-            "'last month' etc. are relative to it",
+            "'last month' etc. are relative to it; offsets are converted to UTC",
         )
         if name == "search":
             s.add_argument("-k", type=_positive, default=10, help="how many turns (default 10)")

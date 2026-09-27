@@ -48,7 +48,7 @@ def sample(qs: list[Question], per_type: int) -> list[Question]:
 
 
 def stage_retrieval(run: Run, client: LLM) -> None:
-    cfg, _ = run.chosen()
+    cfg = run.chosen().store
     strats = {"dense": make_dense(client), "hybrid": make_hybrid(client, cfg)}
     rows = []
     for ds, qs in run.datasets():
@@ -89,7 +89,7 @@ def stage_extract(run: Run, client: LLM, stores: Path) -> None:
 
 
 def stage_answer(run: Run, client: LLM, stores: Path, per_type: int, judge: str) -> None:
-    cfg, _ = run.chosen()
+    cfg = run.chosen().store
     plans = {
         "sliding_window": R.sliding_window,
         "bm25_turns": R.bm25_turns,

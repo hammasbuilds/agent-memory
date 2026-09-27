@@ -28,13 +28,18 @@ def read(run, name):
 def test_retrieval_study_stages(run, monkeypatch):
     monkeypatch.setattr(sweep, "split_of", lambda q: "dev")  # the fixtures are tiny
     monkeypatch.setattr(sweep, "GRID", {"session_weight": (0.0, 0.3), "neighbours": (0,)})
+    monkeypatch.setattr(sweep, "WINDOW_SHARES", (0.1, 0.5))
     sweep.dev_sweep(run)
-    assert read(run, "dev_sweep.json")["store_best"]["config"]["neighbours"] == 0
+    dev = read(run, "dev_sweep.json")
+    assert dev["store_best"]["config"]["neighbours"] == 0
+    assert dev["window_share_best"]["recent_share"] in (0.1, 0.5)
     main_stage(run)
     out = read(run, "retrieval.json")
     strategies = {r["strategy"] for r in out["by_budget"]}
     assert {"sliding_window", "window_bm25", "store", "random"} <= strategies
     assert any("session_recall" in r for r in out["by_budget"])
+    assert any("recall_strict" in r for r in out["by_budget"])
+    assert "window_bm25" not in {r["strategy"] for r in out["by_k"]}  # no k for split plans
     assert out["by_evidence_position"] and "subsets" in out
     assert (run.results / "rows" / "locomo.jsonl.gz").exists()
     forgetting_stage(run)
@@ -43,11 +48,15 @@ def test_retrieval_study_stages(run, monkeypatch):
     diag = {d["dataset"]: d for d in read(run, "diagnostics.json")}
     assert diag["longmemeval"]["histories"] == 3
     assert diag["longmemeval"]["data_quality_flags"]["partial_key"]["all types"] == 1
+    late = diag["longmemeval"]["sessions_dated_after_the_question"]
+    assert late["questions_with_future_sessions"] == 1 and late["future_answer_sessions"] == 0
     vis = diag["locomo"]["lexical_visibility"]["all types"]
     assert set(vis) == {
         "evidence_turns", "evidence_turns_sharing_no_word", "questions",
         "questions_with_no_visible_evidence",
     }  # fmt: skip
+    sweep.window_share_sensitivity(run)
+    assert read(run, "window_share.json")["versus_bm25_turns"]
     sweep.recency_sensitivity(run)
     assert read(run, "recency_sensitivity.json")["split"] == "test"
 
@@ -55,7 +64,13 @@ def test_retrieval_study_stages(run, monkeypatch):
 def test_model_arm_stages_with_a_fake(run, tmp_path, monkeypatch):
     run.results.mkdir(parents=True)
     (run.results / "dev_sweep.json").write_text(
-        json.dumps({"store_best": {"config": {}}, "recency_best": {"half_life_days": 365.0}})
+        json.dumps(
+            {
+                "store_best": {"config": {}},
+                "recency_best": {"half_life_days": 365.0},
+                "window_share_best": {"recent_share": 0.1},
+            }
+        )
     )
     fake = FakeLLM({"Is the response correct?": "yes"}, default="[]")
     stage_retrieval(run, fake)

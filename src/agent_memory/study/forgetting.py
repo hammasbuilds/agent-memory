@@ -41,7 +41,7 @@ def answer_present(q: Question, sessions: Iterable[Session]) -> bool:
 
 
 def forgetting_stage(run: Run) -> None:
-    cfg, _ = run.chosen()
+    cfg = run.chosen().store
     store = R.make_store(cfg)
     out = []
     for ds, qs in run.datasets():

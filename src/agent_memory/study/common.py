@@ -34,11 +34,21 @@ class Run:
         yield "locomo", iter(load_locomo())
         yield "longmemeval", itertools.islice(iter_longmemeval(), self.lme_limit)
 
-    def chosen(self) -> tuple[RetrieverConfig, float]:
-        """The store config and recency half-life picked on the dev split."""
+    def chosen(self) -> Chosen:
+        """The configuration picked on the dev split (see `study.sweep.dev_sweep`)."""
         path = self.results / "dev_sweep.json"
         if not path.exists():
             raise FileNotFoundError(f"{path} missing - run the dev stage first")
         sweep = json.loads(path.read_text("utf-8"))
-        cfg = RetrieverConfig(**sweep["store_best"]["config"])
-        return cfg, float(sweep["recency_best"]["half_life_days"])
+        return Chosen(
+            RetrieverConfig(**sweep["store_best"]["config"]),
+            float(sweep["recency_best"]["half_life_days"]),
+            float(sweep["window_share_best"]["recent_share"]),
+        )
+
+
+@dataclass(frozen=True)
+class Chosen:
+    store: RetrieverConfig
+    half_life_days: float
+    recent_share: float

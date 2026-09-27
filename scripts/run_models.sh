@@ -45,12 +45,26 @@ else
 fi
 
 tags=$(curl -sf --noproxy '*' "$OLLAMA_URL/api/tags") || { echo "Ollama not reachable at $OLLAMA_URL" >&2; exit 1; }
-for model in qwen2.5:14b-instruct nomic-embed-text; do
+# the judge defaults to the answer model; --judge X / --judge=X names another one
+judge=qwen2.5:14b-instruct
+args=("$@")
+for i in "${!args[@]}"; do
+  case "${args[$i]}" in
+    --judge) judge="${args[$((i + 1))]:-}" ;;
+    --judge=*) judge="${args[$i]#--judge=}" ;;
+  esac
+done
+if [[ -z "$judge" ]]; then
+  echo "--judge needs a model name" >&2
+  exit 1
+fi
+
+for model in qwen2.5:14b-instruct nomic-embed-text "$judge"; do
   if ! grep -q "\"$model" <<<"$tags"; then
     echo "model $model is not pulled: run 'ollama pull $model'" >&2
     exit 1
   fi
 done
 
-echo "RAM ${ram} GB free, Ollama at $OLLAMA_URL has both models; starting"
+echo "RAM ${ram} GB free, Ollama at $OLLAMA_URL has every model (judge: $judge); starting"
 uv run python scripts/run_model_arm.py --url "$OLLAMA_URL" "$@"

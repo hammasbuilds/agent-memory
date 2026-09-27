@@ -29,6 +29,7 @@ GRID = {
 }
 HALF_LIVES = (7.0, 30.0, 90.0, 365.0, 1825.0)
 SENSITIVITY_HALF_LIVES = (7.0, 30.0, 90.0, 365.0)
+WINDOW_SHARES = (0.05, 0.1, 0.25, 0.5, 0.75)
 
 
 def _dev(qs: Iterable[Question]) -> list[tuple[Question, History]]:
@@ -75,6 +76,9 @@ def dev_sweep(run: Run) -> dict:
     recency_runs = [
         {"half_life_days": hl, "recall": objective(R.make_recency_bm25(hl))} for hl in HALF_LIVES
     ]
+    share_runs = [
+        {"recent_share": sh, "recall": objective(R.make_window_bm25(sh))} for sh in WINDOW_SHARES
+    ]
     out = {
         "objective": f"mean turn-level evidence recall at {HEADLINE_BUDGET} tokens on the dev "
         "split, macro-averaged over the two datasets",
@@ -83,6 +87,8 @@ def dev_sweep(run: Run) -> dict:
         "store_best": best,
         "recency_grid": recency_runs,
         "recency_best": max(recency_runs, key=lambda r: r["recall"]["macro"]),
+        "window_share_grid": share_runs,
+        "window_share_best": max(share_runs, key=lambda r: r["recall"]["macro"]),
     }
     run.write("dev_sweep.json", out)
     return out
@@ -113,6 +119,34 @@ def recency_sensitivity(run: Run) -> None:
                 for budget in budgets
                 for c in compare(rows, name, "bm25_turns", value=budget, metric="newest")
                 if c["qtype"] == "knowledge-update"
+            ],
+        },
+    )
+
+
+def window_share_sensitivity(run: Run) -> None:
+    """Recent-window + search at every share on the test split, each against search
+    alone. The dev sweep picks the share the main stage uses; this shows how much the
+    choice matters."""
+    strats: dict[str, R.Strategy] = {"bm25_turns": R.bm25_turns}
+    for sh in WINDOW_SHARES:
+        strats[f"window_bm25_{sh:g}"] = R.make_window_bm25(sh)
+    budgets = (512, HEADLINE_BUDGET)
+    rows = []
+    for ds, qs in run.datasets():
+        rows += [r for r in evaluate(qs, strats, budgets=budgets, top_k=()) if r["split"] == "test"]
+        log(f"window share: {ds} done")
+    run.write(
+        "window_share.json",
+        {
+            "split": "test",
+            "recent_shares": WINDOW_SHARES,
+            "versus_bm25_turns": [
+                c
+                for name in strats
+                if name != "bm25_turns"
+                for budget in budgets
+                for c in compare(rows, name, "bm25_turns", value=budget)
             ],
         },
     )

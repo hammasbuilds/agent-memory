@@ -30,7 +30,15 @@ def diagnostics_stage(run: Run) -> None:
         spans: list[float] = []
         sizes: list[int] = []
         seen: set[str] = set()
+        future = Counter()
         for q in qs:
+            late = [x for x in q.history if x.timestamp > q.now]
+            late_answers = [x for x in late if x.id in q.evidence_sessions]
+            future["questions"] += 1
+            future["questions_with_future_sessions"] += bool(late)
+            future["future_sessions"] += len(late)
+            future["future_answer_sessions"] += len(late_answers)
+            future["questions_with_future_answer_sessions"] += bool(late_answers)
             if history_key(q) not in seen:
                 seen.add(history_key(q))
                 sizes.append(sum(count_tokens(t.text) for s in q.history for t in s.turns))
@@ -87,6 +95,7 @@ def diagnostics_stage(run: Run) -> None:
                     | {"n": sum(c.values())}
                     for qt, c in sorted(loc.items())
                 },
+                "sessions_dated_after_the_question": dict(future),
                 "data_quality_flags": {
                     f: dict(sorted(c.items())) for f, c in sorted(flags.items())
                 },

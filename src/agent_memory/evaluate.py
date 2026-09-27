@@ -5,6 +5,8 @@ top-k cut, and scored against two answer keys:
 
 turn level (LoCoMo `evidence`, LongMemEval `has_answer`)
     recall      fraction of the gold evidence turns that made it in
+    recall_strict   the same, not counting a turn that was cut to fit the budget
+                (only positional strategies cut; for ranked ones the two are equal)
     all         every gold turn made it in (what a multi-hop question needs)
 session level (LongMemEval `answer_session_ids`; derived from the turns for LoCoMo)
     session_recall   fraction of answer sessions with at least one turn in context
@@ -132,6 +134,8 @@ def evaluate(
                 # 1 = last) and whether it made it in - the recency control
                 row["evidence"] = [[p, tid in ctx.turn_ids] for tid, p in positions]
                 yield row
+            if plan.recent is not None:
+                continue  # top-k over a split budget is not defined; no k rows
             for k in top_k:
                 ctx = pack(plan.units[:k], 10**9, h.tokens)
                 yield _row(base, name, "k", k, q, ctx)
@@ -152,6 +156,11 @@ def _row(base: dict, strategy: str, axis: str, value: int, q: Question, ctx: Con
         row["measurable"] = False
         return row
     row["measurable"] = True
+    if s.recall is not None:
+        # strict credit: a turn truncated to fit the budget does not count as found
+        strict = score(q, ctx.turn_ids - ctx.cut)
+        assert strict is not None and strict.recall is not None
+        row["recall_strict"] = round(strict.recall, 4)
     for key in ("recall", "all", "session_recall", "all_sessions", "newest", "stale_only"):
         v = getattr(s, key)
         if v is not None:

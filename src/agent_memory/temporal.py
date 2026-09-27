@@ -48,6 +48,13 @@ def naive(dt: datetime) -> datetime:
     return dt.astimezone(UTC).replace(tzinfo=None) if dt.tzinfo else dt
 
 
+def utc_now() -> datetime:
+    """Now, as naive UTC - the store's clock. Defaulting to local time would shift every
+    relative window ("last week") by the machine's UTC offset against timestamps that
+    arrived with an offset and were stored as UTC."""
+    return datetime.now(UTC).replace(tzinfo=None)
+
+
 def parse_timestamp(text: str) -> datetime:
     """Parse '1:56 pm on 8 May, 2023' (LoCoMo), '2023/05/20 (Sat) 02:21' (LongMemEval)
     or an ISO 8601 string. Raises ValueError on anything else."""

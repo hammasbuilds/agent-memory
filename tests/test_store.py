@@ -9,8 +9,9 @@ from agent_memory.text import count_tokens
 
 def test_ingest_is_idempotent_and_round_trips(history):
     with MemoryStore() as m:
-        assert m.ingest(history) == 10
-        assert m.ingest(history) == 0
+        assert m.ingest(history).added == 10
+        again = m.ingest(history)
+        assert (again.added, again.already_stored, again.empty) == (0, 10, 0)
         back = m.sessions()
         assert [s.id for s in back] == ["s1", "s2", "s3"]
         assert back[0].turns[2].text == history[0].turns[2].text
@@ -160,6 +161,34 @@ def test_ingest_appends_after_existing_turns_even_if_input_seq_restarts(history)
         extra = Session(
             "s3", t, (Turn("s3:new", "s3", "user", "one more thing about kayaks", t, 0),)
         )
-        assert m.ingest([extra]) == 1
+        assert m.ingest([extra]).added == 1
         s3 = next(s for s in m.sessions() if s.id == "s3")
         assert [x.id for x in s3.turns][-1] == "s3:new" and s3.turns[-1].seq == 3
+
+
+def test_ingest_skips_empty_turns_as_add_turn_refuses_them():
+    from agent_memory.datasets import Session, Turn
+
+    t = datetime(2024, 1, 1)
+    s = Session("s", t, (Turn("s:0", "s", "user", "hello there", t, 0),
+                         Turn("s:1", "s", "assistant", "   ", t, 1)))  # fmt: skip
+    with MemoryStore() as m:
+        got = m.ingest([s])
+        assert (got.added, got.empty) == (1, 1)
+        assert [x.text for x in m.sessions()[0].turns] == ["hello there"]
+
+
+def test_default_clock_is_utc(monkeypatch):
+    from datetime import UTC
+
+    from agent_memory import store as store_mod
+    from agent_memory.temporal import utc_now
+
+    assert abs(utc_now() - datetime.now(UTC).replace(tzinfo=None)).total_seconds() < 5
+    seen = []
+    with MemoryStore() as m:
+        m.add_turn("s", "user", "bought a red kayak", datetime(2024, 7, 1))
+        monkeypatch.setattr(store_mod, "utc_now", lambda: datetime(2024, 7, 2, 3))
+        monkeypatch.setattr(m.retriever, "search", lambda h, q, now, k: seen.append(now) or [])
+        m.search("kayak")
+    assert seen == [datetime(2024, 7, 2, 3)]

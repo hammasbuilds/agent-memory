@@ -59,7 +59,7 @@ def part_one() -> None:
     print("PART 1 - a store with known answers")
     now = datetime(2024, 7, 1)
     with tempfile.TemporaryDirectory() as tmp, MemoryStore(Path(tmp) / "memory.db") as m:
-        print(f"  ingested {m.ingest(CHAT)} turns from {len(CHAT)} sessions")
+        print(f"  ingested {m.ingest(CHAT).added} turns from {len(CHAT)} sessions")
         hit = m.search("what is my dog called?", now, k=1)[0]
         check("search 'what is my dog called?'", hit.id, "jan:1")
 

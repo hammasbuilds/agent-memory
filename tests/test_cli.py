@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 import pytest
 
@@ -158,3 +159,57 @@ def test_a_second_file_continuing_a_session_appends(capsys, db, chat, tmp_path):
         ]
         assert m.stats()["turns"] == 6
     assert "0 new turns" in run(capsys, "--db", db, "ingest", str(more)).out  # idempotent
+
+
+def test_offsets_are_converted_consistently_for_relative_windows(capsys, db):
+    # 23:30 at +05:00 on 20 June is 18:30 UTC; asked at 23:00 +05:00 the next day
+    run(
+        capsys,
+        "--db",
+        db,
+        "add",
+        "a",
+        "user",
+        "went kayaking on the lake",
+        "--at",
+        "2024-06-20T23:30+05:00",
+    )
+    run(
+        capsys,
+        "--db",
+        db,
+        "add",
+        "b",
+        "user",
+        "kayaking lessons are booked",
+        "--at",
+        "2024-06-01T10:00+05:00",
+    )
+    out = run(capsys, "--db", db, "search", "what kayaking did I do yesterday", "-k", "1",
+              "--now", "2024-06-21T23:00+05:00").out  # fmt: skip
+    assert out.startswith("2024-06-20 18:30") and "lake" in out
+
+
+def test_empty_jsonl_text_is_skipped_and_reported(capsys, db, tmp_path):
+    p = tmp_path / "e.jsonl"
+    lines = [
+        {"session": "a", "time": "2024-01-01T09:00", "speaker": "user", "text": "hello there"},
+        {"session": "a", "time": "2024-01-01T09:01", "speaker": "user", "text": "  "},
+    ]
+    p.write_text("\n".join(json.dumps(x) for x in lines), "utf-8")
+    out = run(capsys, "--db", db, "ingest", str(p)).out
+    assert "ingested 1 new turns" in out and "1 skipped: empty text" in out
+
+
+def test_read_jsonl_is_public_and_raises_valueerror(tmp_path):
+    from agent_memory.jsonl import read_jsonl
+
+    p = tmp_path / "x.jsonl"
+    p.write_text(
+        '{"session": "a", "time": "2024-01-01T09:00+05:00", "speaker": "u", "text": "hi"}\n'
+    )
+    [s] = read_jsonl(p)
+    assert s.turns[0].timestamp == datetime(2024, 1, 1, 4)
+    p.write_text("not json\n")
+    with pytest.raises(ValueError, match=r"x\.jsonl:1"):
+        read_jsonl(p)

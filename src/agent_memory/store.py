@@ -20,7 +20,7 @@ from agent_memory.context import FACTS_HEADER, Context
 from agent_memory.datasets import Session, Turn
 from agent_memory.forget import truncate
 from agent_memory.retrieval import History, Retriever, RetrieverConfig
-from agent_memory.temporal import naive
+from agent_memory.temporal import naive, utc_now
 from agent_memory.text import count_tokens, terms
 
 SCHEMA = """
@@ -56,6 +56,13 @@ CREATE INDEX IF NOT EXISTS facts_key ON facts(subject, attribute, valid_from);
 
 
 FACT_RELATIVE_CUTOFF = 0.5
+
+
+@dataclass(frozen=True)
+class Ingested:
+    added: int
+    already_stored: int
+    empty: int  # turns with no text, skipped
 
 
 @dataclass(frozen=True)
@@ -123,15 +130,16 @@ class MemoryStore:
         self._history = None
         return tid
 
-    def ingest(self, sessions: Iterable[Session]) -> int:
-        """Bulk-load sessions, keeping their turn ids. Returns turns added.
+    def ingest(self, sessions: Iterable[Session]) -> Ingested:
+        """Bulk-load sessions, keeping their turn ids.
 
         A turn whose id is already stored is skipped, so re-ingesting is idempotent. A
-        new turn is appended after everything already in its session (its position
-        comes from the session's counter, not from the input), so a second file that
-        continues a session lands after the first.
+        turn with no text is skipped too, as `add_turn` refuses one (LongMemEval_S has
+        12). A new turn is appended after everything already in its session (its
+        position comes from the session's counter, not from the input), so a second
+        file that continues a session lands after the first.
         """
-        added = 0
+        added = already = empty = 0
         with self.db:
             for s in sessions:
                 self.db.execute(
@@ -139,7 +147,11 @@ class MemoryStore:
                     (s.id, naive(s.timestamp).isoformat()),
                 )
                 for t in s.turns:
+                    if not t.text.strip():
+                        empty += 1
+                        continue
                     if self.db.execute("SELECT 1 FROM turns WHERE id=?", (t.id,)).fetchone():
+                        already += 1
                         continue
                     (seq,) = self.db.execute(
                         "UPDATE sessions SET next_seq = next_seq + 1 WHERE id = ? "
@@ -153,7 +165,7 @@ class MemoryStore:
                     )
                     added += 1
         self._history = None
-        return added
+        return Ingested(added, already, empty)
 
     # ---- turns & retrieval -------------------------------------------------------
 
@@ -183,11 +195,11 @@ class MemoryStore:
         return self._history
 
     def search(self, query: str, now: datetime | None = None, k: int = 10) -> list[Turn]:
-        return self.retriever.search(self.history, query, naive(now or datetime.now()), k)
+        return self.retriever.search(self.history, query, naive(now or utc_now()), k)
 
     def context(self, query: str, budget: int = 2048, now: datetime | None = None) -> Context:
         """Relevant current facts first, then retrieved turns, within `budget` tokens."""
-        now = naive(now or datetime.now())
+        now = naive(now or utc_now())
         facts = self._relevant_facts(query)
         lines: list[str] = []
         used = count_tokens(FACTS_HEADER) if facts else 0
@@ -314,7 +326,7 @@ class MemoryStore:
     def forget(self, policy: Callable[[Turn], bool], now: datetime | None = None) -> int:
         """Soft-delete every live turn the policy selects. Returns how many."""
         doomed = [t.id for s in self.sessions() for t in s.turns if policy(t)]
-        stamp = (now or datetime.now()).isoformat()
+        stamp = naive(now or utc_now()).isoformat()
         with self.db:
             self.db.executemany(
                 "UPDATE turns SET forgotten_at=? WHERE id=?", [(stamp, i) for i in doomed]

@@ -6,7 +6,10 @@ Stages (each writes results/*.json; the code is in agent_memory/study/):
                data-quality flags                        -> diagnostics.json
   recency      recency half-life sensitivity on the test split
                                                          -> recency_sensitivity.json
-  dev          choose the store retriever's knobs and the recency half-life on the dev
+  window-share recent-window share sensitivity on the test split
+                                                         -> window_share.json
+  dev          choose the store retriever's knobs, the recency half-life and the window
+               share on the dev
                split only                                -> dev_sweep.json
   main         every strategy x budget x top-k, both splits, comparisons and controls
                                                          -> retrieval.json, rows/*.jsonl.gz
@@ -27,11 +30,12 @@ from agent_memory.study.common import Run
 from agent_memory.study.diagnostics import diagnostics_stage
 from agent_memory.study.forgetting import forgetting_stage
 from agent_memory.study.recall import main_stage
-from agent_memory.study.sweep import dev_sweep, recency_sensitivity
+from agent_memory.study.sweep import dev_sweep, recency_sensitivity, window_share_sensitivity
 
 STAGES = {
     "diagnostics": diagnostics_stage,
     "recency": recency_sensitivity,
+    "window-share": window_share_sensitivity,
     "dev": dev_sweep,
     "main": main_stage,
     "forgetting": forgetting_stage,

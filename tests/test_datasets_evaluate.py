@@ -159,3 +159,17 @@ def test_evaluate_rows_carry_positions_flags_and_session_metrics(lme_file):
     assert messy["session_recall"] == 1.0  # "hike" finds h2 too
     abst = next(r for r in rows if r["qid"] == "q_abs_abs")
     assert abst["measurable"] is False
+
+
+def test_strict_credit_does_not_count_a_cut_evidence_turn(locomo_file):
+    from agent_memory.context import TokenCache, pack
+    from agent_memory.evaluate import _row
+
+    temporal = load_locomo(locomo_file)[0]  # evidence: conv-x:D1:1, the first turn
+    turns = [t for s in temporal.history for t in s.turns]
+    cache = TokenCache()
+    budget = cache.header(turns[0]) + cache.line(turns[0]) - 1  # all of D1:1 but a word
+    ctx = pack([[turns[0]]], budget, cache, positional=True)
+    assert ctx.cut == {"conv-x:D1:1"}
+    row = _row({}, "window", "budget", budget, temporal, ctx)
+    assert (row["recall"], row["recall_strict"]) == (1.0, 0.0)

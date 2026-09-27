@@ -33,6 +33,7 @@ class Context:
     tokens: int  # everything render() returns, facts included
     budget: int
     facts: tuple[str, ...] = ()  # rendered fact lines, shown before the turns
+    cut: frozenset[str] = frozenset()  # ids of turns included only in part (truncated)
 
     @property
     def turn_ids(self) -> frozenset[str]:
@@ -87,7 +88,8 @@ def pack(
     turn that does not fit is cut to fill the remaining budget and packing stops, which
     is what truncating a long prompt does. Without the cut, a window that meets one
     long turn stops hundreds of tokens short and loses to ranked strategies on fill,
-    not on choice. A cut turn counts as present for scoring.
+    not on choice. A cut turn counts as present for `recall` and absent for
+    `recall_strict` (see `evaluate`); both are reported.
 
     `start` continues from an existing context (used to split one budget between a
     recent window and search results).
@@ -96,6 +98,7 @@ def pack(
         raise ValueError(f"budget must be non-negative, got {budget}")
     chosen: dict[str, Turn] = {t.id: t for t in start.turns} if start else {}
     sessions: set[str] = {t.session_id for t in chosen.values()}
+    cut_ids: set[str] = set(start.cut) if start else set()
     used = start.tokens if start else 0
     for unit in units:
         full = True
@@ -108,6 +111,7 @@ def pack(
                 full = False
                 if positional and (cut := _cut_to_fit(t, budget - used - head, cache)):
                     chosen[t.id], cut_cost = cut
+                    cut_ids.add(t.id)
                     sessions.add(t.session_id)
                     used += cut_cost + head
                     break
@@ -118,7 +122,7 @@ def pack(
         if not full and positional:
             break
     ordered = tuple(sorted(chosen.values(), key=chrono))
-    return Context(ordered, used, budget)
+    return Context(ordered, used, budget, cut=frozenset(cut_ids))
 
 
 def _cut_to_fit(t: Turn, room: int, cache: TokenCache) -> tuple[Turn, int] | None:

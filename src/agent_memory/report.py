@@ -7,7 +7,15 @@ from collections.abc import Iterable, Sequence
 
 from agent_memory.stats import bootstrap_mean, paired_difference
 
-METRICS = ("recall", "all", "session_recall", "all_sessions", "newest", "stale_only")
+METRICS = (
+    "recall",
+    "recall_strict",
+    "all",
+    "session_recall",
+    "all_sessions",
+    "newest",
+    "stale_only",
+)
 ALL = "all types"
 
 

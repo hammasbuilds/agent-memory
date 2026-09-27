@@ -8,8 +8,11 @@ more tokens than it really uses and look worse at a fixed budget.
 Two reference tokenisers, neither a dependency of this project and neither loading
 any model weights:
   cl100k_base   OpenAI's, via `tiktoken`
-  qwen2.5       the vocabulary of the model the queued answer arm uses, from a
-                `tokenizer.json` (plain or .gz) via the `tokenizers` library
+  qwen2.5-coder the `tokenizer.json` of Qwen2.5-Coder-14B-Instruct (plain or .gz), via
+                the `tokenizers` library - the file harness-ablation ships. Qwen2.5-Coder
+                uses the Qwen2.5 byte-level BPE vocabulary, so ordinary text should
+                tokenise as it would for the answer arm's qwen2.5:14b-instruct; that is
+                an assumption, not something this script checks.
 
     PYTHONPATH=src /path/to/python-with-tiktoken-and-tokenizers \
         scripts/calibrate_tokens.py --qwen /path/to/qwen2.5-tokenizer.json.gz
@@ -62,16 +65,15 @@ def ratio(texts: list[str], ref: Counter) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--qwen", type=Path, required=True, help="Qwen2.5 tokenizer.json(.gz)")
+    ap.add_argument("--qwen", type=Path, required=True, help="Qwen2.5-Coder tokenizer.json(.gz)")
     ap.add_argument("--every", type=int, default=10, help="use every Nth question per dataset")
     args = ap.parse_args()
     enc = tiktoken.get_encoding("cl100k_base")
     refs: dict[str, Counter] = {
         "cl100k_base": lambda t: len(enc.encode(t)),
-        "qwen2.5": load_qwen(args.qwen),
+        "qwen2.5-coder": load_qwen(args.qwen),
     }
-    cfg, half_life = Run(ROOT / "results").chosen()
-    strats = strategies(cfg, half_life)
+    strats = strategies(Run(ROOT / "results").chosen())
     out: dict = {
         "budget": HEADLINE_BUDGET,
         "every_nth_question": args.every,
