@@ -146,15 +146,23 @@ class Retriever:
 class Plan:
     """What a strategy wants in context, best first, before the budget is applied.
 
-    `positional` plans (truncation, windows) stop at the first unit that does not fit;
-    ranked plans skip it and keep filling.
+    `positional` plans (truncation, windows) cut the first unit that does not fit and
+    stop; ranked plans skip it and keep filling. A plan with `recent` units first packs
+    those positionally into `recent_share` of the budget, then fills the rest from
+    `units` - the "last few turns plus search" memory many agents use.
     """
 
     units: list[list[Turn]]
     positional: bool = False
+    recent: list[list[Turn]] | None = None
+    recent_share: float = 0.0
 
     def pack(self, budget: int, cache: TokenCache) -> Context:
-        return pack(self.units, budget, cache, stop_at_first_misfit=self.positional)
+        start = None
+        if self.recent is not None:
+            start = pack(self.recent, int(budget * self.recent_share), cache, positional=True)
+        ctx = pack(self.units, budget, cache, positional=self.positional, start=start)
+        return replace(ctx, budget=budget)
 
 
 Strategy = Callable[[History, str, datetime, str], Plan]  # (history, question, now, seed)
@@ -171,6 +179,21 @@ def full_head(h: History, question: str, now: datetime, seed: str) -> Plan:
 
 def sliding_window(h: History, question: str, now: datetime, seed: str) -> Plan:
     return Plan([[t] for t in reversed(h.turns)], positional=True)
+
+
+def make_window_bm25(recent_share: float = 0.5) -> Strategy:
+    """The most recent turns in `recent_share` of the budget, BM25 hits in the rest."""
+    if not 0 < recent_share < 1:
+        raise ValueError(f"recent_share must be in (0, 1), got {recent_share}")
+
+    def window_bm25(h: History, question: str, now: datetime, seed: str) -> Plan:
+        return Plan(
+            _ranked(h, h.turn_index.scores(terms(question))),
+            recent=[[t] for t in reversed(h.turns)],
+            recent_share=recent_share,
+        )
+
+    return window_bm25
 
 
 def random_turns(h: History, question: str, now: datetime, seed: str) -> Plan:

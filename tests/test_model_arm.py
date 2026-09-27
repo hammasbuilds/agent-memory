@@ -59,14 +59,39 @@ def test_extract_into_supersedes_across_sessions(history):
 
 
 def test_answer_and_judge_prompts(lme_file):
-    ku, abst = list(iter_longmemeval(lme_file))
+    ku, abst, _ = list(iter_longmemeval(lme_file))
     ctx = Context((), 0, 100)
     assert "(nothing retrieved)" in answer_prompt(ku, ctx)
     assert "2023-09-01" in answer_prompt(ku, ctx)
     assert "updated value" in judge_prompt(ku, "St Mary's")
     assert "not available" in judge_prompt(abst, "I don't know")
     fake = FakeLLM({"Is the response correct?": "Yes."}, default="St Mary's")
-    assert answer_and_judge(ku, ctx, fake) == {"response": "St Mary's", "correct": True}
+    out = answer_and_judge(ku, ctx, fake)
+    assert (out["response"], out["correct"]) == ("St Mary's", True)
+    fake.calls.clear()
+    answer_and_judge(ku, ctx, fake, model="a", judge="b")
+    assert len(fake.calls) == 2
+    shrug = FakeLLM({"Is the response correct?": "It depends."}, default="St Mary's")
+    assert answer_and_judge(ku, ctx, shrug)["correct"] is None
+
+
+def test_unparsed_verdicts_count_as_wrong_and_are_reported():
+    from agent_memory.report import summarise_answers
+
+    rows = [
+        {
+            "dataset": "d",
+            "strategy": "s",
+            "qtype": "t",
+            "cluster": str(i),
+            "recall": 1.0,
+            "correct": c,
+        }
+        for i, c in enumerate([True, True, None, False])
+    ]
+    rec = next(r for r in summarise_answers(rows, b=100) if r["qtype"] == "t")
+    assert rec["n"] == 4 and rec["unparsed"] == 1
+    assert rec["accuracy"]["mean"] == 0.5  # 2 of 4, not 2 of 3
 
 
 @pytest.mark.parametrize(
@@ -91,24 +116,35 @@ def test_dense_and_hybrid_strategies(history):
 
 class _Stub(BaseHTTPRequestHandler):
     hits: ClassVar[list[str]] = []
+    digests: ClassVar[dict[str, str]] = {}
+    fail_next: ClassVar[list[int]] = []  # HTTP codes to answer the next requests with
 
-    def do_POST(self):
-        body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
-        _Stub.hits.append(self.path)
-        if self.path == "/api/generate":
-            out = {"response": f"echo {body['prompt'][:5]} t={body['options']['temperature']}"}
-        elif self.path == "/api/embed":
-            out = {"embeddings": [[float(len(t)), 1.0] for t in body["input"]]}
-        else:
-            self.send_response(404)
-            self.end_headers()
-            return
+    def _send(self, code: int, out: dict) -> None:
         data = json.dumps(out).encode()
-        self.send_response(200)
+        self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()
         self.wfile.write(data)
+
+    def do_GET(self):
+        _Stub.hits.append(self.path)
+        models = [{"name": n, "digest": d} for n, d in _Stub.digests.items()]
+        self._send(200, {"models": models})
+
+    def do_POST(self):
+        body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        _Stub.hits.append(self.path)
+        if _Stub.fail_next:
+            self._send(_Stub.fail_next.pop(0), {"error": "busy"})
+        elif self.path == "/api/generate":
+            self._send(
+                200, {"response": f"echo {body['prompt'][:5]} t={body['options']['temperature']}"}
+            )
+        elif self.path == "/api/embed":
+            self._send(200, {"embeddings": [[float(len(t)), 1.0] for t in body["input"]]})
+        else:
+            self._send(404, {"error": "no such endpoint"})
 
     def log_message(self, *args):
         pass
@@ -119,12 +155,18 @@ def stub_url():
     server = HTTPServer(("127.0.0.1", 0), _Stub)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     _Stub.hits = []
+    _Stub.digests = {"m:latest": "sha-m-1", "e:latest": "sha-e-1"}
+    _Stub.fail_next = []
     yield f"http://127.0.0.1:{server.server_port}"
     server.shutdown()
 
 
+def fast(url, cache=None):
+    return Ollama(url, cache, timeout=5, backoff=0.0)
+
+
 def test_ollama_client_caches_generations_and_embeddings(stub_url, tmp_path):
-    client = Ollama(stub_url, DiskCache(tmp_path / "cache.sqlite"))
+    client = fast(stub_url, DiskCache(tmp_path / "cache.sqlite"))
     assert client.generate("m", "hello world") == "echo hello t=0.0"
     assert client.generate("m", "hello world") == "echo hello t=0.0"
     assert client.generate("m", "hello world", {"temperature": 0.5}).endswith("t=0.5")
@@ -133,13 +175,42 @@ def test_ollama_client_caches_generations_and_embeddings(stub_url, tmp_path):
     assert client.embed("e", ["abc", "abcd"]) == [[3.0, 1.0], [4.0, 1.0]]
     assert _Stub.hits.count("/api/embed") == 2  # second call sent only "abcd"
     # a fresh client over the same cache directory resumes without calling out
-    again = Ollama(stub_url, DiskCache(tmp_path / "cache.sqlite"))
+    again = fast(stub_url, DiskCache(tmp_path / "cache.sqlite"))
     assert again.generate("m", "hello world") == "echo hello t=0.0"
     assert _Stub.hits.count("/api/generate") == 2
 
 
+def test_a_re_pulled_model_misses_the_cache(stub_url, tmp_path):
+    fast(stub_url, DiskCache(tmp_path / "c.sqlite")).generate("m", "hello world")
+    _Stub.digests["m:latest"] = "sha-m-2"  # same tag, new weights
+    fast(stub_url, DiskCache(tmp_path / "c.sqlite")).generate("m", "hello world")
+    assert _Stub.hits.count("/api/generate") == 2
+
+
+def test_server_errors_are_retried_client_errors_are_not(stub_url):
+    _Stub.fail_next = [503, 500]
+    assert fast(stub_url).generate("m", "hello world") == "echo hello t=0.0"
+    assert _Stub.hits.count("/api/generate") == 3
+    _Stub.fail_next = [400]
+    with pytest.raises(OllamaError, match="HTTP 400"):
+        fast(stub_url).generate("m", "again")
+    _Stub.fail_next = [503] * 10
+    with pytest.raises(OllamaError, match="HTTP 503"):
+        Ollama(stub_url, retries=2, backoff=0.0).generate("m", "third")
+
+
+def test_proxy_environment_is_ignored_for_local_ollama(stub_url, monkeypatch):
+    for var in ("HTTP_PROXY", "http_proxy", "HTTPS_PROXY", "ALL_PROXY"):
+        monkeypatch.setenv(var, "http://127.0.0.1:9")  # nothing listens there
+    monkeypatch.delenv("NO_PROXY", raising=False)
+    monkeypatch.delenv("no_proxy", raising=False)
+    assert fast(stub_url).generate("m", "hello world") == "echo hello t=0.0"
+
+
 def test_ollama_errors_are_clear(stub_url):
     with pytest.raises(OllamaError, match="HTTP 404"):
-        Ollama(stub_url)._post("/api/nothing", {})
+        fast(stub_url)._post("/api/nothing", {})
+    with pytest.raises(OllamaError, match="not pulled"):
+        fast(stub_url).generate("missing-model", "x")
     with pytest.raises(OllamaError, match="cannot reach Ollama"):
-        Ollama("http://127.0.0.1:9", timeout=2).generate("m", "x")
+        Ollama("http://127.0.0.1:9", timeout=2, retries=1, backoff=0.0).generate("m", "x")

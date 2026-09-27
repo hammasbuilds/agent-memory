@@ -25,7 +25,7 @@ def test_locomo_loader(locomo_file):
 
 
 def test_longmemeval_loader(lme_file):
-    ku, abst = list(iter_longmemeval(lme_file))
+    ku, abst, _ = list(iter_longmemeval(lme_file))
     assert ku.qtype == "knowledge-update" and abst.qtype == "abstention"
     assert [s.id for s in ku.history] == ["a", "c", "b"]  # sorted by date, not file order
     assert ku.evidence_turns == {"q_ku:b:0", "q_ku:a:0"}
@@ -55,7 +55,7 @@ def test_missing_data_points_at_the_fetch_script(tmp_path, monkeypatch):
 
 
 def test_score_recall_all_and_knowledge_update(lme_file):
-    ku, abst = list(iter_longmemeval(lme_file))
+    ku, abst, _ = list(iter_longmemeval(lme_file))
     assert score(abst, frozenset()) is None
     only_old = score(ku, frozenset({"q_ku:a:0"}))
     assert (only_old.recall, only_old.all, only_old.newest, only_old.stale_only) == (
@@ -74,7 +74,7 @@ def test_splits_are_stable_and_by_conversation(locomo_file, lme_file):
     qs = load_locomo(locomo_file)
     assert len({split_of(q) for q in qs}) == 1  # one conversation never straddles splits
     assert {cluster_of(q) for q in qs} == {"conv-x"}
-    ku, _ = list(iter_longmemeval(lme_file))
+    ku, _, _ = list(iter_longmemeval(lme_file))
     assert split_of(ku) == split_of(ku) and cluster_of(ku) == "q_ku"
 
 
@@ -98,8 +98,9 @@ def test_diagnostics(locomo_file):
     assert answer_location(temporal) == "needs_date"  # "7 May 2023" vs "yesterday"
     assert answer_location(multi) == "in_text"  # "a bowl" -> "bowl"
     assert answer_location(broken) is None
-    assert lexical_visibility(temporal) == 1.0  # shares "pottery"/"class"
-    assert lexical_visibility(adv) == 1.0  # "race"
+    assert lexical_visibility(temporal) == [True]  # shares "pottery"/"class"
+    assert lexical_visibility(adv) == [True]  # "race"
+    assert lexical_visibility(broken) is None
 
 
 def test_malformed_locomo_evidence_ids_are_normalised():
@@ -116,3 +117,45 @@ def test_evidence_position(locomo_file, lme_file):
     assert evidence_position(temporal) == 0.0  # the first of three turns
     assert evidence_position(multi) == 0.5  # first and last
     assert evidence_position(broken) is None
+
+
+def test_longmemeval_data_quality_is_flagged_not_hidden(lme_file):
+    ku, abst, messy = list(iter_longmemeval(lme_file))
+    assert messy.flags == {"duplicate_sessions", "future_sessions", "partial_key"}
+    assert [s.id for s in messy.history] == ["h1", "h2", "late"]  # one copy of h1, by date
+    assert ku.flags == frozenset()
+    assert "partial_key" in abst.flags or not abst.evidence_sessions
+
+
+def test_session_level_key_covers_what_the_turn_key_misses(lme_file):
+    _, _, messy = list(iter_longmemeval(lme_file))
+    h2_turn = frozenset({"q_messy:h2:0"})
+    s = score(messy, h2_turn)
+    assert s.recall == 0.0  # h2 has no has_answer turn: invisible to the turn key
+    assert s.session_recall == 0.5 and s.all_sessions is False
+    both = score(messy, frozenset({"q_messy:h1:0", "q_messy:h2:0"}))
+    assert (both.recall, both.all, both.session_recall, both.all_sessions) == (1.0, True, 1.0, True)
+
+
+def test_abstention_twins_share_a_split_and_a_cluster():
+    from agent_memory.datasets import Question
+
+    def q(qid):
+        return Question(qid, "longmemeval", "t", "t", "?", "a", datetime(2024, 1, 1), ())
+
+    for base in ("001be529", "00ca467f", "0100672e", "q_ku"):
+        assert split_of(q(base)) == split_of(q(base + "_abs"))
+        assert cluster_of(q(base)) == cluster_of(q(base + "_abs")) == base
+
+
+def test_evaluate_rows_carry_positions_flags_and_session_metrics(lme_file):
+    from agent_memory import retrieval as R
+
+    qs = list(iter_longmemeval(lme_file))
+    rows = [r for r in evaluate(qs, {"bm25": R.bm25_turns}, budgets=(4096,), top_k=())]
+    messy = next(r for r in rows if r["qid"] == "q_messy")
+    assert messy["flags"] == ["duplicate_sessions", "future_sessions", "partial_key"]
+    assert messy["evidence"] == [[0.0, True]]  # h1's turn, first of three
+    assert messy["session_recall"] == 1.0  # "hike" finds h2 too
+    abst = next(r for r in rows if r["qid"] == "q_abs_abs")
+    assert abst["measurable"] is False

@@ -141,6 +141,29 @@ def lme_file(tmp_path: Path) -> Path:
             "haystack_sessions": [sess([("user", "I have a dog.", False)])],
             "answer_session_ids": [],
         },
+        {
+            # messy on purpose: a duplicated session, a session dated after the
+            # question, and an answer session with no turn marked has_answer
+            "question_id": "q_messy",
+            "question_type": "multi-session",
+            "question": "How many hikes did I go on?",
+            "answer": "2",
+            "question_date": "2023/09/01 (Fri) 10:00",
+            "haystack_session_ids": ["h1", "h2", "h1", "late"],
+            "haystack_dates": [
+                "2023/07/01 (Sat) 09:00",
+                "2023/08/01 (Tue) 09:00",
+                "2023/07/01 (Sat) 09:00",
+                "2023/09/03 (Sun) 09:00",
+            ],
+            "haystack_sessions": [
+                sess([("user", "Went on a hike up Snowdon.", True)]),
+                sess([("user", "Another hike, this time Helvellyn.", False)]),
+                sess([("user", "Went on a hike up Snowdon.", True)]),
+                sess([("user", "Weather chat.", False)]),
+            ],
+            "answer_session_ids": ["h1", "h2"],
+        },
     ]
     p = tmp_path / "longmemeval_s_cleaned.json"
     p.write_text(json.dumps(qs, indent=2), "utf-8")

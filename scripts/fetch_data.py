@@ -2,7 +2,7 @@
 
 The network this was built on throttles Hugging Face to ~20 KB/s per connection,
 so a single `curl` of the 277 MB LongMemEval_s file would take hours. Each file is
-split into 5 MB ranges; every range is written to its own part file, so an
+split into 2 MB ranges (32 in flight); every range is written to its own part file, so an
 interrupted run resumes from the parts already on disk. The assembled file is
 only accepted if its SHA-256 matches the one published by the host.
 
@@ -70,7 +70,7 @@ def _fetch_range(url: str, start: int, end: int, part: Path, retries: int = 30) 
     raise RuntimeError(f"gave up on {part.name} after {retries} attempts")
 
 
-def fetch(name: str, out_dir: Path, workers: int, chunk_mb: int = 5) -> Path:
+def fetch(name: str, out_dir: Path, workers: int, chunk_mb: int = 2) -> Path:
     url, size, sha, filename = FILES[name]
     dest = out_dir / filename
     if dest.exists() and dest.stat().st_size == size and _sha256(dest) == sha:
@@ -116,8 +116,8 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--only", nargs="+", choices=sorted(FILES), default=sorted(FILES))
     ap.add_argument("--out", type=Path, default=ROOT / "data" / "raw")
-    ap.add_argument("--workers", type=int, default=16, help="parallel range requests")
-    ap.add_argument("--chunk-mb", type=int, default=5, help="size of each range request")
+    ap.add_argument("--workers", type=int, default=32, help="parallel range requests")
+    ap.add_argument("--chunk-mb", type=int, default=2, help="size of each range request")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     for name in args.only:

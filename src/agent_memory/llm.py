@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+import time
 import urllib.error
 import urllib.request
 from array import array
@@ -68,30 +69,67 @@ class DiskCache:
 
 
 class Ollama:
-    """Talks to Ollama's HTTP API. Nothing is sent until `generate`/`embed` is called."""
+    """Talks to Ollama's HTTP API. Nothing is sent until `generate`/`embed` is called.
 
-    def __init__(self, url: str = DEFAULT_URL, cache: DiskCache | None = None, timeout: int = 600):
+    * Proxies are ignored: Ollama is local, and an `HTTP_PROXY` in the environment would
+      otherwise route 127.0.0.1 through it.
+    * A dropped connection or an HTTP 5xx is retried with exponential backoff; a 4xx is
+      a real error and raised at once.
+    * Cache keys include the model's digest (from `/api/tags`), so re-pulling a model
+      under the same tag does not serve the old model's answers.
+    """
+
+    def __init__(
+        self,
+        url: str = DEFAULT_URL,
+        cache: DiskCache | None = None,
+        timeout: int = 600,
+        retries: int = 4,
+        backoff: float = 2.0,
+    ):
         self.url = url.rstrip("/")
         self.cache = cache
         self.timeout = timeout
+        self.retries = retries
+        self.backoff = backoff
+        self._opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        self._digests: dict[str, str] | None = None
+
+    def _request(self, path: str, body: dict | None = None) -> dict:
+        data = None if body is None else json.dumps(body).encode()
+        req = urllib.request.Request(
+            self.url + path, data=data, headers={"Content-Type": "application/json"}
+        )
+        for attempt in range(self.retries + 1):
+            try:
+                with self._opener.open(req, timeout=self.timeout) as r:
+                    return json.loads(r.read())
+            except urllib.error.HTTPError as e:
+                if e.code < 500 or attempt == self.retries:
+                    raise OllamaError(f"{path} -> HTTP {e.code}: {e.read()[:300]!r}") from e
+            except (urllib.error.URLError, ConnectionError, TimeoutError) as e:
+                if attempt == self.retries:
+                    reason = getattr(e, "reason", e)
+                    raise OllamaError(f"cannot reach Ollama at {self.url}: {reason}") from e
+            time.sleep(self.backoff * 2**attempt)
+        raise AssertionError("unreachable")
 
     def _post(self, path: str, body: dict) -> dict:
-        req = urllib.request.Request(
-            self.url + path,
-            data=json.dumps(body).encode(),
-            headers={"Content-Type": "application/json"},
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as r:
-                return json.loads(r.read())
-        except urllib.error.HTTPError as e:
-            raise OllamaError(f"{path} -> HTTP {e.code}: {e.read()[:300]!r}") from e
-        except urllib.error.URLError as e:
-            raise OllamaError(f"cannot reach Ollama at {self.url}: {e.reason}") from e
+        return self._request(path, body)
+
+    def digest(self, model: str) -> str:
+        """The pulled model's digest; raises if the model is not pulled."""
+        if self._digests is None:
+            tags = self._request("/api/tags").get("models", [])
+            self._digests = {m["name"]: m["digest"] for m in tags}
+        for name in (model, f"{model}:latest"):
+            if name in self._digests:
+                return self._digests[name]
+        raise OllamaError(f"model {model!r} is not pulled: run 'ollama pull {model}'")
 
     def generate(self, model: str, prompt: str, options: dict | None = None) -> str:
         opts = {**GREEDY, **(options or {})}
-        key = _key("generate", model, prompt, opts)
+        key = _key("generate", model, self.digest(model), prompt, opts)
         if self.cache and (hit := self.cache.get_text(key)) is not None:
             return hit
         body = {"model": model, "prompt": prompt, "options": opts, "stream": False}
@@ -102,7 +140,8 @@ class Ollama:
 
     def embed(self, model: str, texts: list[str]) -> list[list[float]]:
         """Embeddings in input order; cached per text, only misses are sent."""
-        keys = [_key("embed", model, t) for t in texts]
+        digest = self.digest(model)
+        keys = [_key("embed", model, digest, t) for t in texts]
         out: list[list[float] | None] = [
             self.cache.get_vector(k) if self.cache else None for k in keys
         ]

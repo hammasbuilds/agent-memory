@@ -71,8 +71,11 @@ def parse_verdict(reply: str) -> bool | None:
 
 
 def answer_and_judge(
-    q: Question, ctx: Context, client: LLM, model: str = CHAT_MODEL
+    q: Question, ctx: Context, client: LLM, model: str = CHAT_MODEL, judge: str | None = None
 ) -> dict[str, object]:
+    """Answer from the context with `model`, then grade with `judge` (default: the same
+    model - self-judging, a known bias; pass another model to avoid it). `correct` is
+    None when the judge's reply is neither yes nor no; callers count it as wrong."""
     response = client.generate(model, answer_prompt(q, ctx), {"num_predict": 200})
-    verdict = parse_verdict(client.generate(model, judge_prompt(q, response), {"num_predict": 5}))
-    return {"response": response, "correct": verdict}
+    reply = client.generate(judge or model, judge_prompt(q, response), {"num_predict": 5})
+    return {"response": response, "judge_reply": reply, "correct": parse_verdict(reply)}

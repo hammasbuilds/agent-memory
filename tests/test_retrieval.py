@@ -96,3 +96,15 @@ def test_defaults_are_what_the_dev_sweep_chose():
     sweep = Path(__file__).resolve().parents[1] / "results" / "dev_sweep.json"
     chosen = json.loads(sweep.read_text("utf-8"))["store_best"]["config"]
     assert asdict(RetrieverConfig()) == chosen
+
+
+def test_window_bm25_splits_the_budget(history):
+    h = History(history)
+    plan = R.make_window_bm25(0.5)(h, "beagle puppy Biscuit", NOW, "s")
+    ctx = plan.pack(60, h.tokens)
+    got = ids(ctx)
+    assert "s3:2" in got  # the most recent turn, from the window half
+    assert "s1:2" in got  # the old beagle turn, from the search half
+    assert ctx.tokens <= 60 and ctx.budget == 60
+    with pytest.raises(ValueError):
+        R.make_window_bm25(1.0)

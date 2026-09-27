@@ -22,16 +22,16 @@ def _speaker_terms(q: Question) -> set[str]:
     return {w for s in q.history for t in s.turns for w in terms(t.speaker)}
 
 
-def lexical_visibility(q: Question) -> float | None:
-    """Fraction of gold evidence turns sharing a content word with the question,
-    ignoring speaker names (in LoCoMo every question names a speaker, which would make
-    every one of that speaker's turns 'match')."""
+def lexical_visibility(q: Question) -> list[bool] | None:
+    """For each gold evidence turn: does it share a content word with the question?
+    Speaker names are ignored (in LoCoMo every question names a speaker, which would make
+    every one of that speaker's turns 'match'). None if there are no evidence turns."""
     if not q.evidence_turns:
         return None
     names = _speaker_terms(q)
     qt = set(terms(q.question)) - names
     ev = [t for s in q.history for t in s.turns if t.id in q.evidence_turns]
-    return sum(1 for t in ev if qt & set(terms(t.text))) / len(ev)
+    return [bool(qt & set(terms(t.text))) for t in ev]
 
 
 _DATE_WORDS = set(

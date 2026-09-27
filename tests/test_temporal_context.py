@@ -69,16 +69,47 @@ def test_pack_orders_chronologically_with_one_header_per_session(history):
     assert ctx.render().count("[session s2") == 1
 
 
-def test_stop_at_first_misfit_versus_skipping(history):
+def test_positional_cuts_the_misfit_turn_ranked_skips_it(history):
     turns = _turns(history)
     cache = TokenCache()
-    big = turns[2]  # the long beagle turn
-    small = turns[4 + 1]  # "That sounds demanding."
-    budget = cache.line(small) + cache.header(small) + 1
-    positional = pack([[big], [small]], budget, cache, stop_at_first_misfit=True)
+    big = turns[2]  # "I just adopted a beagle puppy named Biscuit."
+    small = turns[5]  # "That sounds demanding."
+    budget = cache.header(big) + cache.line(big) - 1  # room for all of `big` but a word
+    assert cache.header(small) + cache.line(small) <= budget
+    positional = pack([[big], [small]], budget, cache, positional=True)
     ranked = pack([[big], [small]], budget, cache)
-    assert positional.turns == ()
+    assert [t.id for t in positional.turns] == [big.id]
+    assert positional.turns[0].text.endswith("…") and positional.turns[0].text != big.text
+    assert positional.tokens <= budget
+    assert positional.tokens == count_tokens(positional.render())
     assert [t.id for t in ranked.turns] == [small.id]
+
+
+def test_positional_fills_the_budget(history):
+    turns = _turns(history)
+    cache = TokenCache()
+    for budget in (40, 57, 73, 91):
+        ctx = pack(([t] for t in reversed(turns)), budget, cache, positional=True)
+        # full, or short by less than a header plus the minimum cut
+        assert budget - 30 <= ctx.tokens <= budget
+        assert ctx.tokens == count_tokens(ctx.render())
+
+
+def test_no_cut_when_only_a_sliver_is_left(history):
+    turns = _turns(history)
+    cache = TokenCache()
+    budget = cache.line(turns[0]) + cache.header(turns[0]) + 3
+    ctx = pack([[turns[0]], [turns[2]]], budget, cache, positional=True)
+    assert [t.id for t in ctx.turns] == [turns[0].id]
+
+
+def test_pack_can_continue_from_a_context(history):
+    turns = _turns(history)
+    cache = TokenCache()
+    first = pack([[turns[-1]]], 30, cache)
+    both = pack([[turns[0]], [turns[-1]]], 60, cache, start=first)
+    assert {t.id for t in both.turns} == {turns[0].id, turns[-1].id}
+    assert both.tokens == count_tokens(both.render())
 
 
 def test_pack_rejects_negative_budget(history):

@@ -44,7 +44,7 @@ else
   echo "warning: nvidia-smi not found; running without a GPU check" >&2
 fi
 
-tags=$(curl -sf "$OLLAMA_URL/api/tags") || { echo "Ollama not reachable at $OLLAMA_URL" >&2; exit 1; }
+tags=$(curl -sf --noproxy '*' "$OLLAMA_URL/api/tags") || { echo "Ollama not reachable at $OLLAMA_URL" >&2; exit 1; }
 for model in qwen2.5:14b-instruct nomic-embed-text; do
   if ! grep -q "\"$model" <<<"$tags"; then
     echo "model $model is not pulled: run 'ollama pull $model'" >&2

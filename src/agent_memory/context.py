@@ -12,6 +12,7 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 
 from agent_memory.datasets import Turn, chrono
+from agent_memory.forget import truncate
 from agent_memory.text import count_tokens
 
 
@@ -73,34 +74,62 @@ def pack(
     budget: int,
     cache: TokenCache,
     *,
-    stop_at_first_misfit: bool = False,
+    positional: bool = False,
+    start: Context | None = None,
 ) -> Context:
     """Greedily add units (a turn, a turn with neighbours, a whole session) in the order
     given until the budget is spent.
 
-    A unit that does not fit whole is added turn by turn as far as it fits. Ranked
-    strategies then skip on to the next unit (a later, shorter one may still fit);
-    positional strategies (head truncation, sliding window) set `stop_at_first_misfit`,
-    because a truncated prompt does not skip a long turn and carry on.
+    Ranked strategies: a unit that does not fit whole is added turn by turn as far as it
+    fits, then packing skips on to the next unit (a later, shorter one may still fit).
+
+    Positional strategies (head truncation, sliding window) set `positional`: the first
+    turn that does not fit is cut to fill the remaining budget and packing stops, which
+    is what truncating a long prompt does. Without the cut, a window that meets one
+    long turn stops hundreds of tokens short and loses to ranked strategies on fill,
+    not on choice. A cut turn counts as present for scoring.
+
+    `start` continues from an existing context (used to split one budget between a
+    recent window and search results).
     """
     if budget < 0:
         raise ValueError(f"budget must be non-negative, got {budget}")
-    chosen: dict[str, Turn] = {}
-    sessions: set[str] = set()
-    used = 0
+    chosen: dict[str, Turn] = {t.id: t for t in start.turns} if start else {}
+    sessions: set[str] = {t.session_id for t in chosen.values()}
+    used = start.tokens if start else 0
     for unit in units:
         full = True
         for t in unit:
             if t.id in chosen:
                 continue
-            cost = cache.line(t) + (0 if t.session_id in sessions else cache.header(t))
+            head = 0 if t.session_id in sessions else cache.header(t)
+            cost = cache.line(t) + head
             if used + cost > budget:
                 full = False
+                if positional and (cut := _cut_to_fit(t, budget - used - head, cache)):
+                    chosen[t.id], cut_cost = cut
+                    sessions.add(t.session_id)
+                    used += cut_cost + head
+                    break
                 continue
             chosen[t.id] = t
             sessions.add(t.session_id)
             used += cost
-        if not full and stop_at_first_misfit:
+        if not full and positional:
             break
     ordered = tuple(sorted(chosen.values(), key=chrono))
     return Context(ordered, used, budget)
+
+
+def _cut_to_fit(t: Turn, room: int, cache: TokenCache) -> tuple[Turn, int] | None:
+    """`t` with its text cut so its line costs at most `room` tokens, and that cost;
+    None if not even a few words fit."""
+    label = cache.line(t) - count_tokens(t.text)  # "speaker: "
+    if room - label < MIN_CUT_TOKENS:
+        return None
+    short = truncate(t, room - label)
+    cost = count_tokens(line(short))
+    return (short, cost) if cost <= room else None
+
+
+MIN_CUT_TOKENS = 8

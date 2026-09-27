@@ -67,6 +67,12 @@ class Question:
     history: tuple[Session, ...]
     evidence_turns: frozenset[str] = field(default_factory=frozenset)
     evidence_sessions: frozenset[str] = field(default_factory=frozenset)
+    # Data-quality flags, reported rather than silently fixed:
+    #   partial_key      an answer session has no turn marked as evidence, so turn-level
+    #                    recall is scored against an incomplete key
+    #   future_sessions  some history is dated after the question (LongMemEval)
+    #   duplicate_sessions  a session id appeared twice (identical copies; one kept)
+    flags: frozenset[str] = field(default_factory=frozenset)
 
 
 def data_dir() -> Path:
@@ -221,20 +227,34 @@ def iter_longmemeval(path: Path | None = None) -> Iterator[Question]:
     path = _require(path or data_dir() / "longmemeval_s_cleaned.json")
     for q in iter_json_array(path):
         qid = q["question_id"]
-        sessions = []
+        now = parse_timestamp(q["question_date"])
+        sessions: dict[str, Session] = {}
+        raw_by_id: dict[str, list] = {}
         ev_turns = set()
+        flags = set()
         for sid, date, turns in zip(
             q["haystack_session_ids"], q["haystack_dates"], q["haystack_sessions"], strict=True
         ):
+            if sid in sessions:
+                if turns != raw_by_id[sid]:
+                    raise ValueError(f"{qid}: session {sid} appears twice with different turns")
+                flags.add("duplicate_sessions")  # 13 questions carry an identical copy
+                continue
+            raw_by_id[sid] = turns
             ts = parse_timestamp(date)
+            if ts > now:
+                flags.add("future_sessions")
             built = []
             for j, t in enumerate(turns):
                 tid = f"{qid}:{sid}:{j}"
                 built.append(Turn(tid, sid, t["role"], t["content"], ts, j))
                 if t.get("has_answer"):
                     ev_turns.add(tid)
-            sessions.append(Session(sid, ts, tuple(built)))
-        sessions.sort(key=lambda s: s.timestamp)  # the file lists sessions out of order
+            sessions[sid] = Session(sid, ts, tuple(built))
+        answer_sessions = frozenset(q["answer_session_ids"])
+        with_evidence = {tid[len(qid) + 1 : tid.rindex(":")] for tid in ev_turns}
+        if answer_sessions - with_evidence:
+            flags.add("partial_key")
         abstention = qid.endswith("_abs")
         yield Question(
             qid=qid,
@@ -243,8 +263,10 @@ def iter_longmemeval(path: Path | None = None) -> Iterator[Question]:
             raw_type=q["question_type"] + ("_abs" if abstention else ""),
             question=q["question"],
             answer=str(q["answer"]),
-            now=parse_timestamp(q["question_date"]),
-            history=tuple(sessions),
+            now=now,
+            # the file lists sessions out of order; memory sees them in time order
+            history=tuple(sorted(sessions.values(), key=lambda s: (s.timestamp, s.id))),
             evidence_turns=frozenset(ev_turns),
-            evidence_sessions=frozenset(q["answer_session_ids"]),
+            evidence_sessions=answer_sessions,
+            flags=frozenset(flags),
         )
