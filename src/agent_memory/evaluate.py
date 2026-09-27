@@ -131,8 +131,10 @@ def evaluate(
                 ctx = plan.pack(budget, h.tokens)
                 row = _row(base, name, "budget", budget, q, ctx)
                 # per evidence turn: its position in the history (0 = first turn ever,
-                # 1 = last) and whether it made it in - the recency control
-                row["evidence"] = [[p, tid in ctx.turn_ids] for tid, p in positions]
+                # 1 = last), whether it made it in, and whether it made it in uncut -
+                # the recency control
+                whole = ctx.turn_ids - ctx.cut
+                row["evidence"] = [[p, tid in ctx.turn_ids, tid in whole] for tid, p in positions]
                 yield row
             if plan.recent is not None:
                 continue  # top-k over a split budget is not defined; no k rows

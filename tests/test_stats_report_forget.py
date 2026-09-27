@@ -127,3 +127,23 @@ def test_parse_policy():
     for bad in ("truncate:0", "role:", "older-than:soon", "shred"):
         with pytest.raises(ValueError, match="bad policy"):
             parse_policy(bad, now)
+
+
+def test_position_differences_pair_evidence_turns():
+    from agent_memory.report import position_differences
+
+    def row(strategy, qid, evidence):
+        return {"qid": qid, "dataset": "d", "split": "test", "cluster": qid, "budget": 100,
+                "strategy": strategy, "evidence": evidence}  # fmt: skip
+
+    rows = []
+    for i in range(30):
+        rows.append(row("win", f"q{i}", [[0.95, True, i % 3 != 0], [0.1, False, False]]))
+        rows.append(row("bm25", f"q{i}", [[0.95, i % 2 == 0, i % 2 == 0], [0.1, True, True]]))
+    out = {
+        (d["position"], d["credit"]): d["diff"]
+        for d in position_differences(rows, "win", "bm25", 100, b=300)
+    }
+    assert out[("0.9-1", "lenient")]["mean"] == pytest.approx(1 - 0.5)
+    assert out[("0.9-1", "strict")]["mean"] == pytest.approx(20 / 30 - 0.5, abs=1e-4)
+    assert out[("0-0.25", "lenient")]["mean"] == -1.0

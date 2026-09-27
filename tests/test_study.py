@@ -48,6 +48,12 @@ def test_retrieval_study_stages(run, monkeypatch):
     diag = {d["dataset"]: d for d in read(run, "diagnostics.json")}
     assert diag["longmemeval"]["histories"] == 3
     assert diag["longmemeval"]["data_quality_flags"]["partial_key"]["all types"] == 1
+    assert diag["locomo"]["evidence_id_audit"]["unresolvable"] == 1
+    assert diag["locomo"]["counts"]["questions_without_evidence_turns"] == 1
+    assert diag["longmemeval"]["counts"]["empty_turns_skipped_at_ingest"] == 0
+    out = read(run, "retrieval.json")
+    assert {d["credit"] for d in out["by_evidence_position_differences"]} == {"lenient", "strict"}
+    assert out["subsets"]["turn_key_complete"]["comparisons"]
     late = diag["longmemeval"]["sessions_dated_after_the_question"]
     assert late["questions_with_future_sessions"] == 1 and late["future_answer_sessions"] == 0
     vis = diag["locomo"]["lexical_visibility"]["all types"]

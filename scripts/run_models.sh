@@ -59,8 +59,13 @@ if [[ -z "$judge" ]]; then
   exit 1
 fi
 
+# exact tag match against Ollama's compact JSON: "name":"<model>" or "<model>:latest"
+pulled() {
+  grep -qF "\"name\":\"$1\"" <<<"$tags" || grep -qF "\"name\":\"$1:latest\"" <<<"$tags"
+}
+
 for model in qwen2.5:14b-instruct nomic-embed-text "$judge"; do
-  if ! grep -q "\"$model" <<<"$tags"; then
+  if ! pulled "$model"; then
     echo "model $model is not pulled: run 'ollama pull $model'" >&2
     exit 1
   fi

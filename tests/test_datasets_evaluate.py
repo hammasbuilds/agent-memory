@@ -155,7 +155,7 @@ def test_evaluate_rows_carry_positions_flags_and_session_metrics(lme_file):
     rows = [r for r in evaluate(qs, {"bm25": R.bm25_turns}, budgets=(4096,), top_k=())]
     messy = next(r for r in rows if r["qid"] == "q_messy")
     assert messy["flags"] == ["duplicate_sessions", "future_sessions", "partial_key"]
-    assert messy["evidence"] == [[0.0, True]]  # h1's turn, first of three
+    assert messy["evidence"] == [[0.0, True, True]]  # h1's turn, first of three, whole
     assert messy["session_recall"] == 1.0  # "hike" finds h2 too
     abst = next(r for r in rows if r["qid"] == "q_abs_abs")
     assert abst["measurable"] is False
@@ -173,3 +173,12 @@ def test_strict_credit_does_not_count_a_cut_evidence_turn(locomo_file):
     assert ctx.cut == {"conv-x:D1:1"}
     row = _row({}, "window", "budget", budget, temporal, ctx)
     assert (row["recall"], row["recall_strict"]) == (1.0, 0.0)
+
+
+def test_locomo_evidence_audit(locomo_file):
+    from agent_memory.datasets import locomo_evidence_audit
+
+    # two exact ids, one "D1:1; D2:1" list (repaired), one "D9:9" (no such turn)
+    assert locomo_evidence_audit(locomo_file) == {
+        "evidence_strings": 4, "exact": 2, "repaired": 1, "unresolvable": 1,
+    }  # fmt: skip

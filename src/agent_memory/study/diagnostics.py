@@ -8,6 +8,7 @@ from collections import Counter, defaultdict
 from statistics import mean
 
 from agent_memory.analysis import answer_location, evidence_position, lexical_visibility
+from agent_memory.datasets import locomo_evidence_audit
 from agent_memory.evaluate import history_key
 from agent_memory.report import ALL
 from agent_memory.study.common import Run
@@ -31,7 +32,9 @@ def diagnostics_stage(run: Run) -> None:
         sizes: list[int] = []
         seen: set[str] = set()
         future = Counter()
+        counts = Counter()
         for q in qs:
+            counts["questions_without_evidence_turns"] += not q.evidence_turns
             late = [x for x in q.history if x.timestamp > q.now]
             late_answers = [x for x in late if x.id in q.evidence_sessions]
             future["questions"] += 1
@@ -42,6 +45,10 @@ def diagnostics_stage(run: Run) -> None:
             if history_key(q) not in seen:
                 seen.add(history_key(q))
                 sizes.append(sum(count_tokens(t.text) for s in q.history for t in s.turns))
+                counts["turns"] += sum(len(s.turns) for s in q.history)
+                counts["empty_turns_skipped_at_ingest"] += sum(
+                    not t.text.strip() for s in q.history for t in s.turns
+                )
                 spans.append((q.now - q.history[0].timestamp).total_seconds() / 86400)
             for f in q.flags:
                 flags[f][q.qtype] += 1
@@ -96,6 +103,8 @@ def diagnostics_stage(run: Run) -> None:
                     for qt, c in sorted(loc.items())
                 },
                 "sessions_dated_after_the_question": dict(future),
+                "counts": dict(counts),
+                **({"evidence_id_audit": locomo_evidence_audit()} if ds == "locomo" else {}),
                 "data_quality_flags": {
                     f: dict(sorted(c.items())) for f, c in sorted(flags.items())
                 },

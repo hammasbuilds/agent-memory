@@ -171,6 +171,27 @@ def _locomo_evidence(ev: list[str]) -> list[str]:
 _EVIDENCE = re.compile(r"D:?(\d+):(\d+)")
 
 
+def locomo_evidence_audit(path: Path | None = None) -> dict[str, int]:
+    """How many of LoCoMo's raw evidence strings name a turn as written, how many only
+    after normalisation, and how many name no turn at all."""
+    raw = json.loads(_require(path or data_dir() / "locomo10.json").read_text("utf-8"))
+    out = {"evidence_strings": 0, "exact": 0, "repaired": 0, "unresolvable": 0}
+    for conv in raw:
+        c = conv["conversation"]
+        known = {t["dia_id"] for k, v in c.items() if k.startswith("session_")
+                 and isinstance(v, list) for t in v}  # fmt: skip
+        for qa in conv["qa"]:
+            for item in qa.get("evidence", []):
+                out["evidence_strings"] += 1
+                if item in known:
+                    out["exact"] += 1
+                    continue
+                parts = _locomo_evidence([item])
+                ok = bool(parts) and all(p in known for p in parts)
+                out["repaired" if ok else "unresolvable"] += 1
+    return out
+
+
 _SEPARATORS = frozenset(" \t\r\n,")
 
 

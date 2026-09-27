@@ -24,7 +24,7 @@ def read_jsonl(path: Path) -> list[Session]:
             continue
         try:
             rec = json.loads(raw)
-            sid, speaker, text = str(rec["session"]), str(rec["speaker"]), str(rec["text"])
+            sid, speaker, text = (_string(rec, k) for k in ("session", "speaker", "text"))
             ts = naive(datetime.fromisoformat(rec["time"]))
         except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
             raise ValueError(
@@ -40,3 +40,14 @@ def read_jsonl(path: Path) -> list[Session]:
         turns[sid].append(Turn(f"{sid}:{digest}", sid, speaker, text, ts, seq))
         starts[sid] = min(starts.get(sid, ts), ts)
     return [Session(sid, starts[sid], tuple(ts)) for sid, ts in turns.items()]
+
+
+def _string(rec: dict, key: str) -> str:
+    """rec[key] as text. A session id may be a number; speaker and text must be strings -
+    `str(None)` would store the word "None" as something someone said."""
+    v = rec[key]
+    if key == "session" and isinstance(v, int) and not isinstance(v, bool):
+        return str(v)
+    if not isinstance(v, str):
+        raise TypeError(f"{key!r} must be a string, got {type(v).__name__}")
+    return v

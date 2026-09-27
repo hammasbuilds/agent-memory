@@ -123,6 +123,13 @@ def budget_to_reach(summary: Sequence[dict], target: float) -> list[dict]:
 POSITION_BUCKETS = ((0.0, 0.25), (0.25, 0.5), (0.5, 0.75), (0.75, 0.9), (0.9, 1.0001))
 
 
+def _bucket(pos: float) -> str | None:
+    for lo, hi in POSITION_BUCKETS:
+        if lo <= pos < hi:
+            return f"{lo:g}-{min(hi, 1):g}"
+    return None
+
+
 def by_position(
     rows: Sequence[dict], budget: int, split: str = "test", b: int = 1000
 ) -> list[dict]:
@@ -134,17 +141,55 @@ def by_position(
     for r in rows:
         if r.get("budget") != budget or r["split"] != split:
             continue
-        for pos, hit in r.get("evidence", ()):
-            for lo, hi in POSITION_BUCKETS:
-                if lo <= pos < hi:
-                    vals, clusters = acc[(r["dataset"], r["strategy"], f"{lo:g}-{min(hi, 1):g}")]
-                    vals.append(float(hit))
-                    clusters.append(r["cluster"])
+        for pos, hit, *_ in r.get("evidence", ()):
+            if (bucket := _bucket(pos)) is not None:
+                vals, clusters = acc[(r["dataset"], r["strategy"], bucket)]
+                vals.append(float(hit))
+                clusters.append(r["cluster"])
     return [
         {"dataset": d, "strategy": s, "position": p, "budget": budget, "split": split}
         | {"recall": bootstrap_mean(v, c, b=b).as_dict()}
         for (d, s, p), (v, c) in sorted(acc.items())
     ]
+
+
+def position_differences(
+    rows: Sequence[dict], a: str, b_: str, budget: int, split: str = "test", b: int = 2000
+) -> list[dict]:
+    """Paired difference a - b in finding each evidence turn, per dataset and position
+    bucket, resampled by cluster. Reported with lenient credit (a truncated turn counts)
+    and strict credit (it does not)."""
+    by: dict[tuple, dict[str, list]] = defaultdict(dict)
+    for r in rows:
+        if r.get("budget") == budget and r["split"] == split and r["strategy"] in (a, b_):
+            by[(r["dataset"], r["qid"])][r["strategy"]] = r
+    acc: dict[tuple, list[tuple[float, float, str]]] = defaultdict(list)
+    for (ds, _), pair in by.items():
+        if a not in pair or b_ not in pair:
+            continue
+        for ea, eb in zip(pair[a]["evidence"], pair[b_]["evidence"], strict=True):
+            if (bucket := _bucket(ea[0])) is None:
+                continue
+            for credit, idx in (("lenient", 1), ("strict", 2)):
+                acc[(ds, bucket, credit)].append(
+                    (float(ea[idx]), float(eb[idx]), pair[a]["cluster"])
+                )
+    out = []
+    for (ds, bucket, credit), xs in sorted(acc.items()):
+        va, vb, cl = zip(*xs, strict=True)
+        out.append(
+            {
+                "dataset": ds,
+                "a": a,
+                "b": b_,
+                "position": bucket,
+                "credit": credit,
+                "budget": budget,
+                "split": split,
+                "diff": paired_difference(va, vb, cl, b=b).as_dict(),
+            }
+        )
+    return out
 
 
 def summarise_answers(rows: Sequence[dict], b: int = 2000) -> list[dict]:

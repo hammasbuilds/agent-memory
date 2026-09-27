@@ -213,3 +213,29 @@ def test_read_jsonl_is_public_and_raises_valueerror(tmp_path):
     p.write_text("not json\n")
     with pytest.raises(ValueError, match=r"x\.jsonl:1"):
         read_jsonl(p)
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        {"session": "a", "time": "2024-01-01T09:00", "speaker": "u", "text": None},
+        {"session": "a", "time": "2024-01-01T09:00", "speaker": None, "text": "hi"},
+        {"session": None, "time": "2024-01-01T09:00", "speaker": "u", "text": "hi"},
+        {"session": "a", "time": "2024-01-01T09:00", "speaker": "u", "text": 42},
+    ],
+)
+def test_read_jsonl_rejects_non_string_fields(tmp_path, bad):
+    from agent_memory.jsonl import read_jsonl
+
+    p = tmp_path / "n.jsonl"
+    p.write_text(json.dumps(bad) + "\n", "utf-8")
+    with pytest.raises(ValueError, match=r"n\.jsonl:1.*must be a string"):
+        read_jsonl(p)
+
+
+def test_read_jsonl_accepts_numeric_session_ids(tmp_path):
+    from agent_memory.jsonl import read_jsonl
+
+    p = tmp_path / "s.jsonl"
+    p.write_text(json.dumps({"session": 7, "time": "2024-01-01", "speaker": "u", "text": "hi"}))
+    assert read_jsonl(p)[0].id == "7"

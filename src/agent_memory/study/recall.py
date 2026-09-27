@@ -10,7 +10,13 @@ from dataclasses import asdict
 
 from agent_memory import retrieval as R
 from agent_memory.evaluate import HEADLINE_BUDGET, evaluate
-from agent_memory.report import budget_to_reach, by_position, compare, summarise
+from agent_memory.report import (
+    budget_to_reach,
+    by_position,
+    compare,
+    position_differences,
+    summarise,
+)
 from agent_memory.study.common import Chosen, Run, log
 
 COMPARISONS = [
@@ -106,6 +112,11 @@ def main_stage(run: Run) -> None:
         "budget_to_reach": budget_to_reach(by_budget, 0.5) + budget_to_reach(by_budget, 0.8),
         # the recency control: recall by where the evidence sits in the history
         "by_evidence_position": by_position(rows, HEADLINE_BUDGET) + by_position(rows, 512),
+        "by_evidence_position_differences": [
+            d
+            for a, b in (("sliding_window", "bm25_turns"), ("window_bm25", "bm25_turns"))
+            for d in position_differences(rows, a, b, HEADLINE_BUDGET)
+        ],
         # the window boost can only act on questions that name a time
         "time_expression_questions": _comparisons(
             [r for r in headline if r["time_expr"]],
@@ -118,11 +129,14 @@ def main_stage(run: Run) -> None:
                 "by_budget": summarise(
                     [r for r in headline if "partial_key" not in r["flags"]], "budget"
                 ),
+                "comparisons": _comparisons(
+                    [r for r in headline if "partial_key" not in r["flags"]], pairs
+                ),
             },
             "no_future_sessions": {
                 "why": "drops questions whose history has sessions dated after the question",
                 "comparisons": _comparisons(
-                    [r for r in headline if "future_sessions" not in r["flags"]], pairs[:6]
+                    [r for r in headline if "future_sessions" not in r["flags"]], pairs
                 ),
             },
         },

@@ -214,3 +214,33 @@ def test_ollama_errors_are_clear(stub_url):
         fast(stub_url).generate("missing-model", "x")
     with pytest.raises(OllamaError, match="cannot reach Ollama"):
         Ollama("http://127.0.0.1:9", timeout=2, retries=1, backoff=0.0).generate("m", "x")
+
+
+def test_run_models_sh_matches_model_tags_exactly():
+    import re
+    import shutil
+    import subprocess
+    from pathlib import Path
+
+    bash = shutil.which("bash")
+    if bash is None:
+        pytest.skip("bash not available")
+    script = (Path(__file__).resolve().parents[1] / "scripts" / "run_models.sh").read_text()
+    pulled = re.search(r"^pulled\(\) \{.*?^\}", script, re.S | re.M).group(0)
+    tags = (
+        '{"models":[{"name":"qwen2.5:14b-instruct-q8_0"},{"name":"nomic-embed-text:latest"},'
+        '{"name":"qwen2.5-coder:14b"}]}'
+    )
+    checks = "; ".join(
+        f'pulled "{m}" && echo "{m} yes" || echo "{m} no"'
+        for m in ("qwen2.5:14b-instruct", "nomic-embed-text", "qwen2.5-coder:14b", "qwen2.5-coder")
+    )
+    out = subprocess.run(
+        [bash, "-c", f"tags='{tags}'\n{pulled}\n{checks}"], capture_output=True, text=True
+    ).stdout.split("\n")
+    assert out[:4] == [
+        "qwen2.5:14b-instruct no",  # only a longer tag with the same prefix is pulled
+        "nomic-embed-text yes",  # :latest
+        "qwen2.5-coder:14b yes",
+        "qwen2.5-coder no",
+    ]
