@@ -100,3 +100,10 @@ def test_diagnostics(locomo_file):
     assert answer_location(broken) is None
     assert lexical_visibility(temporal) == 1.0  # shares "pottery"/"class"
     assert lexical_visibility(adv) == 1.0  # "race"
+
+
+def test_malformed_locomo_evidence_ids_are_normalised():
+    from agent_memory.datasets import _locomo_evidence
+
+    got = _locomo_evidence(["D:11:26", "D30:05", "D", "D9:1 D4:4", "D8:6; D9:17"])
+    assert got == ["D11:26", "D30:5", "D9:1", "D4:4", "D8:6", "D9:17"]

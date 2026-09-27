@@ -35,6 +35,7 @@ from agent_memory.analysis import answer_location, lexical_visibility
 from agent_memory.datasets import Question, iter_longmemeval, load_locomo
 from agent_memory.evaluate import (
     HEADLINE_BUDGET,
+    cluster_of,
     evaluate,
     history_via_store,
     plan_recall,
@@ -82,7 +83,7 @@ def _dev_histories(qs: Iterable[Question]) -> list[tuple[Question, History]]:
     for q in qs:
         if split_of(q) != "dev":
             continue
-        key = id(q.history)
+        key = cluster_of(q)
         if key not in cache:
             cache[key] = history_via_store(q)
         out.append((q, cache[key]))
@@ -309,8 +310,8 @@ def diagnostics_stage(lme_limit: int | None) -> None:
         sizes: list[int] = []
         seen: set[int] = set()
         for q in qs:
-            if id(q.history) not in seen:
-                seen.add(id(q.history))
+            if cluster_of(q) not in seen:
+                seen.add(cluster_of(q))
                 sizes.append(sum(count_tokens(t.text) for s in q.history for t in s.turns))
             timed[q.qtype].append(query_window(q.question, q.now) is not None)
             if (v := lexical_visibility(q)) is not None:

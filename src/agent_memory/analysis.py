@@ -68,4 +68,9 @@ def answer_location(q: Question) -> str | None:
     missing = ans - {w for t in ev for w in terms(t.text)}
     if not missing:
         return "in_text"
-    return "needs_date" if all(_is_date_word(w) for w in missing) else "elsewhere"
+    # A bare count ("3") is not a date: something beyond digits must be date-like, or
+    # the number must look like a year.
+    datelike = any(not w.isdigit() or len(w) == 4 for w in missing)
+    if datelike and all(_is_date_word(w) for w in missing):
+        return "needs_date"
+    return "elsewhere"

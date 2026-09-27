@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -150,15 +151,18 @@ def _locomo_text(t: dict) -> str:
 
 
 def _locomo_evidence(ev: list[str]) -> list[str]:
-    """Evidence ids are 'D<session>:<turn>', occasionally several in one string
-    ('D8:6; D9:17') or with stray spaces."""
+    """Evidence ids are 'D<session>:<turn>'. A few of the 2,815 are malformed: several
+    in one string ('D8:6; D9:17', 'D9:1 D4:4'), an extra colon ('D:11:26'), a zero-padded
+    turn ('D30:05'), or just 'D'. Each is normalised or, if hopeless, dropped."""
     out = []
     for item in ev:
-        for part in item.replace(",", ";").split(";"):
-            part = part.strip()
-            if part.startswith("D") and ":" in part:
-                out.append(part)
+        for part in _EVIDENCE.findall(item):
+            session, turn = part
+            out.append(f"D{int(session)}:{int(turn)}")
     return out
+
+
+_EVIDENCE = re.compile(r"D:?(\d+):(\d+)")
 
 
 _SEPARATORS = frozenset(" \t\r\n,")

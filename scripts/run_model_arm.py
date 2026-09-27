@@ -34,7 +34,14 @@ from agent_memory.answer import answer_and_judge
 from agent_memory.context import line
 from agent_memory.datasets import Question, iter_longmemeval, load_locomo
 from agent_memory.embedding import DOC_PREFIX, make_dense, make_hybrid
-from agent_memory.evaluate import HEADLINE_BUDGET, evaluate, history_via_store, score, split_of
+from agent_memory.evaluate import (
+    HEADLINE_BUDGET,
+    cluster_of,
+    evaluate,
+    history_via_store,
+    score,
+    split_of,
+)
 from agent_memory.extract import extract_into
 from agent_memory.llm import CHAT_MODEL, EMBED_MODEL, DiskCache, Ollama
 from agent_memory.report import summarise
@@ -224,9 +231,9 @@ def dry_run(per_type: int, lme_limit: int | None) -> None:
         n_q += len(qs)
         seen = set()
         for q in qs:
-            if id(q.history) in seen:
+            if cluster_of(q) in seen:
                 continue
-            seen.add(id(q.history))
+            seen.add(cluster_of(q))
             for s in q.history:
                 if ds == "locomo":
                     sessions_locomo.add(s.id)
