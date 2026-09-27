@@ -14,7 +14,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="python">
   <img src="https://img.shields.io/badge/runtime%20dependencies-none-success" alt="dependencies">
-  <img src="https://img.shields.io/badge/tests-117%20passing-success" alt="tests">
+  <img src="https://img.shields.io/badge/tests-123%20passing-success" alt="tests">
   <img src="https://img.shields.io/badge/data-LoCoMo%20%C2%B7%20LongMemEval__S-orange" alt="data">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
 </p>
@@ -30,7 +30,7 @@ flowchart TD
     A["conversation turns"] --> S[("SQLite store<br/>raw turns + versioned facts<br/>with provenance")]
     S --> P1["positional<br/>head truncation · sliding window"]
     S --> P2["search<br/>BM25 turns · BM25 sessions · recency BM25"]
-    S --> P4["recent window + search<br/>half the budget each"]
+    S --> P4["recent window + search<br/>share of budget swept on dev"]
     S --> P3["the store's retriever<br/>turn + session BM25 · time windows · recency"]
     P1 --> C["context builder<br/>same budget, same token counter,<br/>every context filled, session dates shown"]
     P2 --> C
@@ -52,11 +52,12 @@ LongMemEval_S (500 questions, each with its own ~112k-token chat history) - and 
 whether the evidence a question needs made it into a 2,048-token context.
 
 > **Searching everything beats a recent-turns window by 67-79 recall points at 2,048
-> tokens, and the window does no better than random turns. The control shows why: on
+> tokens, and the window lands within ±0.02 of random turns. The control shows why: on
 > LoCoMo the window finds 87% of the evidence that sits in the newest tenth of a history
 > (BM25: 73%) and almost none anywhere else - and only 7-10% of these benchmarks'
-> questions have their evidence there. Even the hybrid agents use - half the budget for
-> recent turns, half for search - loses 4-5 points to search alone. What retrieval
+> questions have their evidence there. Reserving part of the budget for recent turns
+> never beats search alone: a 5% share ties it, a 50% share loses 4-5 points, 75% loses
+> 10-12. What retrieval
 > structurally loses is information spread across turns (multi-hop: all evidence found for
 > only 34% / 50% of questions) or never named by the question (open-domain: 58% of its
 > evidence turns share no content word with it).**
@@ -78,12 +79,12 @@ from [`results/`](results/).
 
 | | Question | Answer on this run | Source |
 |---|---|---|---|
-| 1 | **Does remembering everything and searching beat recency?** | Yes: BM25 over turns minus a sliding window is **+0.670** recall [0.645, 0.699] on LoCoMo and **+0.788** [0.751, 0.823] on LongMemEval. Both fill the budget (2,047 vs 2,040 / 2,028 tokens on average). The window against random turns: +0.019 [0.001, 0.035] on LoCoMo, −0.016 [−0.032, 0.000] on LongMemEval - no better than chance on either. | `retrieval.json` → `comparisons` |
+| 1 | **Does remembering everything and searching beat recency?** | Yes: BM25 over turns minus a sliding window is **+0.670** recall [0.645, 0.699] on LoCoMo and **+0.788** [0.751, 0.823] on LongMemEval. Both fill the budget (2,047 vs 2,040 / 2,028 tokens on average). The window against random turns is **within ±0.02 of zero on both**, but which side depends on how a cut turn is credited. The window fills its budget by truncating its oldest turn; counting that turn as found gives +0.019 [0.001, 0.035] (LoCoMo) and −0.016 [−0.032, 0.000] (LongMemEval); not counting it gives +0.018 [−0.001, 0.035] and −0.020 [−0.035, −0.005]. | `retrieval.json` → `comparisons`, `strict_credit_comparisons` |
 | 2 | **Is that because the evidence is old?** | Tested, not assumed. Recall of evidence turns by their position in the history (1.0 = the last turn): on LoCoMo the window finds **0.868** [0.752, 0.951] of evidence in the newest tenth, beating BM25's 0.729 [0.673, 0.783] there, and ≤0.010 in every older bucket. On LongMemEval a 2,048-token window covers under 2% of a 112k-token history, so even the newest tenth gets 0.057. Only 9.5% (LoCoMo) and 6.7% (LongMemEval) of questions have their evidence in the newest tenth - a property of these benchmarks, not of agents in general. | `retrieval.json` → `by_evidence_position`; `diagnostics.json` → `evidence_position` |
-| 3 | **What about recent turns *plus* search?** | Half the budget for the latest turns, half for BM25, loses to BM25 alone by **0.036** [0.030, 0.045] on LoCoMo and **0.052** [0.029, 0.076] on LongMemEval. It wins the newest bucket on LoCoMo (0.904 vs 0.729) and pays for it in every older one. | `retrieval.json` → `comparisons`, `by_evidence_position` |
+| 3 | **What about recent turns *plus* search?** | No split of the budget beats search alone. The recent share was chosen on the dev split from 5-75%, and dev picked the smallest, 5%, which ties BM25 on test (−0.001 [−0.005, 0.002] on LoCoMo, +0.005 [−0.009, 0.019] on LongMemEval). Larger shares lose steadily: 10% −0.008 / −0.007, 25% −0.020 / −0.003, 50% −0.036 / −0.052, 75% −0.103 / −0.117. At 512 tokens a 5% share (25 tokens) cannot hold a single turn, so there it *is* BM25. | `window_share.json`; `dev_sweep.json` → `window_share_grid` |
 | 4 | **Which question types does retrieval structurally lose?** | Multi-hop and inference. The store's recall is 0.905 single-hop / 0.597 multi-hop / 0.446 open-domain on LoCoMo; 0.955 single-hop / 0.680 multi-hop / 0.632 preference on LongMemEval. For multi-hop, *all* evidence turns arrive for only **34%** [22, 43] and **50%** [41, 60] of questions (52% [42, 62] on the LongMemEval questions whose turn key is complete). Open-domain questions ("would Caroline likely...") are lexically invisible: **58% of their 208 evidence turns** share no content word with the question, and **40% of the 92 questions** have no evidence turn that does. | `retrieval.json` → `by_budget`, `subsets`; `diagnostics.json` → `lexical_visibility` |
 | 5 | **Are temporal questions lost?** | Not at retrieval: 0.860 [0.800, 0.924] and 0.815 [0.744, 0.883]. But **71%** of LoCoMo's temporal answers are dates the evidence turn never states ("I went to a support group *yesterday*" → gold "7 May 2023"); they are recoverable only because the context builder heads each session with its date. | `diagnostics.json` → `answer_location` |
-| 6 | **Knowledge updates: does search return the stale value?** | With BM25 over turns at 2,048 tokens, rarely - the newest value's session is in context for **92%** of update questions and only the stale one for 4.9%. At 512 tokens the stale-only rate is **16.4%**. A 30-day recency half-life cuts that to 6.6% and raises newest-value recall by 6.6 points [0.0, 14.8] - while costing LoCoMo 28 recall points at the same budget (0.608 → 0.325). The dev sweep chose a 5-year half-life: effectively off. | `recency_sensitivity.json` |
+| 6 | **Knowledge updates: does search return the stale value?** | With BM25 over turns at 2,048 tokens, rarely - the newest value's session is in context for **92%** of update questions and only the stale one for 4.9%. At 512 tokens the stale-only rate is **16.4%**. A 30-day recency half-life cuts that to 6.6%, and newest-value recall rises by 6.6 points - an interval of [0.0, 14.8], so not distinguishable from zero - while costing LoCoMo 28 recall points at the same budget (0.608 → 0.325). The dev sweep chose a 5-year half-life: effectively off. | `recency_sensitivity.json` |
 | 7 | **What does the store's retriever add over plain BM25?** | +0.071 [0.057, 0.083] on LoCoMo, +0.021 [0.005, 0.038] on LongMemEval (turn level). The ablations put almost all of it on **session-level fusion** (+0.068 / +0.022). Recency decay adds nothing (+0.001 / +0.000). The time-window boost: +0.004 [0.001, 0.007] on LoCoMo and −0.003 [−0.008, 0.000] on LongMemEval overall; on the 95 LoCoMo questions that name a time it is +0.063 [0.024, 0.100], on the 50 LongMemEval ones −0.020 [−0.060, 0.000]. At session level the store is *slightly worse* than BM25 on LoCoMo (−0.019 [−0.030, −0.009]): fusion concentrates the budget on fewer sessions. | `retrieval.json` → `comparisons`, `session_level_comparisons`, `time_expression_questions` |
 | 8 | **Recall@k flatters coarse units** | BM25 over whole sessions reaches recall@10 of **0.956** on LongMemEval - at a mean of 29,401 tokens. At an equal 2,048-token budget it is **15 points worse** than BM25 over turns (−0.152 [−0.193, −0.111]). On LoCoMo, where sessions are short, sessions win by 0.022 [0.005, 0.037]. | `retrieval.json` → `by_k`, `comparisons` |
 | 9 | **Forgetting: what can be thrown away?** | Truncating every turn to 128 tokens keeps 37% of LongMemEval's stored tokens, drops no evidence turn, and *raises* the store's recall from 0.819 to 0.886 (cheaper turns, more of them fit) - but the literal gold answer survives the cut in 95% of the questions where it was literal, not 100%. Dropping every assistant turn keeps 13% of the tokens and leaves the average almost unchanged (0.813 vs 0.819) by swapping types: multi-hop rises 0.680 → 0.884 while assistant-side questions collapse 0.933 → 0.089. | `forgetting.json` |
@@ -142,7 +143,7 @@ answerable only through the session date (the turn says "yesterday"):
   gold evidence conv-26:D1:3 (08 May 2023) Caroline: I went to a LGBTQ support group yesterday and it was so powerful.
     sliding_window   2047 tokens, evidence turns 0/1, answer sessions 0/1
     bm25_turns       2045 tokens, evidence turns 1/1, answer sessions 1/1
-    window_bm25      2045 tokens, evidence turns 1/1, answer sessions 1/1
+    window_bm25      2044 tokens, evidence turns 1/1, answer sessions 1/1
     store            2041 tokens, evidence turns 1/1, answer sessions 1/1
 ```
 
@@ -159,7 +160,7 @@ them, so every strategy finds at most one:
   gold evidence conv-26:D9:1 (17 Jul 2023) Melanie: Hey Caroline, hope all's good! I had a quiet weekend after we went camping with my fam two
     sliding_window   2047 tokens, evidence turns 0/4, answer sessions 0/3
     bm25_turns       2038 tokens, evidence turns 1/4, answer sessions 3/3
-    window_bm25      2038 tokens, evidence turns 1/4, answer sessions 3/3
+    window_bm25      2029 tokens, evidence turns 1/4, answer sessions 3/3
     store            2034 tokens, evidence turns 1/4, answer sessions 3/3
 ```
 
@@ -177,7 +178,7 @@ race it was:
   gold evidence conv-26:D2:3 (25 May 2023) Melanie: Thanks, Caroline! The event was really thought-provoking. I'm starting to realize that sel
     sliding_window   2047 tokens, evidence turns 0/1, answer sessions 0/1
     bm25_turns       2037 tokens, evidence turns 1/1, answer sessions 1/1
-    window_bm25      2047 tokens, evidence turns 1/1, answer sessions 1/1
+    window_bm25      2046 tokens, evidence turns 1/1, answer sessions 1/1
     store            2043 tokens, evidence turns 1/1, answer sessions 1/1
 ```
 
@@ -191,7 +192,7 @@ changed a week later; search finds both sessions, including the newest value:
   gold evidence 6a1eabeb:answer_a25d4a91_2:0 (30 May 2023) user: I'm training for another charity 5K run coming up and I was wondering if you could give me
     sliding_window   2047 tokens, evidence turns 0/2, answer sessions 0/2, newest value found: False
     bm25_turns       2034 tokens, evidence turns 2/2, answer sessions 2/2, newest value found: True
-    window_bm25      2029 tokens, evidence turns 2/2, answer sessions 2/2, newest value found: True
+    window_bm25      2033 tokens, evidence turns 2/2, answer sessions 2/2, newest value found: True
     store            2042 tokens, evidence turns 2/2, answer sessions 2/2, newest value found: True
 ```
 
@@ -244,7 +245,7 @@ conversation only says he lost the job the day before 20 January 2023.)
 ```bash
 git clone <this repo> && cd agent-memory
 uv sync
-uv run pytest -q                                   # 117 tests, no data, no network, no model
+uv run pytest -q                                   # 123 tests, no data, no network, no model
 uv run python demo.py                              # part 1 needs nothing
 uv run python scripts/fetch_data.py                # LoCoMo + LongMemEval oracle & S (~295 MB)
 uv run python demo.py                              # now with part 2
@@ -292,8 +293,9 @@ their SHA-256.
 How the loaders treat them (all counted in `results/diagnostics.json`):
 
 - LongMemEval sessions are put in date order (the file lists them out of order). 76
-  questions have sessions dated after the question itself, including 75 answer sessions
-  in 44 questions; they are kept (dropping them would delete gold evidence), flagged, and every headline
+  questions have 1,474 sessions dated after the question itself, including 75 answer
+  sessions in 44 questions (`diagnostics.json` → `sessions_dated_after_the_question`);
+  they are kept (dropping them would delete gold evidence), flagged, and every headline
   comparison is repeated without those questions (`retrieval.json` → `subsets`).
 - 13 LongMemEval questions list one session id twice; the two copies are identical in all
   13, so one is kept. A duplicate with different content would stop the loader.
@@ -311,6 +313,7 @@ src/agent_memory/
   text.py         index terms (stop words, light stemmer) and a calibrated token counter
   temporal.py     dataset timestamps; "last month", "three weeks ago", "in May 2023" -> date windows
   retrieval.py    the strategies (positional, search, window + search) and the store's Retriever
+  jsonl.py        `read_jsonl`: conversation turns from JSON Lines, ready for `MemoryStore.ingest`
   context.py      the context builder: fills a budget, one date header per session
   forget.py       forgetting (phatic, role, older-than) and compaction (truncate) policies
   datasets.py     LoCoMo and LongMemEval loaders; streaming JSON; data-quality flags
@@ -323,13 +326,14 @@ src/agent_memory/
   embedding.py    model arm: nomic-embed-text dense index, RRF hybrid with the store retriever
   extract.py      model arm: LLM fact extraction into the store
   answer.py       model arm: answer from context, judge against gold per question type
-  study/          the study stages: diagnostics, sweep (dev + recency), recall, forgetting, models
+  study/          the study stages: diagnostics, sweep (dev, recency, window share), recall,
+                  forgetting, models
 scripts/
   fetch_data.py            parallel, resumable, sha256-verified byte-range download
   run_retrieval_study.py   runs the study stages
   run_model_arm.py         dense/hybrid retrieval, extraction, answer accuracy (+ --dry-run)
   run_models.sh            RAM / GPU / Ollama checks, then the model arm
-  calibrate_tokens.py      count_tokens vs cl100k_base and the Qwen2.5 tokeniser, per strategy
+  calibrate_tokens.py      count_tokens vs cl100k_base and the Qwen2.5-Coder tokeniser, per strategy
 results/                   every number in this README
 ```
 
@@ -343,7 +347,7 @@ a GPU with ~11 GB free.
 ## Tests
 
 ```bash
-uv run pytest -q     # 117 tests
+uv run pytest -q     # 123 tests
 uv run ruff check .
 ```
 
@@ -355,7 +359,9 @@ over, counts exactly what it renders, positional strategies fill the budget), fa
 supersession and relevance with one fact or shared terms, JSONL ingestion across two
 files, turn ids never reused, the two answer keys on a deliberately messy LongMemEval
 question, the grouped split, every study stage and the model arm end to end on fixtures,
-retries and digest-keyed caching against the stub server, and unparsable judge replies.
+retries and digest-keyed caching against the stub server, unparsable judge replies,
+strict versus lenient credit for a truncated evidence turn, empty turns at ingest, and
+relative windows with `+05:00` inputs against the UTC default clock.
 
 ## What this does NOT do
 
@@ -367,13 +373,15 @@ retries and digest-keyed caching against the stub server, and unparsable judge r
   tested, but facts come from `remember()` / the CLI or from the queued LLM extractor. No
   retrieval number above uses facts.
 - **Its token counts are approximate, and not equally so for every strategy.**
-  Against the Qwen2.5 tokeniser (the answer model's), `count_tokens` is 4% over on LoCoMo
-  turns and 8% over on LongMemEval turns (cl100k_base: 4% and 9%). Per rendered 2,048-token
-  context the ratio runs from 0.95 (ranked turn strategies on LoCoMo, whose many short
-  turns and date headers it undercounts) to 1.07 (whole sessions on LongMemEval) - so on
-  LoCoMo ranked strategies really receive up to ~5% more tokens than a window at the same
-  nominal budget. That is far too small to move findings 1-3; it is in
-  `results/token_calibration.json` for anyone comparing absolute costs.
+  Against the Qwen2.5-Coder tokeniser (same BPE vocabulary as the answer model, assumed
+  rather than checked), `count_tokens` is 4% over on LoCoMo turns and 8% over on
+  LongMemEval turns (cl100k_base: 4% and 9%). Per rendered 2,048-token context the ratio
+  runs from 0.951 (random and ranked turn strategies on LoCoMo, whose many short turns and
+  date headers it undercounts) to 1.069 (whole sessions on LongMemEval). So on LoCoMo,
+  random and BM25 really receive about **7%** more tokens than the window (1.020 / 0.951)
+  at the same nominal budget; on LongMemEval random gets 4% more than the window and BM25
+  about the same. Seven percent more tokens cannot close a 67-point gap, but it does sit
+  inside the ±0.02 window-vs-random comparison. Numbers in `results/token_calibration.json`.
 - **It does not model realistic recency.** Finding 2 shows recency wins exactly where
   evidence is recent; these benchmarks rarely put it there.
 - **LongMemEval abstention has little retrieval signal**: 21 of its 30 abstention
@@ -392,6 +400,17 @@ retries and digest-keyed caching against the stub server, and unparsable judge r
   random's 2,045, and LongMemEval's long assistant turns made that gap systematic.
   Positional strategies now cut the boundary turn to fill the budget; the window is now
   merely *no better* than random (−0.016, interval touching zero). Found in review.
+- **"Recent turns plus search loses 4-5 points" was an artefact of one arbitrary split.**
+  The 50/50 share was fixed by hand; sweeping it showed the loss grows with the share and
+  vanishes near 5%. The share is now chosen on dev and the whole curve reported. Found in
+  review.
+- **The window-vs-random sign depended on a scoring choice.** Crediting a truncated turn
+  as found was undisclosed; both credit rules are now reported side by side. Found in
+  review.
+- **The default clock was local time while offsets were stored as UTC**, which would
+  shift "yesterday" by the machine's offset. The store and CLI now default to UTC.
+- **Empty turns were stored by bulk ingest but refused by `add_turn`.** LongMemEval_S has
+  12; `ingest` now skips and counts them.
 - **"Recency loses because evidence is old" was first asserted, not tested.** The
   per-position control (finding 2) and the window + search baseline (finding 3) were added
   after review; the explanation survived, with a number behind it.

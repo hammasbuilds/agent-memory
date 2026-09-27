@@ -139,6 +139,13 @@
     "n": 319
    }
   },
+  "sessions_dated_after_the_question": {
+   "questions": 1986,
+   "questions_with_future_sessions": 0,
+   "future_sessions": 0,
+   "future_answer_sessions": 0,
+   "questions_with_future_answer_sessions": 0
+  },
   "data_quality_flags": {}
  },
  {
@@ -322,6 +329,13 @@
     "needs_date": 0.063,
     "n": 127
    }
+  },
+  "sessions_dated_after_the_question": {
+   "questions": 500,
+   "questions_with_future_sessions": 76,
+   "future_sessions": 1474,
+   "future_answer_sessions": 75,
+   "questions_with_future_answer_sessions": 44
   },
   "data_quality_flags": {
    "duplicate_sessions": {

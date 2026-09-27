@@ -89,13 +89,16 @@ def test_empty_history():
 
 
 def test_defaults_are_what_the_dev_sweep_chose():
+    import inspect
     import json
     from dataclasses import asdict
     from pathlib import Path
 
     sweep = Path(__file__).resolve().parents[1] / "results" / "dev_sweep.json"
-    chosen = json.loads(sweep.read_text("utf-8"))["store_best"]["config"]
-    assert asdict(RetrieverConfig()) == chosen
+    data = json.loads(sweep.read_text("utf-8"))
+    assert asdict(RetrieverConfig()) == data["store_best"]["config"]
+    default_share = inspect.signature(R.make_window_bm25).parameters["recent_share"].default
+    assert default_share == data["window_share_best"]["recent_share"]
 
 
 def test_window_bm25_splits_the_budget(history):

@@ -114,7 +114,7 @@ def part_two() -> None:
     strategies = {
         "sliding_window": R.sliding_window,
         "bm25_turns": R.bm25_turns,
-        "window_bm25": R.make_window_bm25(0.5),
+        "window_bm25": R.make_window_bm25(),  # the recent share the dev sweep chose (5%)
         "store": R.make_store(RetrieverConfig()),
     }
     locomo = {q.qid: q for q in load_locomo()}

@@ -1077,5 +1077,55 @@
    "longmemeval": 0.8842,
    "macro": 0.8069
   }
+ },
+ "window_share_grid": [
+  {
+   "recent_share": 0.05,
+   "recall": {
+    "locomo": 0.7256,
+    "longmemeval": 0.8842,
+    "macro": 0.8049
+   }
+  },
+  {
+   "recent_share": 0.1,
+   "recall": {
+    "locomo": 0.7213,
+    "longmemeval": 0.8625,
+    "macro": 0.7919
+   }
+  },
+  {
+   "recent_share": 0.25,
+   "recall": {
+    "locomo": 0.7136,
+    "longmemeval": 0.8643,
+    "macro": 0.789
+   }
+  },
+  {
+   "recent_share": 0.5,
+   "recall": {
+    "locomo": 0.6864,
+    "longmemeval": 0.8571,
+    "macro": 0.7717
+   }
+  },
+  {
+   "recent_share": 0.75,
+   "recall": {
+    "locomo": 0.6358,
+    "longmemeval": 0.79,
+    "macro": 0.7129
+   }
+  }
+ ],
+ "window_share_best": {
+  "recent_share": 0.05,
+  "recall": {
+   "locomo": 0.7256,
+   "longmemeval": 0.8842,
+   "macro": 0.8049
+  }
  }
 }

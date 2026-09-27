@@ -1,0 +1,2532 @@
+{
+ "split": "test",
+ "recent_shares": [
+  0.05,
+  0.1,
+  0.25,
+  0.5,
+  0.75
+ ],
+ "versus_bm25_turns": [
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0031,
+    "ci95": [
+     -0.0098,
+     0.0
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0014,
+    "ci95": [
+     -0.005,
+     0.0024
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0019,
+    "ci95": [
+     -0.002,
+     0.0078
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0016,
+    "ci95": [
+     -0.0063,
+     0.0041
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0015,
+    "ci95": [
+     -0.0043,
+     0.0
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0046,
+    "ci95": [
+     -0.0092,
+     0.0192
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     -0.0492,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0042,
+    "ci95": [
+     -0.0265,
+     0.033
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0486,
+    "ci95": [
+     -0.0278,
+     0.1458
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0227,
+    "ci95": [
+     0.0,
+     0.0682
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.05",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0082,
+    "ci95": [
+     -0.031,
+     0.0147
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0031,
+    "ci95": [
+     -0.0078,
+     0.0122
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0011,
+    "ci95": [
+     -0.0054,
+     0.0021
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0212,
+    "ci95": [
+     -0.0369,
+     -0.0055
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0081,
+    "ci95": [
+     0.0027,
+     0.0137
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0161,
+    "ci95": [
+     -0.0337,
+     -0.004
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.125,
+    "ci95": [
+     0.0,
+     0.375
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0031,
+    "ci95": [
+     -0.0205,
+     0.0274
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0191,
+    "ci95": [
+     -0.0656,
+     0.0984
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0089,
+    "ci95": [
+     -0.0429,
+     0.0591
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0208,
+    "ci95": [
+     -0.1458,
+     0.1042
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0222,
+    "ci95": [
+     -0.0667,
+     0.0
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0036,
+    "ci95": [
+     -0.048,
+     0.0405
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0125,
+    "ci95": [
+     -0.019,
+     -0.004
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0081,
+    "ci95": [
+     -0.014,
+     -0.0023
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0049,
+    "ci95": [
+     -0.0098,
+     -0.001
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0182,
+    "ci95": [
+     -0.0532,
+     0.0
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0065,
+    "ci95": [
+     -0.0159,
+     0.0037
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0061,
+    "ci95": [
+     -0.0165,
+     0.0
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.125,
+    "ci95": [
+     -0.375,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0065,
+    "ci95": [
+     -0.0241,
+     0.0097
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     -0.0246,
+     0.0246
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0063,
+    "ci95": [
+     -0.0291,
+     0.0409
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0417,
+    "ci95": [
+     0.0,
+     0.125
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     -0.0682,
+     0.0682
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.1",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.031,
+    "ci95": [
+     -0.0703,
+     0.0033
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0376,
+    "ci95": [
+     -0.0486,
+     -0.0252
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0259,
+    "ci95": [
+     -0.0322,
+     -0.0193
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0385,
+    "ci95": [
+     -0.0542,
+     -0.02
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0182,
+    "ci95": [
+     -0.0462,
+     0.0
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0152,
+    "ci95": [
+     -0.0235,
+     -0.0051
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.03,
+    "ci95": [
+     -0.0583,
+     -0.0086
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.125,
+    "ci95": [
+     -0.5,
+     0.25
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0175,
+    "ci95": [
+     -0.0473,
+     0.0106
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0246,
+    "ci95": [
+     -0.0984,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0254,
+    "ci95": [
+     -0.0338,
+     0.0832
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0208,
+    "ci95": [
+     -0.0625,
+     0.125
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0455,
+    "ci95": [
+     -0.1136,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0667,
+    "ci95": [
+     -0.1556,
+     0.0
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0235,
+    "ci95": [
+     -0.0788,
+     0.0337
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0157,
+    "ci95": [
+     -0.0263,
+     -0.0029
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0204,
+    "ci95": [
+     -0.0316,
+     -0.0121
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0298,
+    "ci95": [
+     -0.0453,
+     -0.0164
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0639,
+    "ci95": [
+     -0.1561,
+     0.0148
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0173,
+    "ci95": [
+     -0.0271,
+     -0.0075
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0169,
+    "ci95": [
+     -0.0355,
+     -0.0023
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0034,
+    "ci95": [
+     -0.0212,
+     0.0139
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0164,
+    "ci95": [
+     -0.0328,
+     0.0738
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0078,
+    "ci95": [
+     -0.0364,
+     0.0202
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0417,
+    "ci95": [
+     -0.0417,
+     0.1458
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0227,
+    "ci95": [
+     0.0,
+     0.0682
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0222,
+    "ci95": [
+     0.0,
+     0.0667
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.25",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0441,
+    "ci95": [
+     -0.0817,
+     -0.0095
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0752,
+    "ci95": [
+     -0.0902,
+     -0.0592
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0661,
+    "ci95": [
+     -0.0731,
+     -0.06
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0921,
+    "ci95": [
+     -0.12,
+     -0.0632
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0288,
+    "ci95": [
+     -0.0662,
+     0.0119
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0453,
+    "ci95": [
+     -0.0551,
+     -0.0375
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0983,
+    "ci95": [
+     -0.1349,
+     -0.0607
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.125,
+    "ci95": [
+     0.0,
+     0.375
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1015,
+    "ci95": [
+     -0.1347,
+     -0.0694
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0656,
+    "ci95": [
+     -0.1475,
+     0.0164
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0553,
+    "ci95": [
+     -0.1078,
+     0.0006
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0208,
+    "ci95": [
+     -0.1458,
+     0.1042
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0455,
+    "ci95": [
+     -0.1136,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.3556,
+    "ci95": [
+     -0.4889,
+     -0.2222
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1183,
+    "ci95": [
+     -0.1784,
+     -0.0608
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0298,
+    "ci95": [
+     -0.045,
+     -0.0134
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0364,
+    "ci95": [
+     -0.0446,
+     -0.03
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0752,
+    "ci95": [
+     -0.1017,
+     -0.0583
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0791,
+    "ci95": [
+     -0.1712,
+     0.0188
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0312,
+    "ci95": [
+     -0.039,
+     -0.0211
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0154,
+    "ci95": [
+     -0.0332,
+     -0.0022
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0519,
+    "ci95": [
+     -0.0765,
+     -0.0294
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0492,
+    "ci95": [
+     -0.1148,
+     0.0164
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0482,
+    "ci95": [
+     -0.0906,
+     -0.0095
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0208,
+    "ci95": [
+     -0.1458,
+     0.1042
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0889,
+    "ci95": [
+     -0.1778,
+     -0.0222
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.5",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0748,
+    "ci95": [
+     -0.1232,
+     -0.0294
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.2273,
+    "ci95": [
+     -0.2678,
+     -0.1821
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1939,
+    "ci95": [
+     -0.2142,
+     -0.171
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1698,
+    "ci95": [
+     -0.2155,
+     -0.1126
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1121,
+    "ci95": [
+     -0.1567,
+     -0.0585
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1805,
+    "ci95": [
+     -0.2091,
+     -0.1482
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.225,
+    "ci95": [
+     -0.2797,
+     -0.1462
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": 0.0625,
+    "ci95": [
+     -0.1875,
+     0.375
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.3069,
+    "ci95": [
+     -0.345,
+     -0.2668
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.4071,
+    "ci95": [
+     -0.4918,
+     -0.3142
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.2316,
+    "ci95": [
+     -0.2914,
+     -0.171
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1319,
+    "ci95": [
+     -0.2708,
+     -0.0208
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1364,
+    "ci95": [
+     -0.25,
+     -0.0227
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.5778,
+    "ci95": [
+     -0.7333,
+     -0.4444
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.3474,
+    "ci95": [
+     -0.417,
+     -0.2784
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "abstention",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0784,
+    "ci95": [
+     -0.0997,
+     -0.0581
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "all types",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1032,
+    "ci95": [
+     -0.1212,
+     -0.0894
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.181,
+    "ci95": [
+     -0.2166,
+     -0.1466
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "open-domain",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1306,
+    "ci95": [
+     -0.2465,
+     -0.0278
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1024,
+    "ci95": [
+     -0.1275,
+     -0.0794
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "qtype": "temporal",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0657,
+    "ci95": [
+     -0.1097,
+     -0.0252
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "abstention",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.125,
+    "ci95": [
+     -0.375,
+     0.0
+    ],
+    "n": 8,
+    "clusters": 8
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "all types",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1172,
+    "ci95": [
+     -0.149,
+     -0.0891
+    ],
+    "n": 387,
+    "clusters": 380
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.123,
+    "ci95": [
+     -0.2049,
+     -0.0464
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "multi-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.1644,
+    "ci95": [
+     -0.2291,
+     -0.1053
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "preference",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0625,
+    "ci95": [
+     -0.2083,
+     0.0833
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0114,
+    "ci95": [
+     -0.0341,
+     0.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "single-hop-assistant",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.2,
+    "ci95": [
+     -0.3111,
+     -0.0889
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "temporal",
+   "a": "window_bm25_0.75",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "recall",
+   "diff": {
+    "mean": -0.0876,
+    "ci95": [
+     -0.1422,
+     -0.0363
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  }
+ ]
+}

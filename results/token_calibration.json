@@ -13,7 +13,7 @@
   },
   {
    "dataset": "locomo",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 5882,
    "estimated_total": 212393,
    "reference_total": 204050,
@@ -31,7 +31,7 @@
   },
   {
    "dataset": "longmemeval",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 24463,
    "estimated_total": 5691469,
    "reference_total": 5255069,
@@ -53,7 +53,7 @@
   {
    "dataset": "locomo",
    "strategy": "full_head",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 406476,
    "reference_total": 397239,
@@ -73,7 +73,7 @@
   {
    "dataset": "locomo",
    "strategy": "sliding_window",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 407396,
    "reference_total": 399491,
@@ -93,7 +93,7 @@
   {
    "dataset": "locomo",
    "strategy": "random",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 407194,
    "reference_total": 428036,
@@ -113,7 +113,7 @@
   {
    "dataset": "locomo",
    "strategy": "bm25_turns",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405697,
    "reference_total": 425931,
@@ -133,7 +133,7 @@
   {
    "dataset": "locomo",
    "strategy": "bm25_sessions",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 406369,
    "reference_total": 396210,
@@ -145,20 +145,20 @@
    "strategy": "window_bm25",
    "reference": "cl100k_base",
    "texts": 199,
-   "estimated_total": 406742,
-   "reference_total": 395060,
-   "ratio_total": 1.0296,
-   "mean_abs_pct_error": 0.0326
+   "estimated_total": 405721,
+   "reference_total": 395144,
+   "ratio_total": 1.0268,
+   "mean_abs_pct_error": 0.0325
   },
   {
    "dataset": "locomo",
    "strategy": "window_bm25",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
-   "estimated_total": 406742,
-   "reference_total": 416800,
-   "ratio_total": 0.9759,
-   "mean_abs_pct_error": 0.0274
+   "estimated_total": 405721,
+   "reference_total": 425862,
+   "ratio_total": 0.9527,
+   "mean_abs_pct_error": 0.0469
   },
   {
    "dataset": "locomo",
@@ -173,7 +173,7 @@
   {
    "dataset": "locomo",
    "strategy": "recency_bm25",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405716,
    "reference_total": 425720,
@@ -193,7 +193,7 @@
   {
    "dataset": "locomo",
    "strategy": "store",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405697,
    "reference_total": 412988,
@@ -213,7 +213,7 @@
   {
    "dataset": "locomo",
    "strategy": "store-no-session",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405788,
    "reference_total": 424352,
@@ -233,7 +233,7 @@
   {
    "dataset": "locomo",
    "strategy": "store-no-recency",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405719,
    "reference_total": 413583,
@@ -253,7 +253,7 @@
   {
    "dataset": "locomo",
    "strategy": "store-no-window",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 199,
    "estimated_total": 405699,
    "reference_total": 413099,
@@ -273,7 +273,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "full_head",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 102372,
    "reference_total": 97978,
@@ -293,7 +293,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "sliding_window",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 102369,
    "reference_total": 96683,
@@ -313,7 +313,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "random",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 102233,
    "reference_total": 100398,
@@ -333,7 +333,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "bm25_turns",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 101101,
    "reference_total": 95922,
@@ -345,40 +345,40 @@
    "strategy": "bm25_sessions",
    "reference": "cl100k_base",
    "texts": 50,
-   "estimated_total": 101818,
-   "reference_total": 93594,
-   "ratio_total": 1.0879,
-   "mean_abs_pct_error": 0.0901
+   "estimated_total": 101792,
+   "reference_total": 93562,
+   "ratio_total": 1.088,
+   "mean_abs_pct_error": 0.0902
   },
   {
    "dataset": "longmemeval",
    "strategy": "bm25_sessions",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
-   "estimated_total": 101818,
-   "reference_total": 95307,
-   "ratio_total": 1.0683,
-   "mean_abs_pct_error": 0.0729
+   "estimated_total": 101792,
+   "reference_total": 95269,
+   "ratio_total": 1.0685,
+   "mean_abs_pct_error": 0.0731
   },
   {
    "dataset": "longmemeval",
    "strategy": "window_bm25",
    "reference": "cl100k_base",
    "texts": 50,
-   "estimated_total": 101161,
-   "reference_total": 94052,
-   "ratio_total": 1.0756,
-   "mean_abs_pct_error": 0.077
+   "estimated_total": 100765,
+   "reference_total": 93094,
+   "ratio_total": 1.0824,
+   "mean_abs_pct_error": 0.0836
   },
   {
    "dataset": "longmemeval",
    "strategy": "window_bm25",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
-   "estimated_total": 101161,
-   "reference_total": 96659,
-   "ratio_total": 1.0466,
-   "mean_abs_pct_error": 0.0555
+   "estimated_total": 100765,
+   "reference_total": 95863,
+   "ratio_total": 1.0511,
+   "mean_abs_pct_error": 0.0547
   },
   {
    "dataset": "longmemeval",
@@ -393,7 +393,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "recency_bm25",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 101096,
    "reference_total": 95922,
@@ -413,7 +413,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "store",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 100702,
    "reference_total": 94864,
@@ -433,7 +433,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "store-no-session",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 101079,
    "reference_total": 95925,
@@ -453,7 +453,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "store-no-recency",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 100702,
    "reference_total": 94885,
@@ -473,7 +473,7 @@
   {
    "dataset": "longmemeval",
    "strategy": "store-no-window",
-   "reference": "qwen2.5",
+   "reference": "qwen2.5-coder",
    "texts": 50,
    "estimated_total": 100702,
    "reference_total": 94864,

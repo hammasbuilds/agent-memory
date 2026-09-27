@@ -1,13 +1,27 @@
 # STATUS - agent-memory
 
-**Status: READY-FOR-REVIEW** (second round; retrieval study complete on its own; model
+**Status: READY-FOR-REVIEW** (fourth round; retrieval study complete on its own; model
 arm built, tested with fakes, queued - not needed for the headline)
 
 The first independent review scored this 80/100 (my self-score had been 96). Every one of
 its 14 points and the "split the study script" note is addressed below, each with a
 regression test where code changed, and every result file was regenerated.
 
-## What changed after review
+## What changed after the third review (91/100)
+
+| # | Review point | Fix | Test / evidence |
+|---:|---|---|---|
+| 1 | "Window no better than random on either" contradicted LoCoMo's CI and hid a scoring choice | Claim now "within ±0.02 of random"; `recall_strict` (a truncated turn does not count) computed for every row and reported beside the lenient credit: LoCoMo +0.018 [−0.001, 0.035], LongMemEval −0.020 [−0.035, −0.005] | `retrieval.json` → `strict_credit_comparisons`; `test_strict_credit_does_not_count_a_cut_evidence_turn` |
+| 2 | "Hybrid loses 4-5 points" was the fixed 50/50 split | Recent share swept 5-75% on dev (chose 5%) and reported on test (`window_share.json`); claim is now "no split beats search alone; 5% ties it, the loss grows with the share"; default share guarded against the dev result | `test_defaults_are_what_the_dev_sweep_chose`, window-share stage in `test_study.py` |
+| 3 | "Up to ~5% more tokens" vs 7.2% in the results | Quoted as 7% (1.020 / 0.951) everywhere, with the LongMemEval figures | `token_calibration.json` |
+| 4 | `plan.units[:k]` ignored the recent part, so window_bm25's by_k series duplicated bm25_turns | Plans with a recent part produce no k rows | `test_study.py` asserts window_bm25 is absent from `by_k` |
+| 5 | "75 answer sessions in 44 questions" not in results | `diagnostics.json` → `sessions_dated_after_the_question` (1,474 sessions, 75 answer sessions, 44 questions) | end-to-end fixture test |
+| 6 | "Raises newest-value recall by 6.6 points" with CI [0.0, 14.8] | Reworded: not distinguishable from zero | - |
+| 7 | Bulk ingest stored empty turns that `add_turn` refuses | `ingest` skips and counts them (`Ingested.empty`; LongMemEval_S has 12, none evidence); CLI reports them | `test_ingest_skips_empty_turns_as_add_turn_refuses_them`, `test_empty_jsonl_text_is_skipped_and_reported` |
+| 8 | Default `now` was local time while offsets were stored as UTC | `utc_now()` default in the store and CLI | `test_default_clock_is_utc`, `test_offsets_are_converted_consistently_for_relative_windows` |
+| 9 | Minor | Public `agent_memory.jsonl.read_jsonl` (raises ValueError); `run_models.sh` checks the `--judge` model is pulled; reference tokeniser labelled qwen2.5-coder, same-vocabulary assumption stated | `test_read_jsonl_is_public_and_raises_valueerror` |
+
+## What changed after the second review (80/100)
 
 | # | Review point | Fix | Test / evidence |
 |---:|---|---|---|
@@ -27,19 +41,19 @@ regression test where code changed, and every result file was regenerated.
 | 14 | `X` and `X_abs` could straddle dev/test | Split and bootstrap clusters grouped by `qid.removesuffix("_abs")` (their haystacks do not overlap - Jaccard 0.003 - but the questions are near-paraphrases) | `test_abstention_twins_share_a_split_and_a_cluster` |
 | - | 441-line study script | Stages moved to `agent_memory/study/` (common, sweep, recall, forgetting, diagnostics, models); the scripts are thin CLIs | `tests/test_study.py` runs every stage and the model arm end to end on fixtures |
 
-## Self-score (honest, after a second hostile pass)
+## Self-score (honest, after a third hostile pass)
 
 | Points | Criterion | Score | Reason |
 |---:|---|---:|---|
-| 15 | Works from a clean clone | 15 | Fresh clone: `uv sync --offline`, `uv run pytest -q` (117 passed) with `AGENT_MEMORY_DATA` pointed at an empty dir and `HTTP_PROXY` set, `demo.py` (part 1 runs, part 2 says how to fetch the data), ruff check and format clean. Scripts exit with a one-line message when data is missing. |
-| 20 | Real data, real result | 20 | LoCoMo (1,986 questions) and the full LongMemEval_S (500 questions, sha256-verified). Every README number is in `results/*.json`; per-question rows in `results/rows/`. |
-| 15 | Finding quality | 13 | Now tested rather than asserted: the recency explanation has a per-position control and the realistic window + search baseline; both answer keys; data-quality subsets; grouped split; dev-only tuning; cluster CIs. -2: LoCoMo's test split is 7 conversations, and the session-level key is lenient enough (random turns score 0.777 on LoCoMo) that it can only check the turn key, not replace it. |
-| 15 | Correctness | 13 | 117 tests including end-to-end stage tests on fixtures and a deliberately messy LongMemEval question. -2: a cut (truncated) boundary turn counts as present for positional strategies, which slightly favours them (by at most one turn per context); the review found four real bugs I had missed, so I discount my own confidence. |
-| 10 | Usability | 9 | `--help` with examples on every command; clear errors; JSONL re-ingest idempotent and continuation-safe. -1: no `bench` subcommand. |
-| 10 | README | 10 | House skeleton, 6 fresh Input/Output samples, Data section with licences and citations, NOT-do, real problems (including the ones review found, credited). |
-| 10 | Code quality | 9 | ruff clean, typed, zero runtime deps, study split into modules. -1: `study/recall.py` builds one large results dict; some summaries are computed twice at different budgets. |
-| 5 | Honesty | 5 | Every number traceable; the earlier wrong claims (window worse than random, the 42%, the 80% split) are corrected in place and listed under Problems. |
-| **100** | | **94** | |
+| 15 | Works from a clean clone | 15 | Fresh clone: `uv sync --offline`, `uv run pytest -q` (123 passed) with `AGENT_MEMORY_DATA` empty and `HTTP_PROXY` set, `demo.py`, ruff check and format clean; scripts exit with one line when data is missing. |
+| 20 | Real data, real result | 20 | LoCoMo (1,986 questions) and full LongMemEval_S (500), sha256-verified; every README number in `results/*.json`, per-question rows in `results/rows/`. |
+| 15 | Finding quality | 14 | Recency explanation tested per position; the window + search baseline swept rather than fixed; both answer keys; both credit rules; data-quality subsets; grouped split; dev-only tuning; cluster CIs. -1: LoCoMo's test split is 7 conversations, and the window-vs-random comparison sits inside the 7% token-count asymmetry, so its sign is not interpretable (the README says so). |
+| 15 | Correctness | 13 | 123 tests, end-to-end stage tests on fixtures, a deliberately messy LongMemEval question, strict vs lenient credit, UTC clock. -2: every review round so far has found real defects I had missed (most recently the k-axis mislabel and the local-time clock), so I keep a margin. |
+| 10 | Usability | 9 | `--help` with examples; clear errors; JSONL idempotent, continuation-safe, empty lines reported; public `read_jsonl`. -1: no `bench` subcommand. |
+| 10 | README | 10 | House skeleton, fresh Input/Output samples, Data section with licences and citations, NOT-do, real problems including those review found. |
+| 10 | Code quality | 9 | ruff clean, typed, zero runtime deps, study in modules. -1: `study/recall.py` assembles one large results dict. |
+| 5 | Honesty | 5 | Every number traceable; overstated claims corrected in place and listed under Problems. |
+| **100** | | **95** | |
 
 ## Queued for the model run
 
@@ -68,7 +82,7 @@ counted as wrong and reported, accuracy split by whether evidence was in context
 - Session-level recall is lenient; it is a check on the turn key, not a headline metric.
 - The dev-chosen store config is worse than dropping session fusion on LongMemEval's dev
   split (0.873 vs 0.888), better on its test split (+0.022); chosen on the macro average.
-- Token counts are approximate and differ by strategy by up to ~8% (disclosed with numbers).
+- Token counts are approximate and differ by strategy by up to 7% (window 1.020 vs random/BM25 0.951 on LoCoMo; disclosed with numbers).
 - LongMemEval abstention: n=8 at turn level on the test split.
 - Filler sessions recur across LongMemEval questions (mean reuse 1.24), so a few filler
   sessions appear in both splits; evidence sessions do not.
@@ -82,7 +96,7 @@ uv run pytest -q
 uv run ruff check . && uv run ruff format --check .
 uv run python scripts/fetch_data.py                       # data/raw/*, sha256-verified
 uv run python scripts/run_retrieval_study.py              # every results/*.json except token_calibration
-#   or stage by stage: --stage diagnostics | recency | dev | main | forgetting
+#   or stage by stage: --stage diagnostics | recency | window-share | dev | main | forgetting
 PYTHONPATH=src /d/github/rag-forge/.venv/Scripts/python.exe scripts/calibrate_tokens.py \
     --qwen /d/github/harness-ablation/data/qwen2.5-coder-tokenizer.json.gz   # token_calibration.json
 uv run python demo.py

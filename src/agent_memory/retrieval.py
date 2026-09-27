@@ -181,8 +181,9 @@ def sliding_window(h: History, question: str, now: datetime, seed: str) -> Plan:
     return Plan([[t] for t in reversed(h.turns)], positional=True)
 
 
-def make_window_bm25(recent_share: float = 0.5) -> Strategy:
-    """The most recent turns in `recent_share` of the budget, BM25 hits in the rest."""
+def make_window_bm25(recent_share: float = 0.05) -> Strategy:
+    """The most recent turns in `recent_share` of the budget, BM25 hits in the rest. The
+    default is the share the dev sweep chose (results/dev_sweep.json)."""
     if not 0 < recent_share < 1:
         raise ValueError(f"recent_share must be in (0, 1), got {recent_share}")
 
