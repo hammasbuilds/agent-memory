@@ -43,7 +43,10 @@ def test_retrieval_study_stages(run, monkeypatch):
     assert out["by_evidence_position"] and "subsets" in out
     assert (run.results / "rows" / "locomo.jsonl.gz").exists()
     forgetting_stage(run)
-    assert {p["policy"] for p in read(run, "forgetting.json")["policies"]} >= {"none", "phatic:3"}
+    policies = read(run, "forgetting.json")["policies"]
+    assert {p["policy"] for p in policies} >= {"none", "phatic:3"}
+    none = next(p for p in policies if p["policy"] == "none")
+    assert none["recall_minus_none"]["mean"] == 0.0
     diagnostics_stage(run)
     diag = {d["dataset"]: d for d in read(run, "diagnostics.json")}
     assert diag["longmemeval"]["histories"] == 3
@@ -64,7 +67,8 @@ def test_retrieval_study_stages(run, monkeypatch):
     sweep.window_share_sensitivity(run)
     assert read(run, "window_share.json")["versus_bm25_turns"]
     sweep.recency_sensitivity(run)
-    assert read(run, "recency_sensitivity.json")["split"] == "test"
+    rec = read(run, "recency_sensitivity.json")
+    assert rec["split"] == "test" and "versus_bm25_turns" in rec
 
 
 def test_model_arm_stages_with_a_fake(run, tmp_path, monkeypatch):

@@ -112,6 +112,14 @@ def recency_sensitivity(run: Run) -> None:
             "split": "test",
             "half_lives_days": SENSITIVITY_HALF_LIVES,
             "summary": summarise(rows, "budget"),
+            "versus_bm25_turns": [
+                c
+                for name in strats
+                if name != "bm25_turns"
+                for budget in budgets
+                for c in compare(rows, name, "bm25_turns", value=budget)
+                if c["qtype"] in ("all types", "knowledge-update")
+            ],
             "knowledge_update_newest": [
                 c
                 for name in strats

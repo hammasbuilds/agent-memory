@@ -11,7 +11,7 @@ from agent_memory.datasets import Question, Session
 from agent_memory.evaluate import HEADLINE_BUDGET, cluster_of, score, split_of
 from agent_memory.forget import Policy, apply, older_than, phatic, role
 from agent_memory.retrieval import History
-from agent_memory.stats import bootstrap_mean
+from agent_memory.stats import bootstrap_mean, paired_difference
 from agent_memory.study.common import Run, log
 from agent_memory.text import count_tokens
 
@@ -92,12 +92,21 @@ def forgetting_stage(run: Run) -> None:
                 ),
                 "by_type": {},
             }
+            # every policy scores the same questions in the same order, so recall can be
+            # compared pairwise with keeping everything ("none")
+            base = acc["none"]["recall"]
+            rec["recall_minus_none"] = paired_difference(a["recall"], base, a["cluster"]).as_dict()
             for qt in sorted(set(a["qtype"])):
                 idx = [i for i, t in enumerate(a["qtype"]) if t == qt]
                 rec["by_type"][qt] = {
                     "n": len(idx),
                     "evidence_kept": round(mean(a["evidence_kept"][i] for i in idx), 4),
                     "store_recall": round(mean(a["recall"][i] for i in idx), 4),
+                    "recall_minus_none": paired_difference(
+                        [a["recall"][i] for i in idx],
+                        [base[i] for i in idx],
+                        [a["cluster"][i] for i in idx],
+                    ).as_dict(),
                 }
             out.append(rec)
         log(f"forgetting: {ds} done")
