@@ -175,9 +175,9 @@ def main_stage(cfg: R.RetrieverConfig, half_life: float, lme_limit: int | None) 
         t0 = time.time()
         rows = list(evaluate(qs, strats))
         log(f"{name}: {len(rows)} rows in {time.time() - t0:.0f}s")
-        with gzip.open(rows_dir / f"{name}.jsonl.gz", "wt", encoding="utf-8") as fh:
-            for r in rows:
-                fh.write(json.dumps(r) + "\n")
+        # mtime=0: a rerun that reproduces the rows reproduces the file byte for byte
+        with gzip.GzipFile(rows_dir / f"{name}.jsonl.gz", "wb", mtime=0) as fh:
+            fh.write("".join(json.dumps(r) + "\n" for r in rows).encode("utf-8"))
         all_rows += rows
     comps = [("store", f"store-no-{c}") for c in ("session", "recency", "window", "neighbours")]
     comps = [c for c in COMPARISONS + comps if c[1] in strats]

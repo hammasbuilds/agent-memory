@@ -70,6 +70,10 @@ type, and accuracy split by whether the evidence was in context).
 
 ## Reproduce
 
+A second full run of `scripts/run_retrieval_study.py` from a later commit reproduced every
+`results/*.json` byte for byte and the per-question rows exactly (the rows are now written
+with a fixed gzip timestamp so the files match byte for byte too).
+
 ```bash
 unset VIRTUAL_ENV
 uv sync
