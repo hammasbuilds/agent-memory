@@ -30,6 +30,16 @@ def _when(s: str | None) -> datetime:
         raise argparse.ArgumentTypeError(f"not an ISO date/time: {s!r}") from None
 
 
+def _positive(s: str) -> int:
+    try:
+        n = int(s)
+    except ValueError:
+        n = 0
+    if n < 1:
+        raise argparse.ArgumentTypeError(f"expected a positive whole number, got {s!r}")
+    return n
+
+
 def _read_jsonl(path: Path) -> list[Session]:
     """Lines of {"session": id, "time": ISO, "speaker": name, "text": ...}."""
     turns: dict[str, list[Turn]] = {}
@@ -194,9 +204,11 @@ def build_parser() -> argparse.ArgumentParser:
             "'last month' etc. are relative to it",
         )
         if name == "search":
-            s.add_argument("-k", type=int, default=10, help="how many turns (default 10)")
+            s.add_argument("-k", type=_positive, default=10, help="how many turns (default 10)")
         else:
-            s.add_argument("--budget", type=int, default=2048, help="token budget (default 2048)")
+            s.add_argument(
+                "--budget", type=_positive, default=2048, help="token budget (default 2048)"
+            )
         s.set_defaults(fn=fn)
 
     s = sub.add_parser("remember", help="record a fact; a newer value supersedes the old one")

@@ -13,7 +13,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="python">
   <img src="https://img.shields.io/badge/runtime%20dependencies-none-success" alt="dependencies">
-  <img src="https://img.shields.io/badge/tests-96%20passing-success" alt="tests">
+  <img src="https://img.shields.io/badge/tests-99%20passing-success" alt="tests">
   <img src="https://img.shields.io/badge/data-LoCoMo%20%C2%B7%20LongMemEval__S-orange" alt="data">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
 </p>
@@ -217,7 +217,7 @@ conversation only says he lost the job the day before 20 January 2023.)
 ```bash
 git clone <this repo> && cd agent-memory
 uv sync
-uv run pytest -q                                   # 96 tests, no data, no network, no model
+uv run pytest -q                                   # 99 tests, no data, no network, no model
 uv run python demo.py                              # part 1 needs nothing
 uv run python scripts/fetch_data.py                # LoCoMo + LongMemEval oracle & S (~295 MB)
 uv run python demo.py                              # now with part 2
@@ -278,7 +278,7 @@ a GPU with ~11 GB free.
 ## Tests
 
 ```bash
-uv run pytest -q     # 96 tests
+uv run pytest -q     # 99 tests
 uv run ruff check .
 ```
 

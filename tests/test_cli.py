@@ -118,3 +118,11 @@ def test_bad_jsonl_line_is_located(tmp_path, db):
     )
     with pytest.raises(SystemExit, match=r"bad.jsonl:2"):
         main(["--db", db, "ingest", str(p)])
+
+
+@pytest.mark.parametrize("argv", [["context", "q", "--budget", "0"], ["search", "q", "-k", "-2"]])
+def test_non_positive_budget_or_k_is_a_usage_error(db, argv, capsys):
+    with pytest.raises(SystemExit) as e:
+        main(["--db", db, *argv])
+    assert e.value.code == 2
+    assert "positive whole number" in capsys.readouterr().err
