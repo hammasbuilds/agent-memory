@@ -116,3 +116,15 @@ def test_compact_truncates_long_turns(history):
         m.ingest(history)
         assert m.compact(6) > 0
         assert all(count_tokens(t.text) <= 6 for s in m.sessions() for t in s.turns)
+
+
+def test_timezone_aware_times_are_normalised_to_utc():
+    from datetime import timedelta, timezone
+
+    karachi = timezone(timedelta(hours=5))
+    with MemoryStore() as m:
+        m.add_turn("s", "user", "bought a red kayak", datetime(2024, 7, 1, 9, tzinfo=karachi))
+        assert m.sessions()[0].turns[0].timestamp == datetime(2024, 7, 1, 4)
+        assert m.search("kayak", now=datetime(2024, 7, 2, tzinfo=karachi))
+        m.remember("user", "boat", "kayak", datetime(2024, 7, 1, 9, tzinfo=karachi))
+        assert m.facts_as_of(datetime(2024, 7, 1, 4, 30))[0].value == "kayak"

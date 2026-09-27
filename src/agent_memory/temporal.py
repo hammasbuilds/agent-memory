@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import calendar
 import re
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 MONTHS = {m.lower(): i for i, m in enumerate(calendar.month_name) if m}
 MONTHS |= {m.lower(): i for i, m in enumerate(calendar.month_abbr) if m}
@@ -42,6 +42,12 @@ _LOCOMO = re.compile(
 _LME = re.compile(r"(\d{4})/(\d{2})/(\d{2})(?:\s*\([A-Za-z]+\))?\s*(\d{2}):(\d{2})")
 
 
+def naive(dt: datetime) -> datetime:
+    """The store keeps naive datetimes. An aware one is converted to UTC and stripped,
+    so '2024-01-01T09:00+05:00' and '2024-01-01T04:00' compare as the same moment."""
+    return dt.astimezone(UTC).replace(tzinfo=None) if dt.tzinfo else dt
+
+
 def parse_timestamp(text: str) -> datetime:
     """Parse '1:56 pm on 8 May, 2023' (LoCoMo), '2023/05/20 (Sat) 02:21' (LongMemEval)
     or an ISO 8601 string. Raises ValueError on anything else."""
@@ -57,7 +63,7 @@ def parse_timestamp(text: str) -> datetime:
         y, mo, d, h, mi = map(int, m.groups())
         return datetime(y, mo, d, h, mi)
     try:
-        return datetime.fromisoformat(text)
+        return naive(datetime.fromisoformat(text))
     except ValueError:
         raise ValueError(f"unrecognised timestamp {text!r}") from None
 

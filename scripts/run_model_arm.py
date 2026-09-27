@@ -281,4 +281,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except FileNotFoundError as e:  # benchmark files not downloaded
+        sys.exit(str(e))

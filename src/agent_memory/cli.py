@@ -18,13 +18,14 @@ from pathlib import Path
 from agent_memory.datasets import Session, Turn, iter_longmemeval, load_locomo
 from agent_memory.forget import POLICY_HELP, parse_policy
 from agent_memory.store import MemoryStore
+from agent_memory.temporal import naive
 
 
 def _when(s: str | None) -> datetime:
     if s is None:
         return datetime.now()
     try:
-        return datetime.fromisoformat(s)
+        return naive(datetime.fromisoformat(s))
     except ValueError:
         raise argparse.ArgumentTypeError(f"not an ISO date/time: {s!r}") from None
 
@@ -39,7 +40,7 @@ def _read_jsonl(path: Path) -> list[Session]:
         try:
             rec = json.loads(raw)
             sid, speaker, text = str(rec["session"]), str(rec["speaker"]), str(rec["text"])
-            ts = datetime.fromisoformat(rec["time"])
+            ts = naive(datetime.fromisoformat(rec["time"]))
         except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
             raise SystemExit(
                 f"{path}:{n}: expected JSON with session, time (ISO), speaker, text ({e})"

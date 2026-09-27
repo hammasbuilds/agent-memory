@@ -20,6 +20,7 @@ from agent_memory.context import FACTS_HEADER, Context
 from agent_memory.datasets import Session, Turn
 from agent_memory.forget import truncate
 from agent_memory.retrieval import History, Retriever, RetrieverConfig
+from agent_memory.temporal import naive
 from agent_memory.text import count_tokens, terms
 
 SCHEMA = """
@@ -99,6 +100,7 @@ class MemoryStore:
 
     def add_turn(self, session_id: str, speaker: str, text: str, ts: datetime) -> str:
         """Append one turn to a session (created on first use). Returns the turn id."""
+        ts = naive(ts)
         if not text.strip():
             raise ValueError("refusing to store an empty turn")
         with self.db:
@@ -126,13 +128,13 @@ class MemoryStore:
             for s in sessions:
                 self.db.execute(
                     "INSERT OR IGNORE INTO sessions(id, started_at) VALUES (?, ?)",
-                    (s.id, s.timestamp.isoformat()),
+                    (s.id, naive(s.timestamp).isoformat()),
                 )
                 for t in s.turns:
                     cur = self.db.execute(
                         "INSERT OR IGNORE INTO turns(id, session_id, seq, speaker, text, ts) "
                         "VALUES (?,?,?,?,?,?)",
-                        (t.id, s.id, t.seq, t.speaker, t.text, t.timestamp.isoformat()),
+                        (t.id, s.id, t.seq, t.speaker, t.text, naive(t.timestamp).isoformat()),
                     )
                     added += cur.rowcount
                 self.db.execute(
@@ -170,11 +172,11 @@ class MemoryStore:
         return self._history
 
     def search(self, query: str, now: datetime | None = None, k: int = 10) -> list[Turn]:
-        return self.retriever.search(self.history, query, now or datetime.now(), k)
+        return self.retriever.search(self.history, query, naive(now or datetime.now()), k)
 
     def context(self, query: str, budget: int = 2048, now: datetime | None = None) -> Context:
         """Relevant current facts first, then retrieved turns, within `budget` tokens."""
-        now = now or datetime.now()
+        now = naive(now or datetime.now())
         facts = self._relevant_facts(query)
         lines: list[str] = []
         used = count_tokens(FACTS_HEADER) if facts else 0
@@ -208,6 +210,7 @@ class MemoryStore:
         that time is a no-op that returns the existing fact.
         """
         subject, attribute, value = _key(subject), _key(attribute), value.strip()
+        valid_from = naive(valid_from)
         if not (subject and attribute and value):
             raise ValueError("subject, attribute and value must all be non-empty")
         versions = self.history_of(subject, attribute)
@@ -247,7 +250,7 @@ class MemoryStore:
 
     def facts_as_of(self, when: datetime, subject: str | None = None) -> list[Fact]:
         """The value of every fact as it stood at `when`."""
-        rows = self._facts("valid_from <= ?", (when.isoformat(),))
+        rows = self._facts("valid_from <= ?", (naive(when).isoformat(),))
         latest: dict[tuple[str, str], Fact] = {}
         for f in rows:  # ordered by valid_from, so the last one wins
             if subject is None or f.subject == _key(subject):
