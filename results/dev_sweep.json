@@ -1,5 +1,9 @@
 {
- "objective": "mean evidence recall at 2048 tokens on the dev split, macro-averaged over the two datasets",
+ "objective": "mean turn-level evidence recall at 2048 tokens on the dev split, macro-averaged over the two datasets",
+ "dev_questions": {
+  "locomo": 585,
+  "longmemeval": 94
+ },
  "store_grid": [
   {
    "config": {
@@ -11,8 +15,8 @@
    },
    "recall": {
     "locomo": 0.7316,
-    "longmemeval": 0.8855,
-    "macro": 0.8085
+    "longmemeval": 0.8842,
+    "macro": 0.8079
    }
   },
   {
@@ -25,8 +29,8 @@
    },
    "recall": {
     "locomo": 0.8337,
-    "longmemeval": 0.8349,
-    "macro": 0.8343
+    "longmemeval": 0.8223,
+    "macro": 0.828
    }
   },
   {
@@ -39,8 +43,8 @@
    },
    "recall": {
     "locomo": 0.8497,
-    "longmemeval": 0.774,
-    "macro": 0.8118
+    "longmemeval": 0.7607,
+    "macro": 0.8052
    }
   },
   {
@@ -53,8 +57,8 @@
    },
    "recall": {
     "locomo": 0.7356,
-    "longmemeval": 0.8891,
-    "macro": 0.8124
+    "longmemeval": 0.8879,
+    "macro": 0.8117
    }
   },
   {
@@ -67,8 +71,8 @@
    },
    "recall": {
     "locomo": 0.8414,
-    "longmemeval": 0.8349,
-    "macro": 0.8381
+    "longmemeval": 0.8223,
+    "macro": 0.8318
    }
   },
   {
@@ -81,8 +85,8 @@
    },
    "recall": {
     "locomo": 0.8531,
-    "longmemeval": 0.7633,
-    "macro": 0.8082
+    "longmemeval": 0.7498,
+    "macro": 0.8014
    }
   },
   {
@@ -95,8 +99,8 @@
    },
    "recall": {
     "locomo": 0.7372,
-    "longmemeval": 0.8801,
-    "macro": 0.8086
+    "longmemeval": 0.8788,
+    "macro": 0.808
    }
   },
   {
@@ -109,8 +113,8 @@
    },
    "recall": {
     "locomo": 0.8226,
-    "longmemeval": 0.8385,
-    "macro": 0.8306
+    "longmemeval": 0.8259,
+    "macro": 0.8242
    }
   },
   {
@@ -123,8 +127,8 @@
    },
    "recall": {
     "locomo": 0.8303,
-    "longmemeval": 0.774,
-    "macro": 0.8022
+    "longmemeval": 0.7607,
+    "macro": 0.7955
    }
   },
   {
@@ -137,8 +141,8 @@
    },
    "recall": {
     "locomo": 0.742,
-    "longmemeval": 0.8873,
-    "macro": 0.8146
+    "longmemeval": 0.8861,
+    "macro": 0.814
    }
   },
   {
@@ -151,8 +155,8 @@
    },
    "recall": {
     "locomo": 0.8275,
-    "longmemeval": 0.8385,
-    "macro": 0.833
+    "longmemeval": 0.8259,
+    "macro": 0.8267
    }
   },
   {
@@ -165,8 +169,8 @@
    },
    "recall": {
     "locomo": 0.8346,
-    "longmemeval": 0.774,
-    "macro": 0.8043
+    "longmemeval": 0.7607,
+    "macro": 0.7976
    }
   },
   {
@@ -179,8 +183,8 @@
    },
    "recall": {
     "locomo": 0.7295,
-    "longmemeval": 0.8855,
-    "macro": 0.8075
+    "longmemeval": 0.8842,
+    "macro": 0.8069
    }
   },
   {
@@ -193,8 +197,8 @@
    },
    "recall": {
     "locomo": 0.8312,
-    "longmemeval": 0.8349,
-    "macro": 0.8331
+    "longmemeval": 0.8223,
+    "macro": 0.8268
    }
   },
   {
@@ -207,8 +211,8 @@
    },
    "recall": {
     "locomo": 0.844,
-    "longmemeval": 0.774,
-    "macro": 0.809
+    "longmemeval": 0.7607,
+    "macro": 0.8024
    }
   },
   {
@@ -221,8 +225,8 @@
    },
    "recall": {
     "locomo": 0.7353,
-    "longmemeval": 0.8891,
-    "macro": 0.8122
+    "longmemeval": 0.8879,
+    "macro": 0.8116
    }
   },
   {
@@ -235,8 +239,8 @@
    },
    "recall": {
     "locomo": 0.8395,
-    "longmemeval": 0.8349,
-    "macro": 0.8372
+    "longmemeval": 0.8223,
+    "macro": 0.8309
    }
   },
   {
@@ -249,8 +253,8 @@
    },
    "recall": {
     "locomo": 0.8491,
-    "longmemeval": 0.7633,
-    "macro": 0.8062
+    "longmemeval": 0.7498,
+    "macro": 0.7994
    }
   },
   {
@@ -263,8 +267,8 @@
    },
    "recall": {
     "locomo": 0.8085,
-    "longmemeval": 0.8496,
-    "macro": 0.8291
+    "longmemeval": 0.848,
+    "macro": 0.8282
    }
   },
   {
@@ -277,8 +281,8 @@
    },
    "recall": {
     "locomo": 0.8435,
-    "longmemeval": 0.826,
-    "macro": 0.8347
+    "longmemeval": 0.8132,
+    "macro": 0.8284
    }
   },
   {
@@ -291,8 +295,8 @@
    },
    "recall": {
     "locomo": 0.8544,
-    "longmemeval": 0.774,
-    "macro": 0.8142
+    "longmemeval": 0.7716,
+    "macro": 0.813
    }
   },
   {
@@ -305,8 +309,8 @@
    },
    "recall": {
     "locomo": 0.8151,
-    "longmemeval": 0.864,
-    "macro": 0.8396
+    "longmemeval": 0.8625,
+    "macro": 0.8388
    }
   },
   {
@@ -319,8 +323,8 @@
    },
    "recall": {
     "locomo": 0.8461,
-    "longmemeval": 0.8367,
-    "macro": 0.8414
+    "longmemeval": 0.8241,
+    "macro": 0.8351
    }
   },
   {
@@ -333,8 +337,8 @@
    },
    "recall": {
     "locomo": 0.8561,
-    "longmemeval": 0.7633,
-    "macro": 0.8097
+    "longmemeval": 0.7607,
+    "macro": 0.8084
    }
   },
   {
@@ -347,8 +351,8 @@
    },
    "recall": {
     "locomo": 0.8019,
-    "longmemeval": 0.8532,
-    "macro": 0.8276
+    "longmemeval": 0.8516,
+    "macro": 0.8267
    }
   },
   {
@@ -361,8 +365,8 @@
    },
    "recall": {
     "locomo": 0.8381,
-    "longmemeval": 0.826,
-    "macro": 0.832
+    "longmemeval": 0.8132,
+    "macro": 0.8256
    }
   },
   {
@@ -375,8 +379,8 @@
    },
    "recall": {
     "locomo": 0.8353,
-    "longmemeval": 0.774,
-    "macro": 0.8047
+    "longmemeval": 0.7716,
+    "macro": 0.8034
    }
   },
   {
@@ -389,8 +393,8 @@
    },
    "recall": {
     "locomo": 0.8085,
-    "longmemeval": 0.864,
-    "macro": 0.8362
+    "longmemeval": 0.8625,
+    "macro": 0.8355
    }
   },
   {
@@ -403,8 +407,8 @@
    },
    "recall": {
     "locomo": 0.843,
-    "longmemeval": 0.8367,
-    "macro": 0.8398
+    "longmemeval": 0.8241,
+    "macro": 0.8336
    }
   },
   {
@@ -417,8 +421,8 @@
    },
    "recall": {
     "locomo": 0.8396,
-    "longmemeval": 0.7633,
-    "macro": 0.8014
+    "longmemeval": 0.7607,
+    "macro": 0.8002
    }
   },
   {
@@ -431,8 +435,8 @@
    },
    "recall": {
     "locomo": 0.8087,
-    "longmemeval": 0.8532,
-    "macro": 0.8309
+    "longmemeval": 0.8516,
+    "macro": 0.8301
    }
   },
   {
@@ -445,8 +449,8 @@
    },
    "recall": {
     "locomo": 0.8446,
-    "longmemeval": 0.8224,
-    "macro": 0.8335
+    "longmemeval": 0.8096,
+    "macro": 0.8271
    }
   },
   {
@@ -459,8 +463,8 @@
    },
    "recall": {
     "locomo": 0.8552,
-    "longmemeval": 0.774,
-    "macro": 0.8146
+    "longmemeval": 0.7716,
+    "macro": 0.8134
    }
   },
   {
@@ -473,8 +477,8 @@
    },
    "recall": {
     "locomo": 0.8153,
-    "longmemeval": 0.8676,
-    "macro": 0.8415
+    "longmemeval": 0.8661,
+    "macro": 0.8407
    }
   },
   {
@@ -487,8 +491,8 @@
    },
    "recall": {
     "locomo": 0.8489,
-    "longmemeval": 0.8332,
-    "macro": 0.8411
+    "longmemeval": 0.8205,
+    "macro": 0.8347
    }
   },
   {
@@ -501,8 +505,8 @@
    },
    "recall": {
     "locomo": 0.8569,
-    "longmemeval": 0.7633,
-    "macro": 0.8101
+    "longmemeval": 0.7607,
+    "macro": 0.8088
    }
   },
   {
@@ -515,8 +519,8 @@
    },
    "recall": {
     "locomo": 0.8286,
-    "longmemeval": 0.8604,
-    "macro": 0.8445
+    "longmemeval": 0.8589,
+    "macro": 0.8438
    }
   },
   {
@@ -529,8 +533,8 @@
    },
    "recall": {
     "locomo": 0.8481,
-    "longmemeval": 0.826,
-    "macro": 0.837
+    "longmemeval": 0.8241,
+    "macro": 0.8361
    }
   },
   {
@@ -543,8 +547,8 @@
    },
    "recall": {
     "locomo": 0.852,
-    "longmemeval": 0.7758,
-    "macro": 0.8139
+    "longmemeval": 0.7734,
+    "macro": 0.8127
    }
   },
   {
@@ -557,8 +561,8 @@
    },
    "recall": {
     "locomo": 0.8352,
-    "longmemeval": 0.8711,
-    "macro": 0.8532
+    "longmemeval": 0.8697,
+    "macro": 0.8525
    }
   },
   {
@@ -571,8 +575,8 @@
    },
    "recall": {
     "locomo": 0.8507,
-    "longmemeval": 0.826,
-    "macro": 0.8383
+    "longmemeval": 0.8241,
+    "macro": 0.8374
    }
   },
   {
@@ -585,8 +589,8 @@
    },
    "recall": {
     "locomo": 0.852,
-    "longmemeval": 0.7651,
-    "macro": 0.8085
+    "longmemeval": 0.7625,
+    "macro": 0.8073
    }
   },
   {
@@ -599,8 +603,8 @@
    },
    "recall": {
     "locomo": 0.8177,
-    "longmemeval": 0.8676,
-    "macro": 0.8427
+    "longmemeval": 0.8661,
+    "macro": 0.8419
    }
   },
   {
@@ -613,8 +617,8 @@
    },
    "recall": {
     "locomo": 0.8428,
-    "longmemeval": 0.826,
-    "macro": 0.8344
+    "longmemeval": 0.8241,
+    "macro": 0.8335
    }
   },
   {
@@ -627,8 +631,8 @@
    },
    "recall": {
     "locomo": 0.8454,
-    "longmemeval": 0.7561,
-    "macro": 0.8008
+    "longmemeval": 0.7534,
+    "macro": 0.7994
    }
   },
   {
@@ -641,8 +645,8 @@
    },
    "recall": {
     "locomo": 0.8199,
-    "longmemeval": 0.8783,
-    "macro": 0.8491
+    "longmemeval": 0.877,
+    "macro": 0.8484
    }
   },
   {
@@ -655,8 +659,8 @@
    },
    "recall": {
     "locomo": 0.8477,
-    "longmemeval": 0.826,
-    "macro": 0.8368
+    "longmemeval": 0.8241,
+    "macro": 0.8359
    }
   },
   {
@@ -669,8 +673,8 @@
    },
    "recall": {
     "locomo": 0.848,
-    "longmemeval": 0.7453,
-    "macro": 0.7966
+    "longmemeval": 0.7426,
+    "macro": 0.7953
    }
   },
   {
@@ -683,8 +687,8 @@
    },
    "recall": {
     "locomo": 0.835,
-    "longmemeval": 0.864,
-    "macro": 0.8495
+    "longmemeval": 0.8625,
+    "macro": 0.8488
    }
   },
   {
@@ -697,8 +701,8 @@
    },
    "recall": {
     "locomo": 0.8516,
-    "longmemeval": 0.826,
-    "macro": 0.8388
+    "longmemeval": 0.8241,
+    "macro": 0.8378
    }
   },
   {
@@ -711,8 +715,8 @@
    },
    "recall": {
     "locomo": 0.859,
-    "longmemeval": 0.7758,
-    "macro": 0.8174
+    "longmemeval": 0.7734,
+    "macro": 0.8162
    }
   },
   {
@@ -725,8 +729,8 @@
    },
    "recall": {
     "locomo": 0.839,
-    "longmemeval": 0.8747,
-    "macro": 0.8569
+    "longmemeval": 0.8734,
+    "macro": 0.8562
    }
   },
   {
@@ -739,8 +743,8 @@
    },
    "recall": {
     "locomo": 0.8541,
-    "longmemeval": 0.826,
-    "macro": 0.84
+    "longmemeval": 0.8241,
+    "macro": 0.8391
    }
   },
   {
@@ -753,8 +757,8 @@
    },
    "recall": {
     "locomo": 0.859,
-    "longmemeval": 0.7651,
-    "macro": 0.812
+    "longmemeval": 0.7625,
+    "macro": 0.8107
    }
   },
   {
@@ -767,8 +771,8 @@
    },
    "recall": {
     "locomo": 0.8435,
-    "longmemeval": 0.8622,
-    "macro": 0.8528
+    "longmemeval": 0.8607,
+    "macro": 0.8521
    }
   },
   {
@@ -781,8 +785,8 @@
    },
    "recall": {
     "locomo": 0.8574,
-    "longmemeval": 0.8188,
-    "macro": 0.8381
+    "longmemeval": 0.8168,
+    "macro": 0.8371
    }
   },
   {
@@ -795,8 +799,8 @@
    },
    "recall": {
     "locomo": 0.8558,
-    "longmemeval": 0.8099,
-    "macro": 0.8328
+    "longmemeval": 0.8078,
+    "macro": 0.8318
    }
   },
   {
@@ -809,8 +813,8 @@
    },
    "recall": {
     "locomo": 0.8475,
-    "longmemeval": 0.8586,
-    "macro": 0.8531
+    "longmemeval": 0.8571,
+    "macro": 0.8523
    }
   },
   {
@@ -823,8 +827,8 @@
    },
    "recall": {
     "locomo": 0.8609,
-    "longmemeval": 0.8188,
-    "macro": 0.8398
+    "longmemeval": 0.8168,
+    "macro": 0.8388
    }
   },
   {
@@ -837,8 +841,8 @@
    },
    "recall": {
     "locomo": 0.8575,
-    "longmemeval": 0.7991,
-    "macro": 0.8283
+    "longmemeval": 0.7969,
+    "macro": 0.8272
    }
   },
   {
@@ -851,8 +855,8 @@
    },
    "recall": {
     "locomo": 0.8295,
-    "longmemeval": 0.8586,
-    "macro": 0.844
+    "longmemeval": 0.8571,
+    "macro": 0.8433
    }
   },
   {
@@ -865,8 +869,8 @@
    },
    "recall": {
     "locomo": 0.8486,
-    "longmemeval": 0.8349,
-    "macro": 0.8417
+    "longmemeval": 0.8332,
+    "macro": 0.8409
    }
   },
   {
@@ -879,8 +883,8 @@
    },
    "recall": {
     "locomo": 0.8434,
-    "longmemeval": 0.7982,
-    "macro": 0.8208
+    "longmemeval": 0.796,
+    "macro": 0.8197
    }
   },
   {
@@ -893,8 +897,8 @@
    },
    "recall": {
     "locomo": 0.8318,
-    "longmemeval": 0.8586,
-    "macro": 0.8452
+    "longmemeval": 0.8571,
+    "macro": 0.8444
    }
   },
   {
@@ -907,8 +911,8 @@
    },
    "recall": {
     "locomo": 0.8546,
-    "longmemeval": 0.8349,
-    "macro": 0.8448
+    "longmemeval": 0.8332,
+    "macro": 0.8439
    }
   },
   {
@@ -921,8 +925,8 @@
    },
    "recall": {
     "locomo": 0.8485,
-    "longmemeval": 0.7875,
-    "macro": 0.818
+    "longmemeval": 0.7851,
+    "macro": 0.8168
    }
   },
   {
@@ -935,8 +939,8 @@
    },
    "recall": {
     "locomo": 0.8413,
-    "longmemeval": 0.8586,
-    "macro": 0.8499
+    "longmemeval": 0.8571,
+    "macro": 0.8492
    }
   },
   {
@@ -949,8 +953,8 @@
    },
    "recall": {
     "locomo": 0.8562,
-    "longmemeval": 0.8188,
-    "macro": 0.8375
+    "longmemeval": 0.8168,
+    "macro": 0.8365
    }
   },
   {
@@ -963,8 +967,8 @@
    },
    "recall": {
     "locomo": 0.8534,
-    "longmemeval": 0.8045,
-    "macro": 0.829
+    "longmemeval": 0.8024,
+    "macro": 0.8279
    }
   },
   {
@@ -977,8 +981,8 @@
    },
    "recall": {
     "locomo": 0.8453,
-    "longmemeval": 0.855,
-    "macro": 0.8501
+    "longmemeval": 0.8534,
+    "macro": 0.8494
    }
   },
   {
@@ -991,8 +995,8 @@
    },
    "recall": {
     "locomo": 0.8605,
-    "longmemeval": 0.8188,
-    "macro": 0.8397
+    "longmemeval": 0.8168,
+    "macro": 0.8387
    }
   },
   {
@@ -1005,8 +1009,8 @@
    },
    "recall": {
     "locomo": 0.8551,
-    "longmemeval": 0.7973,
-    "macro": 0.8262
+    "longmemeval": 0.7951,
+    "macro": 0.8251
    }
   }
  ],
@@ -1020,8 +1024,8 @@
   },
   "recall": {
    "locomo": 0.839,
-   "longmemeval": 0.8747,
-   "macro": 0.8569
+   "longmemeval": 0.8734,
+   "macro": 0.8562
   }
  },
  "recency_grid": [
@@ -1029,40 +1033,40 @@
    "half_life_days": 7.0,
    "recall": {
     "locomo": 0.2343,
-    "longmemeval": 0.7848,
-    "macro": 0.5096
+    "longmemeval": 0.7824,
+    "macro": 0.5083
    }
   },
   {
    "half_life_days": 30.0,
    "recall": {
     "locomo": 0.5387,
-    "longmemeval": 0.8586,
-    "macro": 0.6986
+    "longmemeval": 0.8571,
+    "macro": 0.6979
    }
   },
   {
    "half_life_days": 90.0,
    "recall": {
     "locomo": 0.7012,
-    "longmemeval": 0.8783,
-    "macro": 0.7897
+    "longmemeval": 0.877,
+    "macro": 0.7891
    }
   },
   {
    "half_life_days": 365.0,
    "recall": {
     "locomo": 0.7366,
-    "longmemeval": 0.8747,
-    "macro": 0.8056
+    "longmemeval": 0.8734,
+    "macro": 0.805
    }
   },
   {
    "half_life_days": 1825.0,
    "recall": {
     "locomo": 0.7295,
-    "longmemeval": 0.8855,
-    "macro": 0.8075
+    "longmemeval": 0.8842,
+    "macro": 0.8069
    }
   }
  ],
@@ -1070,8 +1074,8 @@
   "half_life_days": 1825.0,
   "recall": {
    "locomo": 0.7295,
-   "longmemeval": 0.8855,
-   "macro": 0.8075
+   "longmemeval": 0.8842,
+   "macro": 0.8069
   }
  }
 }

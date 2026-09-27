@@ -1,18 +1,484 @@
-[
- {
-  "dataset": "locomo",
-  "turns": 5882,
-  "estimated_total": 212393,
-  "cl100k_total": 204011,
-  "ratio_total": 1.0411,
-  "mean_abs_pct_error_per_turn": 0.058
- },
- {
-  "dataset": "longmemeval_oracle",
-  "turns": 10960,
-  "estimated_total": 3124511,
-  "cl100k_total": 2841098,
-  "ratio_total": 1.0998,
-  "mean_abs_pct_error_per_turn": 0.0951
- }
-]
+{
+ "budget": 2048,
+ "every_nth_question": 10,
+ "turns": [
+  {
+   "dataset": "locomo",
+   "reference": "cl100k_base",
+   "texts": 5882,
+   "estimated_total": 212393,
+   "reference_total": 204011,
+   "ratio_total": 1.0411,
+   "mean_abs_pct_error": 0.058
+  },
+  {
+   "dataset": "locomo",
+   "reference": "qwen2.5",
+   "texts": 5882,
+   "estimated_total": 212393,
+   "reference_total": 204050,
+   "ratio_total": 1.0409,
+   "mean_abs_pct_error": 0.0581
+  },
+  {
+   "dataset": "longmemeval",
+   "reference": "cl100k_base",
+   "texts": 24463,
+   "estimated_total": 5691469,
+   "reference_total": 5212441,
+   "ratio_total": 1.0919,
+   "mean_abs_pct_error": 0.0957
+  },
+  {
+   "dataset": "longmemeval",
+   "reference": "qwen2.5",
+   "texts": 24463,
+   "estimated_total": 5691469,
+   "reference_total": 5255069,
+   "ratio_total": 1.083,
+   "mean_abs_pct_error": 0.094
+  }
+ ],
+ "contexts": [
+  {
+   "dataset": "locomo",
+   "strategy": "full_head",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 406476,
+   "reference_total": 392765,
+   "ratio_total": 1.0349,
+   "mean_abs_pct_error": 0.0417
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "full_head",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 406476,
+   "reference_total": 397239,
+   "ratio_total": 1.0233,
+   "mean_abs_pct_error": 0.035
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "sliding_window",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 407396,
+   "reference_total": 394544,
+   "ratio_total": 1.0326,
+   "mean_abs_pct_error": 0.0373
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "sliding_window",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 407396,
+   "reference_total": 399491,
+   "ratio_total": 1.0198,
+   "mean_abs_pct_error": 0.0272
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "random",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 407194,
+   "reference_total": 395107,
+   "ratio_total": 1.0306,
+   "mean_abs_pct_error": 0.0319
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "random",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 407194,
+   "reference_total": 428036,
+   "ratio_total": 0.9513,
+   "mean_abs_pct_error": 0.0483
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "bm25_turns",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405697,
+   "reference_total": 395109,
+   "ratio_total": 1.0268,
+   "mean_abs_pct_error": 0.0327
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "bm25_turns",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405697,
+   "reference_total": 425931,
+   "ratio_total": 0.9525,
+   "mean_abs_pct_error": 0.0471
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "bm25_sessions",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 406369,
+   "reference_total": 391510,
+   "ratio_total": 1.038,
+   "mean_abs_pct_error": 0.0406
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "bm25_sessions",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 406369,
+   "reference_total": 396210,
+   "ratio_total": 1.0256,
+   "mean_abs_pct_error": 0.0305
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "window_bm25",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 406742,
+   "reference_total": 395060,
+   "ratio_total": 1.0296,
+   "mean_abs_pct_error": 0.0326
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "window_bm25",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 406742,
+   "reference_total": 416800,
+   "ratio_total": 0.9759,
+   "mean_abs_pct_error": 0.0274
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "recency_bm25",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405716,
+   "reference_total": 395047,
+   "ratio_total": 1.027,
+   "mean_abs_pct_error": 0.0326
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "recency_bm25",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405716,
+   "reference_total": 425720,
+   "ratio_total": 0.953,
+   "mean_abs_pct_error": 0.0466
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405697,
+   "reference_total": 392523,
+   "ratio_total": 1.0336,
+   "mean_abs_pct_error": 0.0362
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405697,
+   "reference_total": 412988,
+   "ratio_total": 0.9823,
+   "mean_abs_pct_error": 0.0258
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-session",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405788,
+   "reference_total": 394618,
+   "ratio_total": 1.0283,
+   "mean_abs_pct_error": 0.033
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-session",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405788,
+   "reference_total": 424352,
+   "ratio_total": 0.9563,
+   "mean_abs_pct_error": 0.0435
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-recency",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405719,
+   "reference_total": 392668,
+   "ratio_total": 1.0332,
+   "mean_abs_pct_error": 0.0366
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-recency",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405719,
+   "reference_total": 413583,
+   "ratio_total": 0.981,
+   "mean_abs_pct_error": 0.0266
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-window",
+   "reference": "cl100k_base",
+   "texts": 199,
+   "estimated_total": 405699,
+   "reference_total": 392558,
+   "ratio_total": 1.0335,
+   "mean_abs_pct_error": 0.0363
+  },
+  {
+   "dataset": "locomo",
+   "strategy": "store-no-window",
+   "reference": "qwen2.5",
+   "texts": 199,
+   "estimated_total": 405699,
+   "reference_total": 413099,
+   "ratio_total": 0.9821,
+   "mean_abs_pct_error": 0.026
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "full_head",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 102372,
+   "reference_total": 95840,
+   "ratio_total": 1.0682,
+   "mean_abs_pct_error": 0.0941
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "full_head",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 102372,
+   "reference_total": 97978,
+   "ratio_total": 1.0448,
+   "mean_abs_pct_error": 0.0853
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "sliding_window",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 102369,
+   "reference_total": 94761,
+   "ratio_total": 1.0803,
+   "mean_abs_pct_error": 0.0844
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "sliding_window",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 102369,
+   "reference_total": 96683,
+   "ratio_total": 1.0588,
+   "mean_abs_pct_error": 0.0777
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "random",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 102233,
+   "reference_total": 95658,
+   "ratio_total": 1.0687,
+   "mean_abs_pct_error": 0.0694
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "random",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 102233,
+   "reference_total": 100398,
+   "ratio_total": 1.0183,
+   "mean_abs_pct_error": 0.0287
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "bm25_turns",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 101101,
+   "reference_total": 93329,
+   "ratio_total": 1.0833,
+   "mean_abs_pct_error": 0.0848
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "bm25_turns",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 101101,
+   "reference_total": 95922,
+   "ratio_total": 1.054,
+   "mean_abs_pct_error": 0.0585
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "bm25_sessions",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 101818,
+   "reference_total": 93594,
+   "ratio_total": 1.0879,
+   "mean_abs_pct_error": 0.0901
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "bm25_sessions",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 101818,
+   "reference_total": 95307,
+   "ratio_total": 1.0683,
+   "mean_abs_pct_error": 0.0729
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "window_bm25",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 101161,
+   "reference_total": 94052,
+   "ratio_total": 1.0756,
+   "mean_abs_pct_error": 0.077
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "window_bm25",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 101161,
+   "reference_total": 96659,
+   "ratio_total": 1.0466,
+   "mean_abs_pct_error": 0.0555
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "recency_bm25",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 101096,
+   "reference_total": 93332,
+   "ratio_total": 1.0832,
+   "mean_abs_pct_error": 0.0846
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "recency_bm25",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 101096,
+   "reference_total": 95922,
+   "ratio_total": 1.0539,
+   "mean_abs_pct_error": 0.0582
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 92765,
+   "ratio_total": 1.0856,
+   "mean_abs_pct_error": 0.087
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 94864,
+   "ratio_total": 1.0615,
+   "mean_abs_pct_error": 0.0632
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-session",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 101079,
+   "reference_total": 93324,
+   "ratio_total": 1.0831,
+   "mean_abs_pct_error": 0.0846
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-session",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 101079,
+   "reference_total": 95925,
+   "ratio_total": 1.0537,
+   "mean_abs_pct_error": 0.058
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-recency",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 92774,
+   "ratio_total": 1.0855,
+   "mean_abs_pct_error": 0.0869
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-recency",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 94885,
+   "ratio_total": 1.0613,
+   "mean_abs_pct_error": 0.063
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-window",
+   "reference": "cl100k_base",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 92765,
+   "ratio_total": 1.0856,
+   "mean_abs_pct_error": 0.087
+  },
+  {
+   "dataset": "longmemeval",
+   "strategy": "store-no-window",
+   "reference": "qwen2.5",
+   "texts": 50,
+   "estimated_total": 100702,
+   "reference_total": 94864,
+   "ratio_total": 1.0615,
+   "mean_abs_pct_error": 0.0632
+  }
+ ]
+}

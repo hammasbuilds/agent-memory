@@ -99,7 +99,11 @@ def show(q: Question, strategies: dict[str, R.Strategy]) -> None:
         if s.newest is not None:
             extra = f", newest value found: {s.newest}"
         found = len(q.evidence_turns & ctx.turn_ids)
-        print(f"    {name:15} {ctx.tokens:5} tokens, evidence {found}/{len(gold)}{extra}")
+        sessions = round(s.session_recall * len(q.evidence_sessions)) if s.session_recall else 0
+        print(
+            f"    {name:15} {ctx.tokens:5} tokens, evidence turns {found}/{len(gold)},"
+            f" answer sessions {sessions}/{len(q.evidence_sessions)}{extra}"
+        )
 
 
 def part_two() -> None:
@@ -110,6 +114,7 @@ def part_two() -> None:
     strategies = {
         "sliding_window": R.sliding_window,
         "bm25_turns": R.bm25_turns,
+        "window_bm25": R.make_window_bm25(0.5),
         "store": R.make_store(RetrieverConfig()),
     }
     locomo = {q.qid: q for q in load_locomo()}

@@ -7,67 +7,84 @@
    "min": 12239,
    "max": 24231
   },
-  "lexical_visibility": {
-   "abstention": {
-    "mean": 0.8453,
-    "fully_invisible": 0.1502,
-    "n": 446
-   },
-   "multi-hop": {
-    "mean": 0.5916,
-    "fully_invisible": 0.1879,
-    "n": 282
-   },
-   "open-domain": {
-    "mean": 0.4745,
-    "fully_invisible": 0.4022,
-    "n": 92
-   },
-   "single-hop": {
-    "mean": 0.8456,
-    "fully_invisible": 0.1427,
-    "n": 841
-   },
-   "temporal": {
-    "mean": 0.8401,
-    "fully_invisible": 0.134,
-    "n": 321
-   }
-  },
   "history_span_days": {
    "mean": 231.4,
    "min": 166.8,
    "max": 293.2
   },
+  "lexical_visibility": {
+   "abstention": {
+    "evidence_turns": 460,
+    "evidence_turns_sharing_no_word": 0.1565,
+    "questions": 446,
+    "questions_with_no_visible_evidence": 0.1502
+   },
+   "all types": {
+    "evidence_turns": 2820,
+    "evidence_turns_sharing_no_word": 0.2738,
+    "questions": 1982,
+    "questions_with_no_visible_evidence": 0.1615
+   },
+   "multi-hop": {
+    "evidence_turns": 882,
+    "evidence_turns_sharing_no_word": 0.4116,
+    "questions": 282,
+    "questions_with_no_visible_evidence": 0.1879
+   },
+   "open-domain": {
+    "evidence_turns": 208,
+    "evidence_turns_sharing_no_word": 0.5817,
+    "questions": 92,
+    "questions_with_no_visible_evidence": 0.4022
+   },
+   "single-hop": {
+    "evidence_turns": 895,
+    "evidence_turns_sharing_no_word": 0.1642,
+    "questions": 841,
+    "questions_with_no_visible_evidence": 0.1427
+   },
+   "temporal": {
+    "evidence_turns": 375,
+    "evidence_turns_sharing_no_word": 0.184,
+    "questions": 321,
+    "questions_with_no_visible_evidence": 0.134
+   }
+  },
   "evidence_position": {
    "abstention": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.5247,
-    "in_newest_10pct": 0.1256,
+    "questions_in_newest_10pct": 0.1256,
     "n": 446
    },
    "all types": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.495,
-    "in_newest_10pct": 0.0954,
+    "questions_in_newest_10pct": 0.0954,
     "n": 1982
    },
    "multi-hop": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.421,
-    "in_newest_10pct": 0.0213,
+    "questions_in_newest_10pct": 0.0213,
     "n": 282
    },
    "open-domain": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.4152,
-    "in_newest_10pct": 0.0652,
+    "questions_in_newest_10pct": 0.0652,
     "n": 92
    },
    "single-hop": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.5237,
-    "in_newest_10pct": 0.1106,
+    "questions_in_newest_10pct": 0.1106,
     "n": 841
    },
    "temporal": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.4664,
-    "in_newest_10pct": 0.0872,
+    "questions_in_newest_10pct": 0.0872,
     "n": 321
    }
   },
@@ -121,97 +138,119 @@
     "needs_date": 0.7147,
     "n": 319
    }
-  }
+  },
+  "data_quality_flags": {}
  },
  {
   "dataset": "longmemeval",
   "histories": 500,
   "history_tokens": {
-   "mean": 112400,
+   "mean": 112341,
    "min": 105745,
    "max": 117107
-  },
-  "lexical_visibility": {
-   "abstention": {
-    "mean": 1.0,
-    "fully_invisible": 0,
-    "n": 9
-   },
-   "knowledge-update": {
-    "mean": 0.9954,
-    "fully_invisible": 0,
-    "n": 72
-   },
-   "multi-hop": {
-    "mean": 0.8992,
-    "fully_invisible": 0.0248,
-    "n": 121
-   },
-   "preference": {
-    "mean": 0.8167,
-    "fully_invisible": 0.1667,
-    "n": 30
-   },
-   "single-hop": {
-    "mean": 0.9688,
-    "fully_invisible": 0.0312,
-    "n": 64
-   },
-   "single-hop-assistant": {
-    "mean": 1.0,
-    "fully_invisible": 0,
-    "n": 56
-   },
-   "temporal": {
-    "mean": 0.9244,
-    "fully_invisible": 0.063,
-    "n": 127
-   }
   },
   "history_span_days": {
    "mean": 32.4,
    "min": -0.0,
    "max": 311.7
   },
+  "lexical_visibility": {
+   "abstention": {
+    "evidence_turns": 10,
+    "evidence_turns_sharing_no_word": 0,
+    "questions": 9,
+    "questions_with_no_visible_evidence": 0
+   },
+   "all types": {
+    "evidence_turns": 896,
+    "evidence_turns_sharing_no_word": 0.0748,
+    "questions": 479,
+    "questions_with_no_visible_evidence": 0.0376
+   },
+   "knowledge-update": {
+    "evidence_turns": 144,
+    "evidence_turns_sharing_no_word": 0.0069,
+    "questions": 72,
+    "questions_with_no_visible_evidence": 0
+   },
+   "multi-hop": {
+    "evidence_turns": 323,
+    "evidence_turns_sharing_no_word": 0.1238,
+    "questions": 121,
+    "questions_with_no_visible_evidence": 0.0248
+   },
+   "preference": {
+    "evidence_turns": 44,
+    "evidence_turns_sharing_no_word": 0.1818,
+    "questions": 30,
+    "questions_with_no_visible_evidence": 0.1667
+   },
+   "single-hop": {
+    "evidence_turns": 66,
+    "evidence_turns_sharing_no_word": 0.0303,
+    "questions": 64,
+    "questions_with_no_visible_evidence": 0.0312
+   },
+   "single-hop-assistant": {
+    "evidence_turns": 56,
+    "evidence_turns_sharing_no_word": 0,
+    "questions": 56,
+    "questions_with_no_visible_evidence": 0
+   },
+   "temporal": {
+    "evidence_turns": 253,
+    "evidence_turns_sharing_no_word": 0.0632,
+    "questions": 127,
+    "questions_with_no_visible_evidence": 0.063
+   }
+  },
   "evidence_position": {
    "abstention": {
-    "mean": 0.3558,
-    "in_newest_10pct": 0,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.3555,
+    "questions_in_newest_10pct": 0,
     "n": 9
    },
    "all types": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.5417,
-    "in_newest_10pct": 0.0668,
+    "questions_in_newest_10pct": 0.0668,
     "n": 479
    },
    "knowledge-update": {
-    "mean": 0.5093,
-    "in_newest_10pct": 0.0139,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.5095,
+    "questions_in_newest_10pct": 0.0139,
     "n": 72
    },
    "multi-hop": {
-    "mean": 0.508,
-    "in_newest_10pct": 0.0083,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.5079,
+    "questions_in_newest_10pct": 0.0083,
     "n": 121
    },
    "preference": {
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
     "mean": 0.576,
-    "in_newest_10pct": 0.1,
+    "questions_in_newest_10pct": 0.1,
     "n": 30
    },
    "single-hop": {
-    "mean": 0.541,
-    "in_newest_10pct": 0.1406,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.5414,
+    "questions_in_newest_10pct": 0.1406,
     "n": 64
    },
    "single-hop-assistant": {
-    "mean": 0.5611,
-    "in_newest_10pct": 0.1429,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.5612,
+    "questions_in_newest_10pct": 0.1429,
     "n": 56
    },
    "temporal": {
-    "mean": 0.589,
-    "in_newest_10pct": 0.0787,
+    "unit": "per question: mean position of its evidence turns (1 = last turn)",
+    "mean": 0.5889,
+    "questions_in_newest_10pct": 0.0787,
     "n": 127
    }
   },
@@ -282,6 +321,31 @@
     "in_text": 0.378,
     "needs_date": 0.063,
     "n": 127
+   }
+  },
+  "data_quality_flags": {
+   "duplicate_sessions": {
+    "abstention": 1,
+    "all types": 13,
+    "knowledge-update": 2,
+    "multi-hop": 3,
+    "preference": 1,
+    "single-hop": 3,
+    "single-hop-assistant": 1,
+    "temporal": 2
+   },
+   "future_sessions": {
+    "abstention": 7,
+    "all types": 76,
+    "knowledge-update": 15,
+    "temporal": 54
+   },
+   "partial_key": {
+    "abstention": 30,
+    "all types": 62,
+    "knowledge-update": 2,
+    "multi-hop": 10,
+    "temporal": 20
    }
   }
  }

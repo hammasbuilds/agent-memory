@@ -282,17 +282,17 @@
      1.0,
      1.0
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.8187,
+    "mean": 0.8191,
     "ci95": [
-     0.7831,
-     0.8503
+     0.7847,
+     0.8513
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 1.0,
@@ -300,7 +300,7 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
      "store_recall": 1.0
     },
@@ -343,20 +343,20 @@
    "evidence_kept": {
     "mean": 0.9978,
     "ci95": [
-     0.9944,
+     0.9943,
      1.0
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.8187,
+    "mean": 0.8191,
     "ci95": [
-     0.7831,
-     0.8503
+     0.7847,
+     0.8513
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 1.0,
@@ -364,7 +364,7 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
      "store_recall": 1.0
     },
@@ -403,24 +403,24 @@
   {
    "dataset": "longmemeval",
    "policy": "truncate:128",
-   "stored_tokens_kept": 0.3723,
+   "stored_tokens_kept": 0.3722,
    "evidence_kept": {
     "mean": 1.0,
     "ci95": [
      1.0,
      1.0
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.8854,
+    "mean": 0.8857,
     "ci95": [
-     0.8559,
-     0.9125
+     0.8581,
+     0.912
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 0.951,
@@ -428,7 +428,7 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
      "store_recall": 1.0
     },
@@ -467,24 +467,24 @@
   {
    "dataset": "longmemeval",
    "policy": "truncate:64",
-   "stored_tokens_kept": 0.228,
+   "stored_tokens_kept": 0.2279,
    "evidence_kept": {
     "mean": 1.0,
     "ci95": [
      1.0,
      1.0
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.8578,
+    "mean": 0.8581,
     "ci95": [
-     0.8272,
-     0.8859
+     0.8294,
+     0.8867
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 0.7413,
@@ -492,9 +492,9 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
-     "store_recall": 0.9286
+     "store_recall": 0.9375
     },
     "knowledge-update": {
      "n": 61,
@@ -533,22 +533,22 @@
    "policy": "role:assistant",
    "stored_tokens_kept": 0.1259,
    "evidence_kept": {
-    "mean": 0.8925,
+    "mean": 0.8928,
     "ci95": [
-     0.864,
-     0.9223
+     0.8636,
+     0.9236
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.8129,
+    "mean": 0.8134,
     "ci95": [
-     0.7765,
-     0.8479
+     0.7761,
+     0.8487
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 0.8531,
@@ -556,7 +556,7 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
      "store_recall": 1.0
     },
@@ -595,24 +595,24 @@
   {
    "dataset": "longmemeval",
    "policy": "older-than:30",
-   "stored_tokens_kept": 0.8571,
+   "stored_tokens_kept": 0.8593,
    "evidence_kept": {
-    "mean": 0.8956,
+    "mean": 0.8959,
     "ci95": [
-     0.8696,
-     0.9209
+     0.8708,
+     0.9219
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "store_recall_at_2048": {
-    "mean": 0.7262,
+    "mean": 0.7269,
     "ci95": [
-     0.6889,
-     0.7618
+     0.6883,
+     0.7624
     ],
-    "n": 386,
-    "clusters": 386
+    "n": 387,
+    "clusters": 380
    },
    "literal_answer_kept": {
     "mean": 0.9231,
@@ -620,7 +620,7 @@
    },
    "by_type": {
     "abstention": {
-     "n": 7,
+     "n": 8,
      "evidence_kept": 1.0,
      "store_recall": 1.0
     },
