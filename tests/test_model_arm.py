@@ -124,7 +124,7 @@ def stub_url():
 
 
 def test_ollama_client_caches_generations_and_embeddings(stub_url, tmp_path):
-    client = Ollama(stub_url, DiskCache(tmp_path))
+    client = Ollama(stub_url, DiskCache(tmp_path / "cache.sqlite"))
     assert client.generate("m", "hello world") == "echo hello t=0.0"
     assert client.generate("m", "hello world") == "echo hello t=0.0"
     assert client.generate("m", "hello world", {"temperature": 0.5}).endswith("t=0.5")
@@ -133,7 +133,7 @@ def test_ollama_client_caches_generations_and_embeddings(stub_url, tmp_path):
     assert client.embed("e", ["abc", "abcd"]) == [[3.0, 1.0], [4.0, 1.0]]
     assert _Stub.hits.count("/api/embed") == 2  # second call sent only "abcd"
     # a fresh client over the same cache directory resumes without calling out
-    again = Ollama(stub_url, DiskCache(tmp_path))
+    again = Ollama(stub_url, DiskCache(tmp_path / "cache.sqlite"))
     assert again.generate("m", "hello world") == "echo hello t=0.0"
     assert _Stub.hits.count("/api/generate") == 2
 

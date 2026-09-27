@@ -156,7 +156,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="Persistent cross-session memory for agents: SQLite store, BM25 retrieval, "
         "temporal queries, versioned facts.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=__doc__.split("\n", 2)[2],
+        epilog="examples:\n" + __doc__.split("\n", 2)[2],
     )
     p.add_argument("--db", default="memory.db", help="SQLite file (default: memory.db)")
     sub = p.add_subparsers(dest="cmd", required=True, metavar="COMMAND")
@@ -228,6 +228,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
+    writes = {"ingest", "add", "remember"}
+    if args.cmd not in writes and args.db != ":memory:" and not Path(args.db).exists():
+        raise SystemExit(f"error: no memory at {args.db} - `ingest`, `add` or `remember` first")
     try:
         with MemoryStore(args.db) as store:
             args.fn(store, args)

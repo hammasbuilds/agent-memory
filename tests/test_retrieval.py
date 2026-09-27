@@ -86,3 +86,13 @@ def test_empty_history():
     h = History([])
     for strat in (R.full_head, R.sliding_window, R.bm25_turns, R.bm25_sessions, R.make_store()):
         assert strat(h, "anything", NOW, "s").pack(100, h.tokens).turns == ()
+
+
+def test_defaults_are_what_the_dev_sweep_chose():
+    import json
+    from dataclasses import asdict
+    from pathlib import Path
+
+    sweep = Path(__file__).resolve().parents[1] / "results" / "dev_sweep.json"
+    chosen = json.loads(sweep.read_text("utf-8"))["store_best"]["config"]
+    assert asdict(RetrieverConfig()) == chosen

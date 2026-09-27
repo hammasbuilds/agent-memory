@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run the whole model arm end to end: dense/hybrid retrieval, LLM fact extraction,
 # answer accuracy. Checks free RAM, free GPU memory and that Ollama has both models
-# before starting. Every call is cached (data/model_cache), so rerunning resumes.
+# before starting. Every call is cached (data/model_cache.sqlite), so rerunning resumes.
 #
 #   scripts/run_models.sh --dry-run        # job list and call counts; touches nothing
 #   scripts/run_models.sh                  # the full run

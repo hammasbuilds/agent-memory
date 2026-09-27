@@ -1,0 +1,4437 @@
+{
+ "split": "test",
+ "half_lives_days": [
+  7.0,
+  30.0,
+  90.0,
+  365.0
+ ],
+ "summary": [
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 2044.6,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.8166,
+    "ci95": [
+     0.7903,
+     0.8551
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8119,
+    "ci95": [
+     0.7873,
+     0.8521
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 2039.6,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.7571,
+    "ci95": [
+     0.7404,
+     0.7782
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7069,
+    "ci95": [
+     0.6882,
+     0.727
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 2028.2,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.5227,
+    "ci95": [
+     0.4493,
+     0.591
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.285,
+    "ci95": [
+     0.1801,
+     0.3716
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 2011.2,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.4488,
+    "ci95": [
+     0.3061,
+     0.5755
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.3455,
+    "ci95": [
+     0.2241,
+     0.5
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 2041.3,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.8149,
+    "ci95": [
+     0.7891,
+     0.8426
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7967,
+    "ci95": [
+     0.7699,
+     0.8326
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 2044.9,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.7926,
+    "ci95": [
+     0.7179,
+     0.875
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.765,
+    "ci95": [
+     0.6789,
+     0.8579
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 508.7,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.6881,
+    "ci95": [
+     0.6587,
+     0.7308
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6834,
+    "ci95": [
+     0.6527,
+     0.7273
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 508.2,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.6077,
+    "ci95": [
+     0.5922,
+     0.6218
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5661,
+    "ci95": [
+     0.5541,
+     0.5776
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 506.6,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.3077,
+    "ci95": [
+     0.2455,
+     0.3656
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.1244,
+    "ci95": [
+     0.085,
+     0.1517
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 501.9,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.2864,
+    "ci95": [
+     0.1522,
+     0.3843
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.2,
+    "ci95": [
+     0.1042,
+     0.2979
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 508.8,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.6596,
+    "ci95": [
+     0.616,
+     0.7063
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6407,
+    "ci95": [
+     0.5961,
+     0.6966
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 508.9,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.6909,
+    "ci95": [
+     0.5996,
+     0.7892
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6682,
+    "ci95": [
+     0.5735,
+     0.7717
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 2044.7,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.547,
+    "ci95": [
+     0.4892,
+     0.6197
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5455,
+    "ci95": [
+     0.4867,
+     0.6197
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 2039.1,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.491,
+    "ci95": [
+     0.4379,
+     0.5501
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.4503,
+    "ci95": [
+     0.3958,
+     0.5122
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 2027.6,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.3032,
+    "ci95": [
+     0.258,
+     0.3542
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.0984,
+    "ci95": [
+     0.0406,
+     0.1624
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 2009.8,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.2427,
+    "ci95": [
+     0.1053,
+     0.3583
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.1818,
+    "ci95": [
+     0.087,
+     0.2466
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 2040.7,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.5431,
+    "ci95": [
+     0.4817,
+     0.5994
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5301,
+    "ci95": [
+     0.4707,
+     0.5957
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 2044.1,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.4908,
+    "ci95": [
+     0.3563,
+     0.6595
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.4654,
+    "ci95": [
+     0.3308,
+     0.639
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 508.8,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.3934,
+    "ci95": [
+     0.3598,
+     0.421
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.3918,
+    "ci95": [
+     0.3596,
+     0.4184
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 508.1,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.3249,
+    "ci95": [
+     0.2992,
+     0.3504
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.3009,
+    "ci95": [
+     0.277,
+     0.3261
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 506.3,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.1391,
+    "ci95": [
+     0.103,
+     0.1797
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.0259,
+    "ci95": [
+     0.0,
+     0.058
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 502.0,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.1621,
+    "ci95": [
+     0.0732,
+     0.2202
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.1273,
+    "ci95": [
+     0.06,
+     0.1719
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 508.7,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.3753,
+    "ci95": [
+     0.3404,
+     0.4059
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.3659,
+    "ci95": [
+     0.337,
+     0.3942
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 508.5,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.288,
+    "ci95": [
+     0.1844,
+     0.4121
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.2719,
+    "ci95": [
+     0.1709,
+     0.3947
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 2045.2,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.8072,
+    "ci95": [
+     0.788,
+     0.839
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8025,
+    "ci95": [
+     0.7826,
+     0.8364
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 2039.8,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.7498,
+    "ci95": [
+     0.7344,
+     0.7658
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7012,
+    "ci95": [
+     0.6809,
+     0.7231
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 2028.3,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.5224,
+    "ci95": [
+     0.4515,
+     0.591
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.2902,
+    "ci95": [
+     0.1855,
+     0.378
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 2011.3,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.3927,
+    "ci95": [
+     0.2536,
+     0.5005
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.3091,
+    "ci95": [
+     0.2075,
+     0.4118
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 2041.4,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.807,
+    "ci95": [
+     0.7844,
+     0.8358
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7886,
+    "ci95": [
+     0.7562,
+     0.827
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 2045.0,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.7957,
+    "ci95": [
+     0.7239,
+     0.8783
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7696,
+    "ci95": [
+     0.6829,
+     0.86
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 508.6,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.685,
+    "ci95": [
+     0.6581,
+     0.7186
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6803,
+    "ci95": [
+     0.6503,
+     0.716
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 508.1,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.6043,
+    "ci95": [
+     0.5869,
+     0.6183
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5618,
+    "ci95": [
+     0.5469,
+     0.5771
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 506.4,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.2952,
+    "ci95": [
+     0.2428,
+     0.3445
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.1036,
+    "ci95": [
+     0.0702,
+     0.133
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 501.9,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.3045,
+    "ci95": [
+     0.1915,
+     0.3867
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.2182,
+    "ci95": [
+     0.125,
+     0.3061
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 508.8,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.6656,
+    "ci95": [
+     0.617,
+     0.7125
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6488,
+    "ci95": [
+     0.6025,
+     0.7022
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 508.5,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.6632,
+    "ci95": [
+     0.5753,
+     0.7741
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6359,
+    "ci95": [
+     0.5388,
+     0.7537
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 2043.4,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.3197,
+    "ci95": [
+     0.2701,
+     0.3734
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.3197,
+    "ci95": [
+     0.2701,
+     0.3734
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 2038.3,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.2834,
+    "ci95": [
+     0.256,
+     0.3139
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.2588,
+    "ci95": [
+     0.2321,
+     0.2855
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 2026.3,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.1532,
+    "ci95": [
+     0.122,
+     0.1855
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.0415,
+    "ci95": [
+     0.0135,
+     0.0722
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 2010.2,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.1806,
+    "ci95": [
+     0.0633,
+     0.2646
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.1273,
+    "ci95": [
+     0.04,
+     0.2
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 2040.1,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.3266,
+    "ci95": [
+     0.288,
+     0.3689
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.3171,
+    "ci95": [
+     0.2877,
+     0.3452
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 2043.7,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.2496,
+    "ci95": [
+     0.1686,
+     0.3558
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.2304,
+    "ci95": [
+     0.1545,
+     0.3351
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 507.4,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.1834,
+    "ci95": [
+     0.1365,
+     0.2235
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.1818,
+    "ci95": [
+     0.1352,
+     0.2215
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 506.7,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.1629,
+    "ci95": [
+     0.1389,
+     0.1872
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.148,
+    "ci95": [
+     0.1249,
+     0.1718
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 504.7,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.0744,
+    "ci95": [
+     0.0458,
+     0.1052
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.0104,
+    "ci95": [
+     0.0,
+     0.0321
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 500.9,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.1439,
+    "ci95": [
+     0.0469,
+     0.2151
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.1091,
+    "ci95": [
+     0.04,
+     0.1667
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 507.4,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.1818,
+    "ci95": [
+     0.1538,
+     0.2022
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.174,
+    "ci95": [
+     0.1504,
+     0.1925
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 507.2,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.1628,
+    "ci95": [
+     0.0882,
+     0.2723
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.1567,
+    "ci95": [
+     0.0833,
+     0.265
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 2045.1,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.7571,
+    "ci95": [
+     0.7311,
+     0.791
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7524,
+    "ci95": [
+     0.7282,
+     0.7853
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 2039.9,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.6989,
+    "ci95": [
+     0.6868,
+     0.7134
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.6497,
+    "ci95": [
+     0.633,
+     0.6697
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 2028.3,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.4473,
+    "ci95": [
+     0.3857,
+     0.4964
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.228,
+    "ci95": [
+     0.1498,
+     0.2895
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 2010.7,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.3321,
+    "ci95": [
+     0.2015,
+     0.4402
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.2364,
+    "ci95": [
+     0.1351,
+     0.3158
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 2041.5,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.7602,
+    "ci95": [
+     0.7275,
+     0.8017
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7398,
+    "ci95": [
+     0.6922,
+     0.7921
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 2045.3,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.7565,
+    "ci95": [
+     0.6878,
+     0.8479
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7235,
+    "ci95": [
+     0.6422,
+     0.8241
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 319,
+   "mean_tokens": 508.7,
+   "n_measurable": 319,
+   "recall": {
+    "mean": 0.5752,
+    "ci95": [
+     0.5395,
+     0.6146
+    ],
+    "n": 319,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5705,
+    "ci95": [
+     0.534,
+     0.61
+    ],
+    "n": 319,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 1401,
+   "mean_tokens": 508.4,
+   "n_measurable": 1399,
+   "recall": {
+    "mean": 0.4983,
+    "ci95": [
+     0.4749,
+     0.5206
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.4625,
+    "ci95": [
+     0.436,
+     0.486
+    ],
+    "n": 1399,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 193,
+   "mean_tokens": 506.4,
+   "n_measurable": 193,
+   "recall": {
+    "mean": 0.2304,
+    "ci95": [
+     0.1805,
+     0.271
+    ],
+    "n": 193,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.0674,
+    "ci95": [
+     0.0182,
+     0.1117
+    ],
+    "n": 193,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "open-domain",
+   "n_questions": 57,
+   "mean_tokens": 502.1,
+   "n_measurable": 55,
+   "recall": {
+    "mean": 0.2758,
+    "ci95": [
+     0.122,
+     0.3802
+    ],
+    "n": 55,
+    "clusters": 6
+   },
+   "all": {
+    "mean": 0.2,
+    "ci95": [
+     0.093,
+     0.2963
+    ],
+    "n": 55,
+    "clusters": 6
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 615,
+   "mean_tokens": 509.2,
+   "n_measurable": 615,
+   "recall": {
+    "mean": 0.5523,
+    "ci95": [
+     0.5073,
+     0.598
+    ],
+    "n": 615,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5382,
+    "ci95": [
+     0.4857,
+     0.5917
+    ],
+    "n": 615,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "locomo",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 217,
+   "mean_tokens": 509.0,
+   "n_measurable": 217,
+   "recall": {
+    "mean": 0.5269,
+    "ci95": [
+     0.413,
+     0.6575
+    ],
+    "n": 217,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.5069,
+    "ci95": [
+     0.3913,
+     0.6413
+    ],
+    "n": 217,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 1993.8,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 2026.7,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.7975,
+    "ci95": [
+     0.7595,
+     0.8303
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.7228,
+    "ci95": [
+     0.6762,
+     0.7642
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 2026.0,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.9044,
+    "ci95": [
+     0.8415,
+     0.959
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.8361,
+    "ci95": [
+     0.7377,
+     0.918
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 2032.2,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.6804,
+    "ci95": [
+     0.607,
+     0.7487
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.5146,
+    "ci95": [
+     0.4175,
+     0.6117
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 2035.5,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.5347,
+    "ci95": [
+     0.3403,
+     0.7222
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4583,
+    "ci95": [
+     0.25,
+     0.6667
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 2003.2,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 2037.9,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 2032.0,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.8013,
+    "ci95": [
+     0.7281,
+     0.8725
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.7451,
+    "ci95": [
+     0.6569,
+     0.8333
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 485.9,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 494.2,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.6768,
+    "ci95": [
+     0.6337,
+     0.7145
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.5725,
+    "ci95": [
+     0.5207,
+     0.6218
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.7705,
+    "ci95": [
+     0.6557,
+     0.8689
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.1639,
+    "ci95": [
+     0.082,
+     0.2623
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 496.7,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.7814,
+    "ci95": [
+     0.6995,
+     0.8552
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.6393,
+    "ci95": [
+     0.5082,
+     0.7541
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.7705,
+    "ci95": [
+     0.6557,
+     0.8689
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.1639,
+    "ci95": [
+     0.082,
+     0.2623
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 496.0,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.516,
+    "ci95": [
+     0.4385,
+     0.5892
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.3204,
+    "ci95": [
+     0.233,
+     0.4078
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 497.9,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.4722,
+    "ci95": [
+     0.2986,
+     0.6597
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.375,
+    "ci95": [
+     0.2083,
+     0.5833
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 480.2,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9205,
+    "ci95": [
+     0.8295,
+     0.9886
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9091,
+    "ci95": [
+     0.8182,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 500.5,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "bm25_turns",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 495.0,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7118,
+    "ci95": [
+     0.632,
+     0.7918
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.6275,
+    "ci95": [
+     0.5294,
+     0.7255
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 1991.0,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 2026.0,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.7652,
+    "ci95": [
+     0.7274,
+     0.7984
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.6606,
+    "ci95": [
+     0.614,
+     0.7047
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.9508,
+    "ci95": [
+     0.8852,
+     1.0
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0164,
+    "ci95": [
+     0.0,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 2029.9,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.7213,
+    "ci95": [
+     0.653,
+     0.7896
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.4754,
+    "ci95": [
+     0.3607,
+     0.6066
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.9508,
+    "ci95": [
+     0.8852,
+     1.0
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0164,
+    "ci95": [
+     0.0,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 2029.9,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.6775,
+    "ci95": [
+     0.6037,
+     0.7469
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.5049,
+    "ci95": [
+     0.4078,
+     0.6019
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 2036.1,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.6181,
+    "ci95": [
+     0.4236,
+     0.7986
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.5417,
+    "ci95": [
+     0.3333,
+     0.75
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 1997.9,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 2036.2,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 2032.8,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7719,
+    "ci95": [
+     0.6951,
+     0.8497
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.7157,
+    "ci95": [
+     0.6275,
+     0.8039
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 487.3,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 494.1,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.6413,
+    "ci95": [
+     0.6013,
+     0.6789
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.5052,
+    "ci95": [
+     0.456,
+     0.5518
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.8361,
+    "ci95": [
+     0.7377,
+     0.918
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0656,
+    "ci95": [
+     0.0164,
+     0.1311
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 496.0,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.5984,
+    "ci95": [
+     0.5273,
+     0.6749
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.2951,
+    "ci95": [
+     0.1967,
+     0.4098
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.8361,
+    "ci95": [
+     0.7377,
+     0.918
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0656,
+    "ci95": [
+     0.0164,
+     0.1311
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 495.2,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.516,
+    "ci95": [
+     0.4396,
+     0.5875
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.3204,
+    "ci95": [
+     0.233,
+     0.4078
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 499.2,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.4861,
+    "ci95": [
+     0.3056,
+     0.6875
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4167,
+    "ci95": [
+     0.25,
+     0.625
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 479.8,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9205,
+    "ci95": [
+     0.8295,
+     0.9886
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9091,
+    "ci95": [
+     0.8182,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 501.1,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_30d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 495.1,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.6837,
+    "ci95": [
+     0.6069,
+     0.7621
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.5686,
+    "ci95": [
+     0.4804,
+     0.6667
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 1993.1,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 2027.1,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.7958,
+    "ci95": [
+     0.758,
+     0.8289
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.7202,
+    "ci95": [
+     0.6736,
+     0.7617
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 2027.6,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.9044,
+    "ci95": [
+     0.8415,
+     0.959
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.8361,
+    "ci95": [
+     0.7377,
+     0.918
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 2032.3,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.6824,
+    "ci95": [
+     0.6097,
+     0.7506
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.5146,
+    "ci95": [
+     0.4175,
+     0.6117
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 2035.0,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.5347,
+    "ci95": [
+     0.3403,
+     0.7222
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4583,
+    "ci95": [
+     0.25,
+     0.6667
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 2003.5,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 2038.0,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 2032.6,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7931,
+    "ci95": [
+     0.7186,
+     0.8647
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.7353,
+    "ci95": [
+     0.6471,
+     0.8235
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 486.2,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 494.5,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.6711,
+    "ci95": [
+     0.6285,
+     0.7092
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.5674,
+    "ci95": [
+     0.5181,
+     0.6166
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.7705,
+    "ci95": [
+     0.6557,
+     0.8689
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.1311,
+    "ci95": [
+     0.0492,
+     0.2295
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 497.9,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.7514,
+    "ci95": [
+     0.6667,
+     0.8279
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.6066,
+    "ci95": [
+     0.4754,
+     0.7213
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.7705,
+    "ci95": [
+     0.6557,
+     0.8689
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.1311,
+    "ci95": [
+     0.0492,
+     0.2295
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 496.1,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.516,
+    "ci95": [
+     0.4385,
+     0.5892
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.3204,
+    "ci95": [
+     0.233,
+     0.4078
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 498.0,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.4722,
+    "ci95": [
+     0.2986,
+     0.6597
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.375,
+    "ci95": [
+     0.2083,
+     0.5833
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 480.1,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9205,
+    "ci95": [
+     0.8295,
+     0.9886
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9091,
+    "ci95": [
+     0.8182,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 501.0,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_365d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 495.4,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7082,
+    "ci95": [
+     0.6284,
+     0.7882
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.6275,
+    "ci95": [
+     0.5294,
+     0.7255
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 2007.0,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 2027.6,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.7161,
+    "ci95": [
+     0.677,
+     0.7504
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.5803,
+    "ci95": [
+     0.5285,
+     0.6295
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.8689,
+    "ci95": [
+     0.7705,
+     0.9508
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0164,
+    "ci95": [
+     0.0,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 2029.5,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.5656,
+    "ci95": [
+     0.4918,
+     0.6393
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.2459,
+    "ci95": [
+     0.1475,
+     0.3607
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.8689,
+    "ci95": [
+     0.7705,
+     0.9508
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0164,
+    "ci95": [
+     0.0,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 2026.5,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.6534,
+    "ci95": [
+     0.578,
+     0.722
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.4757,
+    "ci95": [
+     0.3786,
+     0.5728
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 2036.2,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.5556,
+    "ci95": [
+     0.3611,
+     0.7431
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4583,
+    "ci95": [
+     0.25,
+     0.6667
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 2013.5,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 2034.6,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 2033.2,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7183,
+    "ci95": [
+     0.6458,
+     0.7886
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.598,
+    "ci95": [
+     0.5098,
+     0.6961
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 483.8,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.7143,
+    "ci95": [
+     0.4286,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.7143,
+    "ci95": [
+     0.4286,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 493.7,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.6053,
+    "ci95": [
+     0.563,
+     0.6434
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.4637,
+    "ci95": [
+     0.4145,
+     0.5104
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.7869,
+    "ci95": [
+     0.6885,
+     0.8852
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 495.7,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.5,
+    "ci95": [
+     0.4208,
+     0.582
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.2131,
+    "ci95": [
+     0.1148,
+     0.3279
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.7869,
+    "ci95": [
+     0.6885,
+     0.8852
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 495.0,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.5087,
+    "ci95": [
+     0.4288,
+     0.5814
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.3204,
+    "ci95": [
+     0.233,
+     0.4078
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 498.3,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.5069,
+    "ci95": [
+     0.3194,
+     0.6875
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4167,
+    "ci95": [
+     0.2083,
+     0.625
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 482.9,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.8977,
+    "ci95": [
+     0.7955,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.8864,
+    "ci95": [
+     0.7727,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 502.4,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_7d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 493.3,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.6281,
+    "ci95": [
+     0.5536,
+     0.7095
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.4804,
+    "ci95": [
+     0.3824,
+     0.5784
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 1992.9,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 2027.3,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.7877,
+    "ci95": [
+     0.75,
+     0.8207
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.7073,
+    "ci95": [
+     0.6606,
+     0.7513
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 2030.9,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.8798,
+    "ci95": [
+     0.8115,
+     0.9399
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.7869,
+    "ci95": [
+     0.6721,
+     0.8852
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.918,
+    "ci95": [
+     0.8525,
+     0.9836
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.0492,
+    "ci95": [
+     0.0,
+     0.1148
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 2031.0,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.6824,
+    "ci95": [
+     0.6097,
+     0.7506
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.5146,
+    "ci95": [
+     0.4175,
+     0.6117
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 2034.9,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.5347,
+    "ci95": [
+     0.3403,
+     0.7222
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.4583,
+    "ci95": [
+     0.25,
+     0.6667
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 2003.0,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9545,
+    "ci95": [
+     0.8864,
+     1.0
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 2036.9,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.8889,
+    "ci95": [
+     0.7778,
+     0.9778
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 2048,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 2033.6,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7771,
+    "ci95": [
+     0.7013,
+     0.8523
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.7157,
+    "ci95": [
+     0.6275,
+     0.8039
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "abstention",
+   "n_questions": 23,
+   "mean_tokens": 486.0,
+   "n_measurable": 7,
+   "recall": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   },
+   "all": {
+    "mean": 0.8571,
+    "ci95": [
+     0.5714,
+     1.0
+    ],
+    "n": 7,
+    "clusters": 7
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "all types",
+   "n_questions": 402,
+   "mean_tokens": 494.7,
+   "n_measurable": 386,
+   "recall": {
+    "mean": 0.6633,
+    "ci95": [
+     0.6219,
+     0.7011
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "all": {
+    "mean": 0.5466,
+    "ci95": [
+     0.5,
+     0.5959
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "newest": {
+    "mean": 0.8033,
+    "ci95": [
+     0.7049,
+     0.9016
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.082,
+    "ci95": [
+     0.0164,
+     0.1475
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "knowledge-update",
+   "n_questions": 61,
+   "mean_tokens": 499.0,
+   "n_measurable": 61,
+   "recall": {
+    "mean": 0.6885,
+    "ci95": [
+     0.6038,
+     0.7732
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "all": {
+    "mean": 0.4918,
+    "ci95": [
+     0.3607,
+     0.623
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "newest": {
+    "mean": 0.8033,
+    "ci95": [
+     0.7049,
+     0.9016
+    ],
+    "n": 61,
+    "clusters": 61
+   },
+   "stale_only": {
+    "mean": 0.082,
+    "ci95": [
+     0.0164,
+     0.1475
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "multi-hop",
+   "n_questions": 103,
+   "mean_tokens": 495.7,
+   "n_measurable": 103,
+   "recall": {
+    "mean": 0.5193,
+    "ci95": [
+     0.4416,
+     0.5926
+    ],
+    "n": 103,
+    "clusters": 103
+   },
+   "all": {
+    "mean": 0.3204,
+    "ci95": [
+     0.233,
+     0.4078
+    ],
+    "n": 103,
+    "clusters": 103
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "preference",
+   "n_questions": 24,
+   "mean_tokens": 499.6,
+   "n_measurable": 24,
+   "recall": {
+    "mean": 0.4722,
+    "ci95": [
+     0.2986,
+     0.6597
+    ],
+    "n": 24,
+    "clusters": 24
+   },
+   "all": {
+    "mean": 0.375,
+    "ci95": [
+     0.2083,
+     0.5833
+    ],
+    "n": 24,
+    "clusters": 24
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "single-hop",
+   "n_questions": 44,
+   "mean_tokens": 480.6,
+   "n_measurable": 44,
+   "recall": {
+    "mean": 0.9205,
+    "ci95": [
+     0.8295,
+     0.9886
+    ],
+    "n": 44,
+    "clusters": 44
+   },
+   "all": {
+    "mean": 0.9091,
+    "ci95": [
+     0.8182,
+     0.9773
+    ],
+    "n": 44,
+    "clusters": 44
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "single-hop-assistant",
+   "n_questions": 45,
+   "mean_tokens": 501.6,
+   "n_measurable": 45,
+   "recall": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   },
+   "all": {
+    "mean": 0.6667,
+    "ci95": [
+     0.5333,
+     0.8
+    ],
+    "n": 45,
+    "clusters": 45
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "split": "test",
+   "strategy": "recency_90d",
+   "budget": 512,
+   "qtype": "temporal",
+   "n_questions": 102,
+   "mean_tokens": 494.8,
+   "n_measurable": 102,
+   "recall": {
+    "mean": 0.7131,
+    "ci95": [
+     0.6343,
+     0.7912
+    ],
+    "n": 102,
+    "clusters": 102
+   },
+   "all": {
+    "mean": 0.6176,
+    "ci95": [
+     0.5196,
+     0.7157
+    ],
+    "n": 102,
+    "clusters": 102
+   }
+  }
+ ],
+ "knowledge_update_newest": [
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_7d",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0164,
+    "ci95": [
+     -0.1148,
+     0.1311
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_7d",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": -0.0492,
+    "ci95": [
+     -0.1311,
+     0.0328
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_30d",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0656,
+    "ci95": [
+     0.0,
+     0.1475
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_30d",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0328,
+    "ci95": [
+     0.0,
+     0.082
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_90d",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0328,
+    "ci95": [
+     -0.0328,
+     0.0984
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_90d",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_365d",
+   "b": "bm25_turns",
+   "budget": 512,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     -0.0492,
+     0.0492
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "qtype": "knowledge-update",
+   "a": "recency_365d",
+   "b": "bm25_turns",
+   "budget": 2048,
+   "split": "test",
+   "metric": "newest",
+   "diff": {
+    "mean": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 61,
+    "clusters": 61
+   }
+  }
+ ]
+}

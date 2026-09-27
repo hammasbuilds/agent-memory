@@ -100,9 +100,12 @@ def test_forget_purge_stats(capsys, db, chat):
         (["ingest", "missing.jsonl"], "no such file"),
         (["remember", "user", "pet", "dog", "--at", "last tuesday"], "not an ISO"),
         (["add", "s", "user", "   "], "empty turn"),
+        (["search", "anything"], "no memory at"),
     ],
 )
 def test_helpful_errors(db, argv, message):
+    if message != "no memory at":
+        main(["--db", db, "add", "s", "user", "hello there"])
     with pytest.raises(SystemExit) as e:
         main(["--db", db, *argv])
     assert message in str(e.value)

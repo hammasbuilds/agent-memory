@@ -1,0 +1,288 @@
+[
+ {
+  "dataset": "locomo",
+  "histories": 10,
+  "history_tokens": {
+   "mean": 20063,
+   "min": 12239,
+   "max": 24231
+  },
+  "lexical_visibility": {
+   "abstention": {
+    "mean": 0.8453,
+    "fully_invisible": 0.1502,
+    "n": 446
+   },
+   "multi-hop": {
+    "mean": 0.5916,
+    "fully_invisible": 0.1879,
+    "n": 282
+   },
+   "open-domain": {
+    "mean": 0.4745,
+    "fully_invisible": 0.4022,
+    "n": 92
+   },
+   "single-hop": {
+    "mean": 0.8456,
+    "fully_invisible": 0.1427,
+    "n": 841
+   },
+   "temporal": {
+    "mean": 0.8401,
+    "fully_invisible": 0.134,
+    "n": 321
+   }
+  },
+  "history_span_days": {
+   "mean": 231.4,
+   "min": 166.8,
+   "max": 293.2
+  },
+  "evidence_position": {
+   "abstention": {
+    "mean": 0.5247,
+    "in_newest_10pct": 0.1256,
+    "n": 446
+   },
+   "all types": {
+    "mean": 0.495,
+    "in_newest_10pct": 0.0954,
+    "n": 1982
+   },
+   "multi-hop": {
+    "mean": 0.421,
+    "in_newest_10pct": 0.0213,
+    "n": 282
+   },
+   "open-domain": {
+    "mean": 0.4152,
+    "in_newest_10pct": 0.0652,
+    "n": 92
+   },
+   "single-hop": {
+    "mean": 0.5237,
+    "in_newest_10pct": 0.1106,
+    "n": 841
+   },
+   "temporal": {
+    "mean": 0.4664,
+    "in_newest_10pct": 0.0872,
+    "n": 321
+   }
+  },
+  "names_a_time": {
+   "abstention": {
+    "rate": 0.0605,
+    "n": 446
+   },
+   "multi-hop": {
+    "rate": 0.0496,
+    "n": 282
+   },
+   "open-domain": {
+    "rate": 0.0625,
+    "n": 96
+   },
+   "single-hop": {
+    "rate": 0.0737,
+    "n": 841
+   },
+   "temporal": {
+    "rate": 0.1028,
+    "n": 321
+   }
+  },
+  "answer_location": {
+   "abstention": {
+    "elsewhere": 1.0,
+    "n": 446
+   },
+   "multi-hop": {
+    "elsewhere": 0.5461,
+    "in_text": 0.4428,
+    "needs_date": 0.0111,
+    "n": 271
+   },
+   "open-domain": {
+    "elsewhere": 0.9195,
+    "in_text": 0.0805,
+    "n": 87
+   },
+   "single-hop": {
+    "elsewhere": 0.1868,
+    "in_text": 0.8108,
+    "needs_date": 0.0024,
+    "n": 835
+   },
+   "temporal": {
+    "elsewhere": 0.1944,
+    "in_text": 0.0909,
+    "needs_date": 0.7147,
+    "n": 319
+   }
+  }
+ },
+ {
+  "dataset": "longmemeval",
+  "histories": 500,
+  "history_tokens": {
+   "mean": 112400,
+   "min": 105745,
+   "max": 117107
+  },
+  "lexical_visibility": {
+   "abstention": {
+    "mean": 1.0,
+    "fully_invisible": 0,
+    "n": 9
+   },
+   "knowledge-update": {
+    "mean": 0.9954,
+    "fully_invisible": 0,
+    "n": 72
+   },
+   "multi-hop": {
+    "mean": 0.8992,
+    "fully_invisible": 0.0248,
+    "n": 121
+   },
+   "preference": {
+    "mean": 0.8167,
+    "fully_invisible": 0.1667,
+    "n": 30
+   },
+   "single-hop": {
+    "mean": 0.9688,
+    "fully_invisible": 0.0312,
+    "n": 64
+   },
+   "single-hop-assistant": {
+    "mean": 1.0,
+    "fully_invisible": 0,
+    "n": 56
+   },
+   "temporal": {
+    "mean": 0.9244,
+    "fully_invisible": 0.063,
+    "n": 127
+   }
+  },
+  "history_span_days": {
+   "mean": 32.4,
+   "min": -0.0,
+   "max": 311.7
+  },
+  "evidence_position": {
+   "abstention": {
+    "mean": 0.3558,
+    "in_newest_10pct": 0,
+    "n": 9
+   },
+   "all types": {
+    "mean": 0.5417,
+    "in_newest_10pct": 0.0668,
+    "n": 479
+   },
+   "knowledge-update": {
+    "mean": 0.5093,
+    "in_newest_10pct": 0.0139,
+    "n": 72
+   },
+   "multi-hop": {
+    "mean": 0.508,
+    "in_newest_10pct": 0.0083,
+    "n": 121
+   },
+   "preference": {
+    "mean": 0.576,
+    "in_newest_10pct": 0.1,
+    "n": 30
+   },
+   "single-hop": {
+    "mean": 0.541,
+    "in_newest_10pct": 0.1406,
+    "n": 64
+   },
+   "single-hop-assistant": {
+    "mean": 0.5611,
+    "in_newest_10pct": 0.1429,
+    "n": 56
+   },
+   "temporal": {
+    "mean": 0.589,
+    "in_newest_10pct": 0.0787,
+    "n": 127
+   }
+  },
+  "names_a_time": {
+   "abstention": {
+    "rate": 0.0667,
+    "n": 30
+   },
+   "knowledge-update": {
+    "rate": 0.0278,
+    "n": 72
+   },
+   "multi-hop": {
+    "rate": 0.2231,
+    "n": 121
+   },
+   "preference": {
+    "rate": 0.2,
+    "n": 30
+   },
+   "single-hop": {
+    "rate": 0.0625,
+    "n": 64
+   },
+   "single-hop-assistant": {
+    "rate": 0,
+    "n": 56
+   },
+   "temporal": {
+    "rate": 0.189,
+    "n": 127
+   }
+  },
+  "answer_location": {
+   "abstention": {
+    "elsewhere": 1.0,
+    "n": 9
+   },
+   "knowledge-update": {
+    "elsewhere": 0.1471,
+    "in_text": 0.8529,
+    "n": 68
+   },
+   "multi-hop": {
+    "elsewhere": 0.8833,
+    "in_text": 0.1083,
+    "needs_date": 0.0083,
+    "n": 120
+   },
+   "preference": {
+    "elsewhere": 1.0,
+    "n": 30
+   },
+   "single-hop": {
+    "elsewhere": 0.0625,
+    "in_text": 0.9219,
+    "needs_date": 0.0156,
+    "n": 64
+   },
+   "single-hop-assistant": {
+    "elsewhere": 0.2143,
+    "in_text": 0.7679,
+    "needs_date": 0.0179,
+    "n": 56
+   },
+   "temporal": {
+    "elsewhere": 0.5591,
+    "in_text": 0.378,
+    "needs_date": 0.063,
+    "n": 127
+   }
+  }
+ }
+]

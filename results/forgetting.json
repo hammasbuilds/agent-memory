@@ -1,0 +1,660 @@
+{
+ "split": "test",
+ "budget": 2048,
+ "policies": [
+  {
+   "dataset": "locomo",
+   "policy": "none",
+   "stored_tokens_kept": 1.0,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8278,
+    "ci95": [
+     0.8052,
+     0.8527
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "literal_answer_kept": {
+    "mean": 1.0,
+    "n": 378
+   },
+   "by_type": {
+    "abstention": {
+     "n": 319,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8621
+    },
+    "multi-hop": {
+     "n": 193,
+     "evidence_kept": 1.0,
+     "store_recall": 0.5974
+    },
+    "open-domain": {
+     "n": 55,
+     "evidence_kept": 1.0,
+     "store_recall": 0.4461
+    },
+    "single-hop": {
+     "n": 615,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9051
+    },
+    "temporal": {
+     "n": 217,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8602
+    }
+   }
+  },
+  {
+   "dataset": "locomo",
+   "policy": "phatic:3",
+   "stored_tokens_kept": 0.9943,
+   "evidence_kept": {
+    "mean": 0.9979,
+    "ci95": [
+     0.9941,
+     1.0
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8269,
+    "ci95": [
+     0.8034,
+     0.8525
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "literal_answer_kept": {
+    "mean": 0.9974,
+    "n": 378
+   },
+   "by_type": {
+    "abstention": {
+     "n": 319,
+     "evidence_kept": 0.9969,
+     "store_recall": 0.8621
+    },
+    "multi-hop": {
+     "n": 193,
+     "evidence_kept": 1.0,
+     "store_recall": 0.5977
+    },
+    "open-domain": {
+     "n": 55,
+     "evidence_kept": 1.0,
+     "store_recall": 0.4442
+    },
+    "single-hop": {
+     "n": 615,
+     "evidence_kept": 0.9984,
+     "store_recall": 0.9035
+    },
+    "temporal": {
+     "n": 217,
+     "evidence_kept": 0.9954,
+     "store_recall": 0.8587
+    }
+   }
+  },
+  {
+   "dataset": "locomo",
+   "policy": "truncate:128",
+   "stored_tokens_kept": 1.0,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8278,
+    "ci95": [
+     0.8052,
+     0.8527
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "literal_answer_kept": {
+    "mean": 1.0,
+    "n": 378
+   },
+   "by_type": {
+    "abstention": {
+     "n": 319,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8621
+    },
+    "multi-hop": {
+     "n": 193,
+     "evidence_kept": 1.0,
+     "store_recall": 0.5974
+    },
+    "open-domain": {
+     "n": 55,
+     "evidence_kept": 1.0,
+     "store_recall": 0.4461
+    },
+    "single-hop": {
+     "n": 615,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9051
+    },
+    "temporal": {
+     "n": 217,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8602
+    }
+   }
+  },
+  {
+   "dataset": "locomo",
+   "policy": "truncate:64",
+   "stored_tokens_kept": 0.9695,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8266,
+    "ci95": [
+     0.8063,
+     0.8524
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "literal_answer_kept": {
+    "mean": 0.9709,
+    "n": 378
+   },
+   "by_type": {
+    "abstention": {
+     "n": 319,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8589
+    },
+    "multi-hop": {
+     "n": 193,
+     "evidence_kept": 1.0,
+     "store_recall": 0.5937
+    },
+    "open-domain": {
+     "n": 55,
+     "evidence_kept": 1.0,
+     "store_recall": 0.4279
+    },
+    "single-hop": {
+     "n": 615,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9076
+    },
+    "temporal": {
+     "n": 217,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8579
+    }
+   }
+  },
+  {
+   "dataset": "locomo",
+   "policy": "older-than:90",
+   "stored_tokens_kept": 0.5301,
+   "evidence_kept": {
+    "mean": 0.5324,
+    "ci95": [
+     0.4948,
+     0.5752
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "store_recall_at_2048": {
+    "mean": 0.4767,
+    "ci95": [
+     0.4454,
+     0.5096
+    ],
+    "n": 1399,
+    "clusters": 7
+   },
+   "literal_answer_kept": {
+    "mean": 0.5767,
+    "n": 378
+   },
+   "by_type": {
+    "abstention": {
+     "n": 319,
+     "evidence_kept": 0.5737,
+     "store_recall": 0.5047
+    },
+    "multi-hop": {
+     "n": 193,
+     "evidence_kept": 0.4147,
+     "store_recall": 0.2995
+    },
+    "open-domain": {
+     "n": 55,
+     "evidence_kept": 0.3858,
+     "store_recall": 0.2264
+    },
+    "single-hop": {
+     "n": 615,
+     "evidence_kept": 0.5789,
+     "store_recall": 0.5572
+    },
+    "temporal": {
+     "n": 217,
+     "evidence_kept": 0.4816,
+     "store_recall": 0.4286
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "none",
+   "stored_tokens_kept": 1.0,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8187,
+    "ci95": [
+     0.7831,
+     0.8503
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 1.0,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 1.0,
+     "store_recall": 0.929
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6803
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6319
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9545
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9333
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8147
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "phatic:3",
+   "stored_tokens_kept": 0.9997,
+   "evidence_kept": {
+    "mean": 0.9978,
+    "ci95": [
+     0.9944,
+     1.0
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8187,
+    "ci95": [
+     0.7831,
+     0.8503
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 1.0,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 0.9945,
+     "store_recall": 0.929
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 0.9951,
+     "store_recall": 0.6803
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6319
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9545
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9333
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8147
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "truncate:128",
+   "stored_tokens_kept": 0.3723,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8854,
+    "ci95": [
+     0.8559,
+     0.9125
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 0.951,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9781
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8099
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6458
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9773
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8644
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "truncate:64",
+   "stored_tokens_kept": 0.228,
+   "evidence_kept": {
+    "mean": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8578,
+    "ci95": [
+     0.8272,
+     0.8859
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 0.7413,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9286
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9044
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 1.0,
+     "store_recall": 0.7916
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6458
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9545
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9778
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8471
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "role:assistant",
+   "stored_tokens_kept": 0.1259,
+   "evidence_kept": {
+    "mean": 0.8925,
+    "ci95": [
+     0.864,
+     0.9223
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.8129,
+    "ci95": [
+     0.7765,
+     0.8479
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 0.8531,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9945
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 1.0,
+     "store_recall": 0.884
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.7083
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 0.9886,
+     "store_recall": 0.9659
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 0.0889,
+     "store_recall": 0.0889
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 1.0,
+     "store_recall": 0.8977
+    }
+   }
+  },
+  {
+   "dataset": "longmemeval",
+   "policy": "older-than:30",
+   "stored_tokens_kept": 0.8571,
+   "evidence_kept": {
+    "mean": 0.8956,
+    "ci95": [
+     0.8696,
+     0.9209
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "store_recall_at_2048": {
+    "mean": 0.7262,
+    "ci95": [
+     0.6889,
+     0.7618
+    ],
+    "n": 386,
+    "clusters": 386
+   },
+   "literal_answer_kept": {
+    "mean": 0.9231,
+    "n": 143
+   },
+   "by_type": {
+    "abstention": {
+     "n": 7,
+     "evidence_kept": 1.0,
+     "store_recall": 1.0
+    },
+    "knowledge-update": {
+     "n": 61,
+     "evidence_kept": 0.6721,
+     "store_recall": 0.6421
+    },
+    "multi-hop": {
+     "n": 103,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6803
+    },
+    "preference": {
+     "n": 24,
+     "evidence_kept": 1.0,
+     "store_recall": 0.6319
+    },
+    "single-hop": {
+     "n": 44,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9545
+    },
+    "single-hop-assistant": {
+     "n": 45,
+     "evidence_kept": 1.0,
+     "store_recall": 0.9333
+    },
+    "temporal": {
+     "n": 102,
+     "evidence_kept": 0.801,
+     "store_recall": 0.6363
+    }
+   }
+  }
+ ]
+}

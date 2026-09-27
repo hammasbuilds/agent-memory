@@ -1,6 +1,6 @@
 """The model arm: dense/hybrid retrieval with nomic-embed-text, LLM fact extraction
 into the store, and answer accuracy with qwen2.5:14b-instruct judged against the gold
-answers. Every call is cached under data/model_cache, so a killed run resumes.
+answers. Every call is cached in data/model_cache.sqlite, so a killed run resumes.
 
     uv run python scripts/run_model_arm.py --dry-run          # job list + call counts
     uv run python scripts/run_model_arm.py                    # everything
@@ -50,7 +50,7 @@ from agent_memory.store import MemoryStore
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
-CACHE = ROOT / "data" / "model_cache"
+CACHE = ROOT / "data" / "model_cache.sqlite"
 STORES = ROOT / "data" / "model_stores"
 ANSWER_STRATEGIES = ("sliding_window", "bm25_turns", "store", "hybrid", "store+facts")
 

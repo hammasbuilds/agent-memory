@@ -74,3 +74,14 @@ def answer_location(q: Question) -> str | None:
     if datelike and all(_is_date_word(w) for w in missing):
         return "needs_date"
     return "elsewhere"
+
+
+def evidence_position(q: Question) -> float | None:
+    """Mean position of the gold evidence turns in the history, 0 = the first turn ever
+    said, 1 = the last before the question. Recency-based memory can only win when
+    evidence sits near 1."""
+    turns = [t.id for s in q.history for t in s.turns]
+    if not q.evidence_turns or len(turns) < 2:
+        return None
+    pos = [i / (len(turns) - 1) for i, tid in enumerate(turns) if tid in q.evidence_turns]
+    return sum(pos) / len(pos)

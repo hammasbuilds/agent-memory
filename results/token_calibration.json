@@ -1,0 +1,18 @@
+[
+ {
+  "dataset": "locomo",
+  "turns": 5882,
+  "estimated_total": 212393,
+  "cl100k_total": 204011,
+  "ratio_total": 1.0411,
+  "mean_abs_pct_error_per_turn": 0.058
+ },
+ {
+  "dataset": "longmemeval_oracle",
+  "turns": 10960,
+  "estimated_total": 3124511,
+  "cl100k_total": 2841098,
+  "ratio_total": 1.0998,
+  "mean_abs_pct_error_per_turn": 0.0951
+ }
+]

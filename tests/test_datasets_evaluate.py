@@ -107,3 +107,12 @@ def test_malformed_locomo_evidence_ids_are_normalised():
 
     got = _locomo_evidence(["D:11:26", "D30:05", "D", "D9:1 D4:4", "D8:6; D9:17"])
     assert got == ["D11:26", "D30:5", "D9:1", "D4:4", "D8:6", "D9:17"]
+
+
+def test_evidence_position(locomo_file, lme_file):
+    from agent_memory.analysis import evidence_position
+
+    temporal, multi, _, broken = load_locomo(locomo_file)
+    assert evidence_position(temporal) == 0.0  # the first of three turns
+    assert evidence_position(multi) == 0.5  # first and last
+    assert evidence_position(broken) is None

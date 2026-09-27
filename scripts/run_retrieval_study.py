@@ -31,7 +31,7 @@ from pathlib import Path
 from statistics import mean
 
 from agent_memory import retrieval as R
-from agent_memory.analysis import answer_location, lexical_visibility
+from agent_memory.analysis import answer_location, evidence_position, lexical_visibility
 from agent_memory.datasets import Question, iter_longmemeval, load_locomo
 from agent_memory.evaluate import (
     HEADLINE_BUDGET,
@@ -43,7 +43,7 @@ from agent_memory.evaluate import (
     split_of,
 )
 from agent_memory.forget import apply, older_than, phatic, role
-from agent_memory.report import budget_to_reach, compare, summarise
+from agent_memory.report import ALL, budget_to_reach, compare, summarise
 from agent_memory.retrieval import History
 from agent_memory.stats import bootstrap_mean
 from agent_memory.temporal import query_window
@@ -298,6 +298,44 @@ def forgetting_stage(cfg: R.RetrieverConfig, lme_limit: int | None) -> None:
     write("forgetting.json", {"split": "test", "budget": HEADLINE_BUDGET, "policies": out})
 
 
+# ---- 3b. recency sensitivity ----------------------------------------------------------
+
+SENSITIVITY_HALF_LIVES = (7.0, 30.0, 90.0, 365.0)
+
+
+def recency_stage(lme_limit: int | None) -> None:
+    """Not tuning: the dev sweep already chose the half-life. This shows, on the test
+    split, what stronger recency buys knowledge-update questions and what it costs
+    every other type - the trade the dev sweep resolved."""
+    strats: dict[str, R.Strategy] = {"bm25_turns": R.bm25_turns}
+    for hl in SENSITIVITY_HALF_LIVES:
+        strats[f"recency_{hl:g}d"] = R.make_recency_bm25(hl)
+    rows = []
+    for ds, qs in (("locomo", load_locomo()), ("longmemeval", lme(lme_limit))):
+        rows += [
+            r
+            for r in evaluate(qs, strats, budgets=(512, HEADLINE_BUDGET), top_k=())
+            if r["split"] == "test"
+        ]
+        log(f"recency: {ds} done")
+    write(
+        "recency_sensitivity.json",
+        {
+            "split": "test",
+            "half_lives_days": SENSITIVITY_HALF_LIVES,
+            "summary": summarise(rows, "budget"),
+            "knowledge_update_newest": [
+                c
+                for name in strats
+                if name != "bm25_turns"
+                for budget in (512, HEADLINE_BUDGET)
+                for c in compare(rows, name, "bm25_turns", value=budget, metric="newest")
+                if c["qtype"] == "knowledge-update"
+            ],
+        },
+    )
+
+
 # ---- 4. diagnostics -------------------------------------------------------------------
 
 
@@ -307,12 +345,18 @@ def diagnostics_stage(lme_limit: int | None) -> None:
         vis: dict[str, list[float]] = defaultdict(list)
         loc: dict[str, Counter] = defaultdict(Counter)
         timed: dict[str, list[bool]] = defaultdict(list)
+        position: dict[str, list[float]] = defaultdict(list)
+        spans: list[float] = []
         sizes: list[int] = []
         seen: set[int] = set()
         for q in qs:
             if cluster_of(q) not in seen:
                 seen.add(cluster_of(q))
                 sizes.append(sum(count_tokens(t.text) for s in q.history for t in s.turns))
+                spans.append((q.now - q.history[0].timestamp).total_seconds() / 86400)
+            if (p := evidence_position(q)) is not None:
+                position[q.qtype].append(p)
+                position[ALL].append(p)
             timed[q.qtype].append(query_window(q.question, q.now) is not None)
             if (v := lexical_visibility(q)) is not None:
                 vis[q.qtype].append(v)
@@ -335,6 +379,19 @@ def diagnostics_stage(lme_limit: int | None) -> None:
                     }
                     for qt, v in sorted(vis.items())
                 },
+                "history_span_days": {
+                    "mean": round(mean(spans), 1),
+                    "min": round(min(spans), 1),
+                    "max": round(max(spans), 1),
+                },
+                "evidence_position": {
+                    qt: {
+                        "mean": round(mean(v), 4),
+                        "in_newest_10pct": round(mean(x >= 0.9 for x in v), 4),
+                        "n": len(v),
+                    }
+                    for qt, v in sorted(position.items())
+                },
                 "names_a_time": {
                     qt: {"rate": round(mean(v), 4), "n": len(v)} for qt, v in sorted(timed.items())
                 },
@@ -351,13 +408,17 @@ def diagnostics_stage(lme_limit: int | None) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument(
-        "--stage", choices=("all", "dev", "main", "forgetting", "diagnostics"), default="all"
+        "--stage",
+        choices=("all", "dev", "main", "forgetting", "recency", "diagnostics"),
+        default="all",
     )
     ap.add_argument("--lme-limit", type=int, default=None, help="first N LongMemEval questions")
     args = ap.parse_args()
     if args.stage in ("all", "diagnostics"):
         diagnostics_stage(args.lme_limit)
-    if args.stage == "diagnostics":
+    if args.stage in ("all", "recency"):
+        recency_stage(args.lme_limit)
+    if args.stage in ("diagnostics", "recency"):
         return
     if args.stage in ("all", "dev"):
         sweep = dev_sweep(args.lme_limit)

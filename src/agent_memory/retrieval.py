@@ -31,13 +31,14 @@ from agent_memory.text import terms
 
 @dataclass(frozen=True)
 class RetrieverConfig:
-    """Knobs of the `store` retriever. Defaults were chosen on the dev split only."""
+    """Knobs of the `store` retriever. The defaults are the configuration the dev-split
+    sweep chose (results/dev_sweep.json); nothing was tuned on the test split."""
 
     session_weight: float = 0.3  # weight of the session-level BM25 score (0 disables)
-    half_life_days: float = 0.0  # recency half-life (0 disables decay)
+    half_life_days: float = 365.0  # recency half-life (0 disables decay)
     recency_floor: float = 0.5  # the oldest memory keeps this fraction of its score
     window_boost: float = 1.0  # extra multiplier inside a named time window (0 disables)
-    neighbours: int = 1  # turns either side of a hit that come with it
+    neighbours: int = 0  # turns either side of a hit that come with it
 
     def without(self, component: str) -> RetrieverConfig:
         """This config with one component switched off, for ablations."""

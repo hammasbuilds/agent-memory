@@ -1,0 +1,1077 @@
+{
+ "objective": "mean evidence recall at 2048 tokens on the dev split, macro-averaged over the two datasets",
+ "store_grid": [
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7316,
+    "longmemeval": 0.8855,
+    "macro": 0.8085
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8337,
+    "longmemeval": 0.8349,
+    "macro": 0.8343
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8497,
+    "longmemeval": 0.774,
+    "macro": 0.8118
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7356,
+    "longmemeval": 0.8891,
+    "macro": 0.8124
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8414,
+    "longmemeval": 0.8349,
+    "macro": 0.8381
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8531,
+    "longmemeval": 0.7633,
+    "macro": 0.8082
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7372,
+    "longmemeval": 0.8801,
+    "macro": 0.8086
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8226,
+    "longmemeval": 0.8385,
+    "macro": 0.8306
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8303,
+    "longmemeval": 0.774,
+    "macro": 0.8022
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.742,
+    "longmemeval": 0.8873,
+    "macro": 0.8146
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8275,
+    "longmemeval": 0.8385,
+    "macro": 0.833
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8346,
+    "longmemeval": 0.774,
+    "macro": 0.8043
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7295,
+    "longmemeval": 0.8855,
+    "macro": 0.8075
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8312,
+    "longmemeval": 0.8349,
+    "macro": 0.8331
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.844,
+    "longmemeval": 0.774,
+    "macro": 0.809
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7353,
+    "longmemeval": 0.8891,
+    "macro": 0.8122
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8395,
+    "longmemeval": 0.8349,
+    "macro": 0.8372
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8491,
+    "longmemeval": 0.7633,
+    "macro": 0.8062
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8085,
+    "longmemeval": 0.8496,
+    "macro": 0.8291
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8435,
+    "longmemeval": 0.826,
+    "macro": 0.8347
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8544,
+    "longmemeval": 0.774,
+    "macro": 0.8142
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8151,
+    "longmemeval": 0.864,
+    "macro": 0.8396
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8461,
+    "longmemeval": 0.8367,
+    "macro": 0.8414
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8561,
+    "longmemeval": 0.7633,
+    "macro": 0.8097
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8019,
+    "longmemeval": 0.8532,
+    "macro": 0.8276
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8381,
+    "longmemeval": 0.826,
+    "macro": 0.832
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8353,
+    "longmemeval": 0.774,
+    "macro": 0.8047
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8085,
+    "longmemeval": 0.864,
+    "macro": 0.8362
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.843,
+    "longmemeval": 0.8367,
+    "macro": 0.8398
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8396,
+    "longmemeval": 0.7633,
+    "macro": 0.8014
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8087,
+    "longmemeval": 0.8532,
+    "macro": 0.8309
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8446,
+    "longmemeval": 0.8224,
+    "macro": 0.8335
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8552,
+    "longmemeval": 0.774,
+    "macro": 0.8146
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8153,
+    "longmemeval": 0.8676,
+    "macro": 0.8415
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8489,
+    "longmemeval": 0.8332,
+    "macro": 0.8411
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8569,
+    "longmemeval": 0.7633,
+    "macro": 0.8101
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8286,
+    "longmemeval": 0.8604,
+    "macro": 0.8445
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8481,
+    "longmemeval": 0.826,
+    "macro": 0.837
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.852,
+    "longmemeval": 0.7758,
+    "macro": 0.8139
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8352,
+    "longmemeval": 0.8711,
+    "macro": 0.8532
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8507,
+    "longmemeval": 0.826,
+    "macro": 0.8383
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.852,
+    "longmemeval": 0.7651,
+    "macro": 0.8085
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8177,
+    "longmemeval": 0.8676,
+    "macro": 0.8427
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8428,
+    "longmemeval": 0.826,
+    "macro": 0.8344
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8454,
+    "longmemeval": 0.7561,
+    "macro": 0.8008
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8199,
+    "longmemeval": 0.8783,
+    "macro": 0.8491
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8477,
+    "longmemeval": 0.826,
+    "macro": 0.8368
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.848,
+    "longmemeval": 0.7453,
+    "macro": 0.7966
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.835,
+    "longmemeval": 0.864,
+    "macro": 0.8495
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8516,
+    "longmemeval": 0.826,
+    "macro": 0.8388
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.859,
+    "longmemeval": 0.7758,
+    "macro": 0.8174
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.839,
+    "longmemeval": 0.8747,
+    "macro": 0.8569
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8541,
+    "longmemeval": 0.826,
+    "macro": 0.84
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.859,
+    "longmemeval": 0.7651,
+    "macro": 0.812
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8435,
+    "longmemeval": 0.8622,
+    "macro": 0.8528
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8574,
+    "longmemeval": 0.8188,
+    "macro": 0.8381
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8558,
+    "longmemeval": 0.8099,
+    "macro": 0.8328
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8475,
+    "longmemeval": 0.8586,
+    "macro": 0.8531
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8609,
+    "longmemeval": 0.8188,
+    "macro": 0.8398
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8575,
+    "longmemeval": 0.7991,
+    "macro": 0.8283
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8295,
+    "longmemeval": 0.8586,
+    "macro": 0.844
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8486,
+    "longmemeval": 0.8349,
+    "macro": 0.8417
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8434,
+    "longmemeval": 0.7982,
+    "macro": 0.8208
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8318,
+    "longmemeval": 0.8586,
+    "macro": 0.8452
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8546,
+    "longmemeval": 0.8349,
+    "macro": 0.8448
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8485,
+    "longmemeval": 0.7875,
+    "macro": 0.818
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8413,
+    "longmemeval": 0.8586,
+    "macro": 0.8499
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8562,
+    "longmemeval": 0.8188,
+    "macro": 0.8375
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8534,
+    "longmemeval": 0.8045,
+    "macro": 0.829
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8453,
+    "longmemeval": 0.855,
+    "macro": 0.8501
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8605,
+    "longmemeval": 0.8188,
+    "macro": 0.8397
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8551,
+    "longmemeval": 0.7973,
+    "macro": 0.8262
+   }
+  }
+ ],
+ "store_best": {
+  "config": {
+   "session_weight": 0.3,
+   "half_life_days": 365.0,
+   "recency_floor": 0.5,
+   "window_boost": 1.0,
+   "neighbours": 0
+  },
+  "recall": {
+   "locomo": 0.839,
+   "longmemeval": 0.8747,
+   "macro": 0.8569
+  }
+ },
+ "recency_grid": [
+  {
+   "half_life_days": 7.0,
+   "recall": {
+    "locomo": 0.2343,
+    "longmemeval": 0.7848,
+    "macro": 0.5096
+   }
+  },
+  {
+   "half_life_days": 30.0,
+   "recall": {
+    "locomo": 0.5387,
+    "longmemeval": 0.8586,
+    "macro": 0.6986
+   }
+  },
+  {
+   "half_life_days": 90.0,
+   "recall": {
+    "locomo": 0.7012,
+    "longmemeval": 0.8783,
+    "macro": 0.7897
+   }
+  },
+  {
+   "half_life_days": 365.0,
+   "recall": {
+    "locomo": 0.7366,
+    "longmemeval": 0.8747,
+    "macro": 0.8056
+   }
+  },
+  {
+   "half_life_days": 1825.0,
+   "recall": {
+    "locomo": 0.7295,
+    "longmemeval": 0.8855,
+    "macro": 0.8075
+   }
+  }
+ ],
+ "recency_best": {
+  "half_life_days": 1825.0,
+  "recall": {
+   "locomo": 0.7295,
+   "longmemeval": 0.8855,
+   "macro": 0.8075
+  }
+ }
+}

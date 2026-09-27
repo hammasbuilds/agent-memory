@@ -9,9 +9,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
+import sqlite3
 import urllib.error
 import urllib.request
+from array import array
 from pathlib import Path
 from typing import Protocol
 
@@ -36,24 +37,34 @@ def _key(*parts: object) -> str:
 
 
 class DiskCache:
-    """JSON values in files named by their key, sharded by the key's first two chars."""
+    """One SQLite file of cached results. Generations are stored as text, embeddings
+    as packed float32 (LongMemEval_S alone is ~195k turn embeddings; as JSON files
+    they would take ~3 GB). Every put commits, so a killed run loses at most one call.
+    """
 
-    def __init__(self, root: Path):
-        self.root = root
+    def __init__(self, path: Path):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.db = sqlite3.connect(str(path))
+        self.db.execute(
+            "CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, text TEXT, vector BLOB)"
+        )
 
-    def _path(self, key: str) -> Path:
-        return self.root / key[:2] / f"{key}.json"
+    def get_text(self, key: str) -> str | None:
+        row = self.db.execute("SELECT text FROM cache WHERE key=?", (key,)).fetchone()
+        return None if row is None else row[0]
 
-    def get(self, key: str) -> object | None:
-        p = self._path(key)
-        return json.loads(p.read_text("utf-8")) if p.exists() else None
+    def get_vector(self, key: str) -> list[float] | None:
+        row = self.db.execute("SELECT vector FROM cache WHERE key=?", (key,)).fetchone()
+        return None if row is None else array("f", row[0]).tolist()
 
-    def put(self, key: str, value: object) -> None:
-        p = self._path(key)
-        p.parent.mkdir(parents=True, exist_ok=True)
-        tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(value), "utf-8")
-        os.replace(tmp, p)  # atomic, so a killed run never leaves half a file
+    def put_text(self, key: str, value: str) -> None:
+        with self.db:
+            self.db.execute("INSERT OR REPLACE INTO cache(key, text) VALUES (?, ?)", (key, value))
+
+    def put_vector(self, key: str, value: list[float]) -> None:
+        blob = array("f", value).tobytes()
+        with self.db:
+            self.db.execute("INSERT OR REPLACE INTO cache(key, vector) VALUES (?, ?)", (key, blob))
 
 
 class Ollama:
@@ -81,20 +92,19 @@ class Ollama:
     def generate(self, model: str, prompt: str, options: dict | None = None) -> str:
         opts = {**GREEDY, **(options or {})}
         key = _key("generate", model, prompt, opts)
-        if self.cache and (hit := self.cache.get(key)) is not None:
-            return str(hit)
+        if self.cache and (hit := self.cache.get_text(key)) is not None:
+            return hit
         body = {"model": model, "prompt": prompt, "options": opts, "stream": False}
         out = self._post("/api/generate", body)["response"]
         if self.cache:
-            self.cache.put(key, out)
+            self.cache.put_text(key, out)
         return out
 
     def embed(self, model: str, texts: list[str]) -> list[list[float]]:
         """Embeddings in input order; cached per text, only misses are sent."""
         keys = [_key("embed", model, t) for t in texts]
         out: list[list[float] | None] = [
-            self.cache.get(k) if self.cache else None  # type: ignore[misc]
-            for k in keys
+            self.cache.get_vector(k) if self.cache else None for k in keys
         ]
         missing = [i for i, v in enumerate(out) if v is None]
         for start in range(0, len(missing), 64):
@@ -105,7 +115,7 @@ class Ollama:
             for i, v in zip(batch, vecs, strict=True):
                 out[i] = v
                 if self.cache:
-                    self.cache.put(keys[i], v)
+                    self.cache.put_vector(keys[i], v)
         return [v for v in out if v is not None]
 
 
