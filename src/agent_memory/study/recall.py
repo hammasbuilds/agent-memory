@@ -83,6 +83,18 @@ def main_stage(run: Run) -> None:
         "by_budget": by_budget,
         "by_k": summarise(rows, "k", b=1000),
         "comparisons": _comparisons(rows, pairs),
+        # positional strategies cut their boundary turn to fill the budget; here a cut
+        # evidence turn does not count as found
+        "strict_credit_comparisons": _comparisons(
+            rows,
+            [
+                ("sliding_window", "random"),
+                ("full_head", "random"),
+                ("bm25_turns", "sliding_window"),
+                ("bm25_turns", "window_bm25"),
+            ],
+            metric="recall_strict",
+        ),
         "session_level_comparisons": _comparisons(rows, pairs[:6], metric="session_recall"),
         "knowledge_update_newest": [
             c
