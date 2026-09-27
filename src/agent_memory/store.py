@@ -55,6 +55,9 @@ CREATE INDEX IF NOT EXISTS facts_key ON facts(subject, attribute, valid_from);
 """
 
 
+FACT_RELATIVE_CUTOFF = 0.5
+
+
 @dataclass(frozen=True)
 class Fact:
     id: int
@@ -121,8 +124,13 @@ class MemoryStore:
         return tid
 
     def ingest(self, sessions: Iterable[Session]) -> int:
-        """Bulk-load whole sessions, keeping their turn ids. Returns turns added;
-        turns already stored (same id) are skipped, so re-ingesting is idempotent."""
+        """Bulk-load sessions, keeping their turn ids. Returns turns added.
+
+        A turn whose id is already stored is skipped, so re-ingesting is idempotent. A
+        new turn is appended after everything already in its session (its position
+        comes from the session's counter, not from the input), so a second file that
+        continues a session lands after the first.
+        """
         added = 0
         with self.db:
             for s in sessions:
@@ -131,16 +139,19 @@ class MemoryStore:
                     (s.id, naive(s.timestamp).isoformat()),
                 )
                 for t in s.turns:
-                    cur = self.db.execute(
-                        "INSERT OR IGNORE INTO turns(id, session_id, seq, speaker, text, ts) "
+                    if self.db.execute("SELECT 1 FROM turns WHERE id=?", (t.id,)).fetchone():
+                        continue
+                    (seq,) = self.db.execute(
+                        "UPDATE sessions SET next_seq = next_seq + 1 WHERE id = ? "
+                        "RETURNING next_seq - 1",
+                        (s.id,),
+                    ).fetchone()
+                    self.db.execute(
+                        "INSERT INTO turns(id, session_id, seq, speaker, text, ts) "
                         "VALUES (?,?,?,?,?,?)",
-                        (t.id, s.id, t.seq, t.speaker, t.text, naive(t.timestamp).isoformat()),
+                        (t.id, s.id, seq, t.speaker, t.text, naive(t.timestamp).isoformat()),
                     )
-                    added += cur.rowcount
-                self.db.execute(
-                    "UPDATE sessions SET next_seq = MAX(next_seq, ?) WHERE id = ?",
-                    (max((t.seq + 1 for t in s.turns), default=0), s.id),
-                )
+                    added += 1
         self._history = None
         return added
 
@@ -286,11 +297,17 @@ class MemoryStore:
                 for f in facts
             ]
         )
-        # Terms found in every fact (usually the subject, "user") carry no information.
-        q = [t for t in terms(query) if len(index.postings.get(t, ())) < len(facts)]
-        scores = index.scores(q)
-        order = sorted((i for i, s in enumerate(scores) if s > 0), key=lambda i: -scores[i])
-        return [facts[i] for i in order[:k]]
+        # BM25's idf already down-weights a term found in every fact (usually the
+        # subject, "user"), but it still scores above zero, so every fact would match.
+        # Keep only facts scoring at least `FACT_RELATIVE_CUTOFF` of the best one: a
+        # lone fact, or facts that all match equally, are kept; a fact matching only on
+        # a common term is dropped when another matches on a rarer one.
+        scores = index.scores(terms(query))
+        top = max(scores, default=0.0)
+        if top <= 0:
+            return []
+        keep = [i for i, s in enumerate(scores) if s >= FACT_RELATIVE_CUTOFF * top]
+        return [facts[i] for i in sorted(keep, key=lambda i: -scores[i])[:k]]
 
     # ---- forgetting ---------------------------------------------------------------
 

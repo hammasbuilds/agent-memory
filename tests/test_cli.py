@@ -3,6 +3,7 @@ import json
 import pytest
 
 from agent_memory.cli import build_parser, main
+from agent_memory.store import MemoryStore
 
 
 def run(capsys, *argv):
@@ -53,7 +54,9 @@ def test_help_lists_every_command(capsys):
 
 def test_ingest_search_context(capsys, db, chat):
     assert "ingested 3 new turns" in run(capsys, "--db", db, "ingest", str(chat)).out
-    assert "0 new turns (3 already stored)" in run(capsys, "--db", db, "ingest", str(chat)).out
+    assert (
+        "0 new turns from 2 sessions (3 skipped" in run(capsys, "--db", db, "ingest", str(chat)).out
+    )
     out = run(capsys, "--db", db, "search", "what is my dog called beagle").out
     assert "Biscuit" in out.splitlines()[0]
     res = run(
@@ -126,3 +129,32 @@ def test_non_positive_budget_or_k_is_a_usage_error(db, argv, capsys):
         main(["--db", db, *argv])
     assert e.value.code == 2
     assert "positive whole number" in capsys.readouterr().err
+
+
+def test_a_second_file_continuing_a_session_appends(capsys, db, chat, tmp_path):
+    more = tmp_path / "more.jsonl"
+    lines = [
+        {
+            "session": "a",
+            "time": "2024-01-11T08:00",
+            "speaker": "user",
+            "text": "Biscuit chewed my shoe.",
+        },
+        {"session": "a", "time": "2024-01-11T08:01", "speaker": "user", "text": "ok thanks"},
+        {"session": "a", "time": "2024-01-11T08:02", "speaker": "user", "text": "ok thanks"},
+    ]
+    more.write_text("\n".join(json.dumps(x) for x in lines), "utf-8")
+    run(capsys, "--db", db, "ingest", str(chat))
+    out = run(capsys, "--db", db, "ingest", str(more)).out
+    assert "ingested 3 new turns" in out and "0 skipped" in out
+    with MemoryStore(db) as m:
+        a = next(s for s in m.sessions() if s.id == "a")
+        assert [t.text for t in a.turns] == [
+            "I adopted a beagle called Biscuit.",
+            "Lovely name!",
+            "Biscuit chewed my shoe.",
+            "ok thanks",
+            "ok thanks",
+        ]
+        assert m.stats()["turns"] == 6
+    assert "0 new turns" in run(capsys, "--db", db, "ingest", str(more)).out  # idempotent

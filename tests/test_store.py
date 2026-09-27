@@ -128,3 +128,38 @@ def test_timezone_aware_times_are_normalised_to_utc():
         assert m.search("kayak", now=datetime(2024, 7, 2, tzinfo=karachi))
         m.remember("user", "boat", "kayak", datetime(2024, 7, 1, 9, tzinfo=karachi))
         assert m.facts_as_of(datetime(2024, 7, 1, 4, 30))[0].value == "kayak"
+
+
+def test_a_single_fact_is_found():
+    # the README's "As a library" example: one fact whose subject is in the query
+    with MemoryStore() as m:
+        m.add_turn("s1", "user", "I just adopted a beagle called Biscuit.", datetime(2024, 1, 10))
+        m.remember("user", "dog", "Biscuit (beagle)", datetime(2024, 1, 10), source_turn="s1:0")
+        ctx = m.context("what's my dog called?", budget=512, now=datetime(2024, 2, 1))
+        assert ctx.facts == ("user / dog: Biscuit (beagle) (since 2024-01-10)",)
+
+
+def test_facts_sharing_the_query_word_are_ranked_not_excluded():
+    with MemoryStore() as m:
+        t = datetime(2024, 1, 1)
+        m.remember("user", "dog", "beagle", t)
+        m.remember("user", "cat", "tabby", t)
+        both = m.context("tell me about the user", budget=512, now=t)
+        assert len(both.facts) == 2  # all equally relevant: all kept
+        dog = m.context("what dog does the user have", budget=512, now=t)
+        assert dog.facts == ("user / dog: beagle (since 2024-01-01)",)
+        assert m.context("xylophone", budget=512, now=t).facts == ()
+
+
+def test_ingest_appends_after_existing_turns_even_if_input_seq_restarts(history):
+    from agent_memory.datasets import Session, Turn
+
+    with MemoryStore() as m:
+        m.ingest(history)
+        t = datetime(2024, 6, 21)
+        extra = Session(
+            "s3", t, (Turn("s3:new", "s3", "user", "one more thing about kayaks", t, 0),)
+        )
+        assert m.ingest([extra]) == 1
+        s3 = next(s for s in m.sessions() if s.id == "s3")
+        assert [x.id for x in s3.turns][-1] == "s3:new" and s3.turns[-1].seq == 3
