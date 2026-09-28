@@ -11,7 +11,7 @@ from agent_memory.datasets import Question, Session
 from agent_memory.evaluate import HEADLINE_BUDGET, cluster_of, score, split_of
 from agent_memory.forget import Policy, apply, older_than, phatic, role
 from agent_memory.retrieval import History
-from agent_memory.stats import bootstrap_mean, paired_difference
+from agent_memory.stats import cluster_mean, paired_difference
 from agent_memory.study.common import Run, log
 from agent_memory.text import count_tokens
 
@@ -81,8 +81,8 @@ def forgetting_stage(run: Run) -> None:
                 "dataset": ds,
                 "policy": name,
                 "stored_tokens_kept": round(mean(a["tokens_kept"]), 4),
-                "evidence_kept": bootstrap_mean(a["evidence_kept"], a["cluster"]).as_dict(),
-                f"store_recall_at_{HEADLINE_BUDGET}": bootstrap_mean(
+                "evidence_kept": cluster_mean(a["evidence_kept"], a["cluster"]).as_dict(),
+                f"store_recall_at_{HEADLINE_BUDGET}": cluster_mean(
                     a["recall"], a["cluster"]
                 ).as_dict(),
                 "literal_answer_kept": (

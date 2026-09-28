@@ -1,11 +1,11 @@
-"""Turn evaluation rows into the summary tables, with cluster-bootstrap intervals."""
+"""Turn evaluation rows into the summary tables, with cluster-level (jackknife-t) intervals."""
 
 from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Iterable, Sequence
 
-from agent_memory.stats import bootstrap_mean, paired_difference
+from agent_memory.stats import cluster_mean, paired_difference
 
 METRICS = (
     "recall",
@@ -51,7 +51,7 @@ def summarise(rows: Sequence[dict], axis: str = "budget", b: int = 2000) -> list
             vals = [(float(r[m]), r["cluster"]) for r in measurable if m in r]
             if vals:
                 v, c = zip(*vals, strict=True)
-                rec[m] = bootstrap_mean(v, c, b=b).as_dict()
+                rec[m] = cluster_mean(v, c, b=b).as_dict()
         out.append(rec)
     return out
 
@@ -148,7 +148,7 @@ def by_position(
                 clusters.append(r["cluster"])
     return [
         {"dataset": d, "strategy": s, "position": p, "budget": budget, "split": split}
-        | {"recall": bootstrap_mean(v, c, b=b).as_dict()}
+        | {"recall": cluster_mean(v, c, b=b).as_dict()}
         for (d, s, p), (v, c) in sorted(acc.items())
     ]
 
@@ -193,7 +193,7 @@ def position_differences(
 
 
 def summarise_answers(rows: Sequence[dict], b: int = 2000) -> list[dict]:
-    """Answer accuracy per (dataset, strategy, type) with cluster-bootstrap CIs.
+    """Answer accuracy per (dataset, strategy, type) with cluster-level (jackknife-t) CIs.
 
     A judge reply that is neither yes nor no (`correct` is None) counts as incorrect in
     `accuracy` and is counted in `unparsed`, so a flaky judge cannot shrink the
@@ -212,7 +212,7 @@ def summarise_answers(rows: Sequence[dict], b: int = 2000) -> list[dict]:
             "qtype": qt,
             "n": len(g),
             "unparsed": sum(r["correct"] is None for r in g),
-            "accuracy": bootstrap_mean(correct, [r["cluster"] for r in g], b=b).as_dict(),
+            "accuracy": cluster_mean(correct, [r["cluster"] for r in g], b=b).as_dict(),
         }
         for label, cond in (
             ("evidence_found", lambda r: (r.get("recall") or 0) > 0),

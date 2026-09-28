@@ -4,39 +4,79 @@ import pytest
 
 from agent_memory.forget import apply, older_than, parse_policy, phatic, role, truncate
 from agent_memory.report import budget_to_reach, compare, summarise
-from agent_memory.stats import bootstrap_mean, paired_difference
+from agent_memory.stats import cluster_mean, paired_difference, t975
 from agent_memory.text import count_tokens
 
 
-def test_bootstrap_interval_brackets_the_mean():
+def test_interval_brackets_the_mean():
     vals = [0, 1] * 50
-    e = bootstrap_mean(vals, b=500)
+    e = cluster_mean(vals, b=500)
     assert e.mean == 0.5 and e.lo < 0.5 < e.hi and e.n == 100
 
 
 def test_constant_values_give_zero_width():
-    e = bootstrap_mean([0.3] * 20, b=200)
+    e = cluster_mean([0.3] * 20, b=200)
     assert e.lo == e.hi == pytest.approx(0.3)
 
 
 def test_clusters_widen_the_interval():
     # two clusters of perfectly correlated questions: really n=2, not n=200
     vals = [1.0] * 100 + [0.0] * 100
-    naive = bootstrap_mean(vals, b=500)
-    clustered = bootstrap_mean(vals, ["a"] * 100 + ["b"] * 100, b=500)
+    naive = cluster_mean(vals, b=500)
+    clustered = cluster_mean(vals, ["a"] * 100 + ["b"] * 100, b=500)
     assert clustered.clusters == 2
     assert clustered.hi - clustered.lo > 3 * (naive.hi - naive.lo)
 
 
-def test_bootstrap_errors_and_single_cluster():
+def test_errors_and_single_cluster():
     with pytest.raises(ValueError):
-        bootstrap_mean([])
+        cluster_mean([])
     with pytest.raises(ValueError):
-        bootstrap_mean([1.0], ["a", "b"])
-    one = bootstrap_mean([1.0, 0.0], ["a", "a"])
+        cluster_mean([1.0], ["a", "b"])
+    one = cluster_mean([1.0, 0.0], ["a", "a"])
     assert (one.lo, one.hi) == (0.5, 0.5)
     with pytest.raises(ValueError):
         paired_difference([1.0], [1.0, 2.0])
+
+
+def test_t_quantiles():
+    assert t975(1) == 12.706 and t975(6) == 2.447 and t975(30) == 2.042
+    assert t975(31) == pytest.approx(2.040, abs=1e-3)
+    assert t975(120) == pytest.approx(1.980, abs=1e-3)
+    assert t975(10**6) == pytest.approx(1.960, abs=1e-3)
+    with pytest.raises(ValueError):
+        t975(0)
+
+
+def test_equal_clusters_give_the_textbook_t_interval():
+    # 7 equal-size clusters: the jackknife SE of the pooled mean is sd(cluster means)/sqrt(7)
+    means = [0.1, 0.3, 0.2, 0.6, 0.4, 0.5, 0.3]
+    vals, cl = [], []
+    for c, m in enumerate(means):
+        vals += [m] * 10
+        cl += [c] * 10
+    e = cluster_mean(vals, cl, b=200)
+    mu = sum(means) / 7
+    sd = (sum((m - mu) ** 2 for m in means) / 6) ** 0.5
+    half = 2.447 * sd / 7**0.5
+    assert (e.lo, e.hi) == (pytest.approx(mu - half), pytest.approx(mu + half))
+    # the percentile bootstrap over 7 clusters is narrower - why it is not quoted
+    assert e.boot_hi - e.boot_lo < e.hi - e.lo
+
+
+def test_interval_is_clipped_to_the_range_of_the_values():
+    e = cluster_mean([1.0] * 9 + [0.9], list(range(10)), b=100)
+    assert e.hi == 1.0 and e.lo < e.mean
+
+
+def test_many_clusters_jackknife_and_bootstrap_agree():
+    import random
+
+    rng = random.Random(3)
+    vals = [rng.random() for _ in range(2000)]
+    e = cluster_mean(vals, [i // 5 for i in range(2000)], b=1000)
+    assert e.clusters == 400
+    assert abs((e.hi - e.lo) - (e.boot_hi - e.boot_lo)) < 0.15 * (e.hi - e.lo)
 
 
 def _rows():
