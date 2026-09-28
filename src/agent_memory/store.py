@@ -148,14 +148,15 @@ class MemoryStore:
         added = already = empty = 0
         with self.db:
             for s in sessions:
+                kept = [t for t in s.turns if t.text.strip()]
+                empty += len(s.turns) - len(kept)
+                if not kept:  # a session with nothing said is not stored at all
+                    continue
                 self.db.execute(
                     "INSERT OR IGNORE INTO sessions(id, started_at) VALUES (?, ?)",
                     (s.id, naive(s.timestamp).isoformat()),
                 )
-                for t in s.turns:
-                    if not t.text.strip():
-                        empty += 1
-                        continue
+                for t in kept:
                     if self.db.execute("SELECT 1 FROM turns WHERE id=?", (t.id,)).fetchone():
                         already += 1
                         continue
@@ -200,13 +201,29 @@ class MemoryStore:
             self._history = History(self.sessions())
         return self._history
 
+    def history_at(self, now: datetime) -> History:
+        """The history as it stood at `now`: turns dated after it are left out."""
+        full = self.history
+        if all(t.timestamp <= now for t in full.turns):
+            return full
+        return History(
+            [
+                Session(s.id, s.timestamp, kept)
+                for s in full.sessions
+                if (kept := tuple(t for t in s.turns if t.timestamp <= now))
+            ]
+        )
+
     def search(self, query: str, now: datetime | None = None, k: int = 10) -> list[Turn]:
-        return self.retriever.search(self.history, query, naive(now or utc_now()), k)
+        """The k best turns said at or before `now` (default: the current UTC time)."""
+        now = naive(now or utc_now())
+        return self.retriever.search(self.history_at(now), query, now, k)
 
     def context(self, query: str, budget: int = 2048, now: datetime | None = None) -> Context:
-        """Relevant current facts first, then retrieved turns, within `budget` tokens."""
+        """Relevant facts as they stood at `now` first, then retrieved turns said at or
+        before `now`, within `budget` tokens. `now` defaults to the current UTC time."""
         now = naive(now or utc_now())
-        facts = self._relevant_facts(query)
+        facts = self._relevant_facts(query, now)
         lines: list[str] = []
         used = count_tokens(FACTS_HEADER) if facts else 0
         for f in facts:
@@ -217,7 +234,7 @@ class MemoryStore:
             used += cost
         if not lines:
             used = 0
-        ctx = self.retriever.context(self.history, query, now, budget - used)
+        ctx = self.retriever.context(self.history_at(now), query, now, budget - used)
         return replace(ctx, facts=tuple(lines), tokens=ctx.tokens + used, budget=budget)
 
     # ---- facts ------------------------------------------------------------------
@@ -297,16 +314,18 @@ class MemoryStore:
             for i, s, a, v, vf, sb, st, ex in rows
         ]
 
-    def _relevant_facts(self, query: str, k: int = 20) -> list[Fact]:
-        facts = self.current_facts()
+    def _relevant_facts(self, query: str, now: datetime, k: int = 20) -> list[Fact]:
+        facts = self.facts_as_of(now)
         if not facts:
             return []
         # A fact is indexed with the turn it came from, so "where do I work" finds an
         # 'employer' fact whose source turn says "I work at...".
+        ids = [f.source_turn for f in facts if f.source_turn]
         source = dict(
             self.db.execute(
                 "SELECT id, text FROM turns WHERE forgotten_at IS NULL AND id IN "
-                "(SELECT source_turn FROM facts WHERE superseded_by IS NULL)"
+                f"({','.join('?' * len(ids))})",
+                ids,
             ).fetchall()
         )
         index = BM25(

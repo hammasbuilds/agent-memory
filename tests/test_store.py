@@ -192,3 +192,33 @@ def test_default_clock_is_utc(monkeypatch):
         monkeypatch.setattr(m.retriever, "search", lambda h, q, now, k: seen.append(now) or [])
         m.search("kayak")
     assert seen == [datetime(2024, 7, 2, 3)]
+
+
+def test_context_and_search_see_memory_as_it_stood_at_now():
+    with MemoryStore() as m:
+        m.add_turn("s1", "user", "I work at Riverside hospital.", datetime(2024, 3, 5))
+        m.add_turn("s2", "user", "I moved jobs, I work at St Mary's now.", datetime(2024, 6, 20))
+        m.remember("user", "employer", "Riverside", datetime(2024, 3, 5), "s1:0")
+        m.remember("user", "employer", "St Mary's", datetime(2024, 6, 20), "s2:0")
+        april = datetime(2024, 4, 1)
+        ctx = m.context("where do I work", budget=200, now=april)
+        assert [f for f in ctx.facts if "employer" in f] == [
+            "user / employer: Riverside (since 2024-03-05)"
+        ]
+        assert [t.id for t in ctx.turns] == ["s1:0"]  # the June turn had not been said
+        assert "St Mary" not in ctx.render()
+        assert [t.id for t in m.search("work", now=april)] == ["s1:0"]
+        # later, both turns are visible and the newer fact wins
+        july = m.context("where do I work", budget=200, now=datetime(2024, 7, 1))
+        assert any("St Mary's" in f for f in july.facts)
+        assert {t.id for t in july.turns} == {"s1:0", "s2:0"}
+        assert {t.id for t in m.search("work", now=datetime(2024, 7, 1))} == {"s1:0", "s2:0"}
+
+
+def test_context_before_any_memory_is_empty():
+    with MemoryStore() as m:
+        m.add_turn("s1", "user", "I work at Riverside hospital.", datetime(2024, 3, 5))
+        m.remember("user", "employer", "Riverside", datetime(2024, 3, 5), "s1:0")
+        ctx = m.context("where do I work", budget=200, now=datetime(2024, 1, 1))
+        assert ctx.turns == () and ctx.facts == () and ctx.tokens == 0
+        assert m.search("work", now=datetime(2024, 1, 1)) == []
