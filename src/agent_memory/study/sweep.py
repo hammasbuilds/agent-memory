@@ -28,7 +28,7 @@ GRID = {
     "neighbours": (0, 1, 2),
 }
 HALF_LIVES = (7.0, 30.0, 90.0, 365.0, 1825.0)
-SENSITIVITY_HALF_LIVES = (7.0, 30.0, 90.0, 365.0)
+SENSITIVITY_HALF_LIVES = HALF_LIVES  # the whole dev grid, the dev-chosen value included
 WINDOW_SHARES = (0.05, 0.1, 0.25, 0.5, 0.75)
 
 
@@ -95,9 +95,11 @@ def dev_sweep(run: Run) -> dict:
 
 
 def recency_sensitivity(run: Run) -> None:
-    """Not tuning: the dev sweep already chose the half-life. This shows, on the test
-    split, what stronger recency buys knowledge-update questions and what it costs every
-    other type - the trade the dev sweep resolved."""
+    """Not tuning: the dev sweep already chose the half-life. This reports, on the test
+    split, every half-life of the dev grid (the dev-chosen one included) against plain
+    BM25: what stronger recency buys knowledge-update questions and what it costs every
+    other type. Quote the whole grid, not the best-looking row."""
+    run.chosen()  # the dev stage must have run: its choice is recorded beside the grid
     strats: dict[str, R.Strategy] = {"bm25_turns": R.bm25_turns}
     for hl in SENSITIVITY_HALF_LIVES:
         strats[f"recency_{hl:g}d"] = R.make_recency_bm25(hl)
@@ -111,6 +113,7 @@ def recency_sensitivity(run: Run) -> None:
         {
             "split": "test",
             "half_lives_days": SENSITIVITY_HALF_LIVES,
+            "dev_chosen_half_life_days": run.chosen().half_life_days,
             "summary": summarise(rows, "budget"),
             "versus_bm25_turns": [
                 c
@@ -149,6 +152,7 @@ def window_share_sensitivity(run: Run) -> None:
         {
             "split": "test",
             "recent_shares": WINDOW_SHARES,
+            "dev_chosen_recent_share": run.chosen().recent_share,
             "versus_bm25_turns": [
                 c
                 for name in strats

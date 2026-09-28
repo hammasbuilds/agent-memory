@@ -69,6 +69,8 @@ def test_retrieval_study_stages(run, monkeypatch):
     sweep.recency_sensitivity(run)
     rec = read(run, "recency_sensitivity.json")
     assert rec["split"] == "test" and "versus_bm25_turns" in rec
+    assert rec["dev_chosen_half_life_days"] == dev["recency_best"]["half_life_days"]
+    assert rec["dev_chosen_half_life_days"] in rec["half_lives_days"]  # the grid includes it
 
 
 def test_model_arm_stages_with_a_fake(run, tmp_path, monkeypatch):

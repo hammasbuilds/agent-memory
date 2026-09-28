@@ -12,7 +12,8 @@ Search over everything ever said:
     recency_bm25    BM25 over turns, multiplied by an exponential recency decay
     store           this library's retriever (`Retriever`): turn BM25 fused with its
                     session's BM25, a boost for turns inside a time window the question
-                    names, mild recency decay, and each hit's neighbouring turns
+                    names and mild recency decay. It can also bring each hit's
+                    neighbouring turns, but the dev sweep chose none (`neighbours=0`)
 """
 
 from __future__ import annotations

@@ -1,16 +1,15 @@
 """The retrieval study (no model): evidence recall and token cost of every memory
-strategy on LoCoMo and LongMemEval_S, by question type, with cluster-bootstrap CIs.
+strategy on LoCoMo and LongMemEval_S, by question type, with cluster-level (jackknife-t) CIs.
 
 Stages (each writes results/*.json; the code is in agent_memory/study/):
   diagnostics  history sizes, evidence position, lexical visibility, answer location,
                data-quality flags                        -> diagnostics.json
-  recency      recency half-life sensitivity on the test split
-                                                         -> recency_sensitivity.json
-  window-share recent-window share sensitivity on the test split
-                                                         -> window_share.json
   dev          choose the store retriever's knobs, the recency half-life and the window
-               share on the dev
-               split only                                -> dev_sweep.json
+               share on the dev split only               -> dev_sweep.json
+  recency      every half-life of the dev grid on the test split, the dev choice marked
+                                                         -> recency_sensitivity.json
+  window-share every recent-window share on the test split, the dev choice marked
+                                                         -> window_share.json
   main         every strategy x budget x top-k, both splits, comparisons and controls
                                                          -> retrieval.json, rows/*.jsonl.gz
   forgetting   what each forgetting / compaction policy costs in evidence
@@ -34,9 +33,9 @@ from agent_memory.study.sweep import dev_sweep, recency_sensitivity, window_shar
 
 STAGES = {
     "diagnostics": diagnostics_stage,
+    "dev": dev_sweep,
     "recency": recency_sensitivity,
     "window-share": window_share_sensitivity,
-    "dev": dev_sweep,
     "main": main_stage,
     "forgetting": forgetting_stage,
 }

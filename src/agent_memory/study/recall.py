@@ -30,6 +30,16 @@ COMPARISONS = [
     ("sliding_window", "random"),
 ]
 ABLATIONS = ("session", "recency", "window", "neighbours")
+# repeated with session-level credit: the headline and baseline comparisons, not the
+# recency / window-vs-random / ablation ones, whose question is turn-level
+SESSION_LEVEL_PAIRS = [
+    ("store", "bm25_turns"),
+    ("bm25_turns", "sliding_window"),
+    ("bm25_turns", "full_head"),
+    ("bm25_turns", "window_bm25"),
+    ("window_bm25", "sliding_window"),
+    ("bm25_sessions", "bm25_turns"),
+]
 
 
 def strategies(chosen: Chosen) -> dict[str, R.Strategy]:
@@ -101,7 +111,7 @@ def main_stage(run: Run) -> None:
             ],
             metric="recall_strict",
         ),
-        "session_level_comparisons": _comparisons(rows, pairs[:6], metric="session_recall"),
+        "session_level_comparisons": _comparisons(rows, SESSION_LEVEL_PAIRS, metric="session_recall"),
         "knowledge_update_newest": [
             c
             for c in _comparisons(
