@@ -80,9 +80,12 @@ def cmd_search(store: MemoryStore, args: argparse.Namespace) -> None:
 
 def cmd_context(store: MemoryStore, args: argparse.Namespace) -> None:
     ctx = store.context(args.query, args.budget, _when(args.now))
-    print(ctx.render() or "(nothing relevant in memory)")
+    if not ctx.turns and not ctx.facts:
+        print("(nothing relevant in memory)")
+        return
+    print(ctx.render())
     print(
-        f"\n-- {ctx.tokens} of {ctx.budget} tokens, {len(ctx.turns)} turns, {len(ctx.facts)} facts",
+        f"-- {ctx.tokens} of {ctx.budget} tokens, {len(ctx.turns)} turns, {len(ctx.facts)} facts",
         file=sys.stderr,
     )
 

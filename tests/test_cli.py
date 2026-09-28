@@ -239,3 +239,46 @@ def test_read_jsonl_accepts_numeric_session_ids(tmp_path):
     p = tmp_path / "s.jsonl"
     p.write_text(json.dumps({"session": 7, "time": "2024-01-01", "speaker": "u", "text": "hi"}))
     assert read_jsonl(p)[0].id == "7"
+
+
+@pytest.mark.parametrize(
+    ("line", "message"),
+    [
+        ({"session": "a", "speaker": "u", "text": "hi"}, "missing 'time'"),
+        ({"session": "a", "time": "2024-01-01"}, "missing 'speaker', 'text'"),
+        ({"session": "a", "time": 20240101, "speaker": "u", "text": "hi"}, "'time' must be"),
+        (["a", "list"], "expected a JSON object"),
+        ({"session": "a", "time": "yesterday", "speaker": "u", "text": "hi"}, "yesterday"),
+    ],
+)
+def test_jsonl_errors_name_the_problem_field(tmp_path, line, message):
+    from agent_memory.jsonl import read_jsonl
+
+    p = tmp_path / "m.jsonl"
+    p.write_text(json.dumps(line) + "\n", "utf-8")
+    with pytest.raises(ValueError, match=r"m\.jsonl:1: ") as e:
+        read_jsonl(p)
+    assert message in str(e.value)
+
+
+def test_a_session_of_only_empty_turns_is_not_stored(capsys, db, tmp_path):
+    p = tmp_path / "e.jsonl"
+    lines = [
+        {"session": "a", "time": "2024-01-01T09:00", "speaker": "user", "text": "hello there"},
+        {"session": "ghost", "time": "2024-01-02T09:00", "speaker": "user", "text": " "},
+    ]
+    p.write_text("\n".join(json.dumps(x) for x in lines), "utf-8")
+    assert "1 skipped: empty text" in run(capsys, "--db", db, "ingest", str(p)).out
+    assert "sessions           1" in run(capsys, "--db", db, "stats").out
+
+
+def test_context_output_is_clean(capsys, db, chat):
+    run(capsys, "--db", db, "ingest", str(chat))
+    empty = run(capsys, "--db", db, "context", "zebra xylophone", "--now", "2024-06-01")
+    assert empty.out == "(nothing relevant in memory)\n" and empty.err == ""
+    got = run(capsys, "--db", db, "context", "beagle", "--now", "2024-06-01")
+    assert got.out.startswith("[session a - 2024-01-10 09:00") and got.out.endswith("Biscuit.\n")
+    assert got.err.startswith("-- ") and got.err.count("\n") == 1
+    # --now before anything was said: nothing to show
+    early = run(capsys, "--db", db, "context", "beagle", "--now", "2023-01-01")
+    assert early.out == "(nothing relevant in memory)\n"
