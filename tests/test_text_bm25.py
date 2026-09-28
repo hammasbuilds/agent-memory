@@ -9,12 +9,11 @@ from agent_memory.text import count_tokens, stem, terms
 @pytest.mark.parametrize(
     ("word", "root"),
     [
-        ("paintings", "painting"),
+        ("paintings", "paint"),
         ("painted", "paint"),
         ("painting", "paint"),
         ("running", "run"),
         ("stories", "story"),
-        ("shares", "share"),
         ("boxes", "box"),
         ("cat", "cat"),
         ("2023", "2023"),
@@ -24,8 +23,45 @@ def test_stem(word, root):
     assert stem(word) == root
 
 
+@pytest.mark.parametrize(
+    "family",
+    [
+        # base forms ending in "e" meet their -ed / -ing forms (the round-5 review gap)
+        "move moved moves moving",
+        "like liked likes liking",
+        "love loved loves loving",
+        "dance danced dances dancing",
+        "bake baked bakes baking",
+        "hike hiked hikes hiking",
+        "share shared shares sharing",
+        "agree agreed agrees agreeing",
+        # a plural of an -ing noun reaches the verb
+        "paint paints painted painting paintings",
+        # doubled consonants: undoubled after -ing/-ed, except l, s, z, e, o
+        "run runs running",
+        "stop stopped stopping",
+        "fall falls falling",
+        "pass passed passes passing",
+        "boss bosses",
+        "study studied studies studying",
+    ],
+)
+def test_inflections_share_one_stem(family):
+    assert len({stem(w) for w in family.split()}) == 1, {w: stem(w) for w in family.split()}
+
+
+@pytest.mark.parametrize("word", ["campus", "tennis", "boss", "see", "use"])
+def test_words_ending_in_s_or_short_words_are_left_alone(word):
+    assert stem(word) == word
+
+
+def test_the_e_drop_does_not_merge_distinct_words():
+    assert stem("hiking") != stem("hiring")
+    assert stem("paint") != stem("pain")
+
+
 def test_terms_drop_stopwords_and_possessives():
-    assert terms("What did Caroline's dog eat?") == ["caroline", "dog", "eat"]
+    assert terms("What did Caroline's dog eat?") == ["carolin", "dog", "eat"]  # stemmed
     assert terms("") == []
 
 

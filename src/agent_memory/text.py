@@ -31,28 +31,57 @@ _STOPWORD_TEXT = (
 )
 STOPWORDS = frozenset(_STOPWORD_TEXT.split())
 
-_SUFFIXES = ("ingly", "edly", "ing", "ies", "ied", "ed", "ly", "es", "s")
+_INFLECTIONS = ("ingly", "edly", "ing", "ed", "ly")
+_KEEP_DOUBLE = frozenset("lszeo")  # "falling" -> "fall", "passed" -> "pass", "agreeing" -> "agree"
+MIN_STEM = 3
+
+
+def _plural(word: str) -> str:
+    """Drop a plural / third-person "s" ("paintings" -> "painting", "boxes" -> "box")."""
+    if word.endswith("ies") and len(word) - 3 >= MIN_STEM:
+        return word[:-3] + "y"
+    if word.endswith("es") and len(word) - 2 >= MIN_STEM:
+        root = word[:-2]
+        return root if root.endswith(("s", "x", "z", "ch", "sh")) else word[:-1]
+    # not "ss" (boss), "us" (campus) or "is" (tennis): those are not plurals
+    if word.endswith("s") and not word.endswith(("ss", "us", "is")) and len(word) > MIN_STEM:
+        return word[:-1]
+    return word
+
+
+def _inflection(word: str) -> tuple[str, str]:
+    """Drop one tense / adverb suffix ("painted" -> "paint", "running" -> "run");
+    returns the root and the suffix removed ("" if none)."""
+    if word.endswith("ied") and len(word) - 3 >= MIN_STEM:
+        return word[:-3] + "y", "ied"
+    for suf in _INFLECTIONS:
+        if word.endswith(suf) and len(word) - len(suf) >= MIN_STEM:
+            root = word[: -len(suf)]
+            doubled = len(root) > 3 and root[-1] == root[-2] and root[-1] not in _KEEP_DOUBLE
+            if suf in ("ing", "ed") and doubled:
+                return root[:-1], suf  # "running" -> "run"
+            return root, suf
+    return word, ""
 
 
 def stem(word: str) -> str:
-    """Strip one common English inflectional suffix, keeping at least 3 characters.
+    """A light suffix-stripping stemmer, keeping at least 3 characters.
 
-    Deliberately light: it conflates plural/tense variants ("paintings", "painted",
-    "painting" -> "paint") without the over-stemming of a full Porter stemmer.
+    It removes a plural "s", then one tense or adverb suffix, then a final "e", so the
+    inflections of a word land on one stem: "paintings", "painted", "painting" and
+    "paint" -> "paint"; "move", "moved", "moves", "moving" -> "mov"; "share", "shared",
+    "sharing" -> "shar". Dropping the "e" is what makes base forms ending in "e" meet
+    their "-ed"/"-ing" forms, whose "e" is already gone. Deliberately lighter than
+    Porter: no derivational suffixes ("-ness", "-ation"), so it over-stems less.
     """
-    if len(word) <= 3 or word.isdigit():
+    if len(word) <= MIN_STEM or word.isdigit():
         return word
-    for suf in _SUFFIXES:
-        if word.endswith(suf) and len(word) - len(suf) >= 3:
-            root = word[: -len(suf)]
-            if suf in ("ies", "ied"):
-                return root + "y"
-            if suf == "es" and not root.endswith(("s", "x", "z", "ch", "sh")):
-                return word[:-1]  # "shares" -> "share", not "shar"
-            if suf in ("ing", "ed") and len(root) > 3 and root[-1] == root[-2]:
-                return root[:-1]  # "running" -> "run"
-            return root
-    return word
+    root, suffix = _inflection(_plural(word))
+    # "-ed" already took the "e" ("moved" -> "mov"); an "e" left after it belongs to
+    # the root ("agreed" -> "agre", like "agree" -> "agre")
+    if not suffix.startswith("ed") and root.endswith("e") and len(root) > MIN_STEM:
+        root = root[:-1]
+    return root
 
 
 def terms(text: str) -> list[str]:
