@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
+from datetime import datetime
 
 from agent_memory.datasets import Turn, chrono
 from agent_memory.forget import truncate
@@ -29,7 +30,7 @@ FACTS_HEADER = "[known facts - newest value of each]"
 
 @dataclass(frozen=True)
 class Context:
-    turns: tuple[Turn, ...]  # chronological
+    turns: tuple[Turn, ...]  # grouped by session, sessions by earliest turn
     tokens: int  # everything render() returns, facts included
     budget: int
     facts: tuple[str, ...] = ()  # rendered fact lines, shown before the turns
@@ -55,7 +56,7 @@ class TokenCache:
 
     def __init__(self) -> None:
         self._line: dict[str, int] = {}
-        self._head: dict[str, int] = {}
+        self._head: dict[tuple[str, datetime], int] = {}
 
     def line(self, t: Turn) -> int:
         n = self._line.get(t.id)
@@ -64,9 +65,11 @@ class TokenCache:
         return n
 
     def header(self, t: Turn) -> int:
-        n = self._head.get(t.session_id)
+        """The cost of the session header `t` would render (it shows `t`'s own time)."""
+        key = (t.session_id, t.timestamp)
+        n = self._head.get(key)
         if n is None:
-            n = self._head[t.session_id] = count_tokens(header(t))
+            n = self._head[key] = count_tokens(header(t))
         return n
 
 
@@ -97,7 +100,11 @@ def pack(
     if budget < 0:
         raise ValueError(f"budget must be non-negative, got {budget}")
     chosen: dict[str, Turn] = {t.id: t for t in start.turns} if start else {}
-    sessions: set[str] = {t.session_id for t in chosen.values()}
+    # `render` heads each session with its earliest turn in context, so a turn earlier
+    # than the current head of its session also pays the change in header cost
+    heads: dict[str, Turn] = {}
+    for t in sorted(chosen.values(), key=chrono):
+        heads.setdefault(t.session_id, t)
     cut_ids: set[str] = set(start.cut) if start else set()
     used = start.tokens if start else 0
     for unit in units:
@@ -105,24 +112,30 @@ def pack(
         for t in unit:
             if t.id in chosen:
                 continue
-            head = 0 if t.session_id in sessions else cache.header(t)
+            old = heads.get(t.session_id)
+            new_head = old is None or chrono(t) < chrono(old)
+            head = cache.header(t) - (cache.header(old) if old else 0) if new_head else 0
             cost = cache.line(t) + head
             if used + cost > budget:
                 full = False
                 if positional and (cut := _cut_to_fit(t, budget - used - head, cache)):
                     chosen[t.id], cut_cost = cut
                     cut_ids.add(t.id)
-                    sessions.add(t.session_id)
+                    if new_head:
+                        heads[t.session_id] = t
                     used += cut_cost + head
                     break
                 continue
             chosen[t.id] = t
-            sessions.add(t.session_id)
+            if new_head:
+                heads[t.session_id] = t
             used += cost
         if not full and positional:
             break
-    ordered = tuple(sorted(chosen.values(), key=chrono))
-    return Context(ordered, used, budget, cut=frozenset(cut_ids))
+    # one block per session (one header each, as costed), sessions in order of their
+    # earliest turn, turns in order within a session
+    ordered = sorted(chosen.values(), key=lambda t: (chrono(heads[t.session_id]), chrono(t)))
+    return Context(tuple(ordered), used, budget, cut=frozenset(cut_ids))
 
 
 def _cut_to_fit(t: Turn, room: int, cache: TokenCache) -> tuple[Turn, int] | None:

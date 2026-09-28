@@ -120,3 +120,45 @@ def test_pack_rejects_negative_budget(history):
 def test_context_facts_render_first():
     ctx = Context((), 0, 10, facts=("sam / job: nurse (since 2024-01-01)",))
     assert ctx.render().splitlines()[1].startswith("sam / job")
+
+
+def _turn(tid, sid, when, text, seq):
+    from agent_memory.datasets import Turn
+
+    return Turn(tid, sid, "user", text, when, seq)
+
+
+def test_header_is_costed_from_the_turn_it_is_rendered_from():
+    # review probe: one session spanning a weekday change. The later turn is packed
+    # first (header "Saturday"), then the earlier one, which moves the rendered header
+    # to "Wednesday" - one token dearer. Before the fix, budget 27 rendered 28 tokens.
+    early = _turn("s:0", "s", datetime(2024, 1, 3, 23, 59), "hello there friend", 0)
+    late = _turn("s:1", "s", datetime(2024, 1, 6, 0, 1), "a later remark", 1)
+    whole = pack([[late], [early]], 10**6, TokenCache())
+    assert whole.tokens == count_tokens(whole.render()) == 28
+    ctx = pack([[late], [early]], 27, TokenCache())
+    assert ctx.tokens == count_tokens(ctx.render()) <= 27
+
+
+def test_tokens_match_the_render_for_any_packing_order():
+    rng = random.Random(1)
+    day = datetime(2024, 1, 1)
+    turns = [
+        _turn(
+            f"{sid}:{i}",
+            sid,
+            day.replace(day=1 + rng.randrange(28), hour=rng.randrange(24)),
+            " ".join("word" for _ in range(rng.randrange(1, 12))),
+            i,
+        )
+        for sid in ("a", "b", "c")
+        for i in range(6)
+    ]
+    for trial in range(200):
+        rng.shuffle(turns)
+        budget = rng.randrange(0, 200)
+        ctx = pack([[t] for t in turns], budget, TokenCache(), positional=trial % 2 == 0)
+        assert ctx.tokens == count_tokens(ctx.render()) <= budget
+        # sessions interleaved in time still render one header each
+        sids = [t.session_id for t in ctx.turns]
+        assert len([s for i, s in enumerate(sids) if i == 0 or sids[i - 1] != s]) == len(set(sids))
