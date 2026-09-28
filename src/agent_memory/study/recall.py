@@ -111,7 +111,9 @@ def main_stage(run: Run) -> None:
             ],
             metric="recall_strict",
         ),
-        "session_level_comparisons": _comparisons(rows, SESSION_LEVEL_PAIRS, metric="session_recall"),
+        "session_level_comparisons": _comparisons(
+            rows, SESSION_LEVEL_PAIRS, metric="session_recall"
+        ),
         "knowledge_update_newest": [
             c
             for c in _comparisons(
