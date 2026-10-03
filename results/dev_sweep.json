@@ -14,9 +14,9 @@
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.7316,
-    "longmemeval": 0.8842,
-    "macro": 0.8079
+    "locomo": 0.7264,
+    "longmemeval": 0.8897,
+    "macro": 0.8081
    }
   },
   {
@@ -28,443 +28,401 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8337,
-    "longmemeval": 0.8223,
+    "locomo": 0.8463,
+    "longmemeval": 0.8205,
+    "macro": 0.8334
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8518,
+    "longmemeval": 0.777,
+    "macro": 0.8144
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7304,
+    "longmemeval": 0.8897,
+    "macro": 0.8101
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8523,
+    "longmemeval": 0.8422,
+    "macro": 0.8472
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8553,
+    "longmemeval": 0.7661,
+    "macro": 0.8107
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.738,
+    "longmemeval": 0.8879,
+    "macro": 0.813
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.832,
+    "longmemeval": 0.8241,
     "macro": 0.828
    }
   },
   {
    "config": {
     "session_weight": 0.0,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8497,
-    "longmemeval": 0.7607,
-    "macro": 0.8052
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.7356,
-    "longmemeval": 0.8879,
-    "macro": 0.8117
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8414,
-    "longmemeval": 0.8223,
-    "macro": 0.8318
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8531,
-    "longmemeval": 0.7498,
-    "macro": 0.8014
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.7372,
-    "longmemeval": 0.8788,
-    "macro": 0.808
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8226,
-    "longmemeval": 0.8259,
-    "macro": 0.8242
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
     "half_life_days": 90.0,
     "recency_floor": 0.5,
     "window_boost": 0.0,
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8303,
-    "longmemeval": 0.7607,
-    "macro": 0.7955
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.742,
-    "longmemeval": 0.8861,
-    "macro": 0.814
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8275,
-    "longmemeval": 0.8259,
-    "macro": 0.8267
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8346,
-    "longmemeval": 0.7607,
-    "macro": 0.7976
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.7295,
-    "longmemeval": 0.8842,
-    "macro": 0.8069
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8312,
-    "longmemeval": 0.8223,
-    "macro": 0.8268
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.844,
-    "longmemeval": 0.7607,
-    "macro": 0.8024
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.7353,
-    "longmemeval": 0.8879,
-    "macro": 0.8116
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8395,
-    "longmemeval": 0.8223,
-    "macro": 0.8309
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.0,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8491,
-    "longmemeval": 0.7498,
-    "macro": 0.7994
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8085,
-    "longmemeval": 0.848,
-    "macro": 0.8282
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8435,
-    "longmemeval": 0.8132,
-    "macro": 0.8284
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8544,
-    "longmemeval": 0.7716,
-    "macro": 0.813
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8151,
-    "longmemeval": 0.8625,
-    "macro": 0.8388
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8461,
-    "longmemeval": 0.8241,
-    "macro": 0.8351
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8561,
-    "longmemeval": 0.7607,
-    "macro": 0.8084
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8019,
-    "longmemeval": 0.8516,
-    "macro": 0.8267
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8381,
-    "longmemeval": 0.8132,
-    "macro": 0.8256
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8353,
+    "locomo": 0.8352,
     "longmemeval": 0.7716,
     "macro": 0.8034
    }
   },
   {
    "config": {
-    "session_weight": 0.15,
+    "session_weight": 0.0,
     "half_life_days": 90.0,
     "recency_floor": 0.5,
     "window_boost": 1.0,
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.8085,
-    "longmemeval": 0.8625,
-    "macro": 0.8355
+    "locomo": 0.7428,
+    "longmemeval": 0.8915,
+    "macro": 0.8172
    }
   },
   {
    "config": {
-    "session_weight": 0.15,
+    "session_weight": 0.0,
     "half_life_days": 90.0,
     "recency_floor": 0.5,
     "window_boost": 1.0,
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.843,
-    "longmemeval": 0.8241,
-    "macro": 0.8336
+    "locomo": 0.8369,
+    "longmemeval": 0.8458,
+    "macro": 0.8414
    }
   },
   {
    "config": {
-    "session_weight": 0.15,
+    "session_weight": 0.0,
     "half_life_days": 90.0,
     "recency_floor": 0.5,
     "window_boost": 1.0,
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8396,
-    "longmemeval": 0.7607,
-    "macro": 0.8002
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8087,
-    "longmemeval": 0.8516,
-    "macro": 0.8301
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8446,
-    "longmemeval": 0.8096,
-    "macro": 0.8271
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.15,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8552,
+    "locomo": 0.8412,
     "longmemeval": 0.7716,
-    "macro": 0.8134
+    "macro": 0.8064
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7328,
+    "longmemeval": 0.8897,
+    "macro": 0.8113
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8401,
+    "longmemeval": 0.8205,
+    "macro": 0.8303
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8492,
+    "longmemeval": 0.777,
+    "macro": 0.8131
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7368,
+    "longmemeval": 0.8933,
+    "macro": 0.8151
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8484,
+    "longmemeval": 0.8422,
+    "macro": 0.8453
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.0,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8543,
+    "longmemeval": 0.7661,
+    "macro": 0.8102
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8001,
+    "longmemeval": 0.8625,
+    "macro": 0.8313
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8503,
+    "longmemeval": 0.8277,
+    "macro": 0.839
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8633,
+    "longmemeval": 0.7879,
+    "macro": 0.8256
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8067,
+    "longmemeval": 0.877,
+    "macro": 0.8418
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8529,
+    "longmemeval": 0.8495,
+    "macro": 0.8512
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8633,
+    "longmemeval": 0.777,
+    "macro": 0.8201
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.7964,
+    "longmemeval": 0.8661,
+    "macro": 0.8313
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8469,
+    "longmemeval": 0.8313,
+    "macro": 0.8391
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8412,
+    "longmemeval": 0.7824,
+    "macro": 0.8118
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.803,
+    "longmemeval": 0.877,
+    "macro": 0.84
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8518,
+    "longmemeval": 0.8531,
+    "macro": 0.8524
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8455,
+    "longmemeval": 0.7716,
+    "macro": 0.8085
    }
   },
   {
@@ -472,12 +430,26 @@
     "session_weight": 0.15,
     "half_life_days": 365.0,
     "recency_floor": 0.5,
-    "window_boost": 1.0,
+    "window_boost": 0.0,
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.8153,
+    "locomo": 0.7956,
     "longmemeval": 0.8661,
+    "macro": 0.8308
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8536,
+    "longmemeval": 0.8277,
     "macro": 0.8407
    }
   },
@@ -486,13 +458,41 @@
     "session_weight": 0.15,
     "half_life_days": 365.0,
     "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8595,
+    "longmemeval": 0.7879,
+    "macro": 0.8237
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8022,
+    "longmemeval": 0.8806,
+    "macro": 0.8414
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.15,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
     "window_boost": 1.0,
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8489,
-    "longmemeval": 0.8205,
-    "macro": 0.8347
+    "locomo": 0.8562,
+    "longmemeval": 0.8495,
+    "macro": 0.8528
    }
   },
   {
@@ -504,9 +504,9 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8569,
-    "longmemeval": 0.7607,
-    "macro": 0.8088
+    "locomo": 0.8612,
+    "longmemeval": 0.777,
+    "macro": 0.8191
    }
   },
   {
@@ -518,51 +518,51 @@
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.8286,
-    "longmemeval": 0.8589,
-    "macro": 0.8438
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8481,
-    "longmemeval": 0.8241,
-    "macro": 0.8361
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.852,
-    "longmemeval": 0.7734,
-    "macro": 0.8127
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8352,
+    "locomo": 0.8259,
     "longmemeval": 0.8697,
-    "macro": 0.8525
+    "macro": 0.8478
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.856,
+    "longmemeval": 0.8205,
+    "macro": 0.8382
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8568,
+    "longmemeval": 0.7824,
+    "macro": 0.8196
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8325,
+    "longmemeval": 0.8806,
+    "macro": 0.8566
    }
   },
   {
@@ -574,9 +574,9 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8507,
-    "longmemeval": 0.8241,
-    "macro": 0.8374
+    "locomo": 0.8586,
+    "longmemeval": 0.8422,
+    "macro": 0.8504
    }
   },
   {
@@ -588,9 +588,9 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.852,
-    "longmemeval": 0.7625,
-    "macro": 0.8073
+    "locomo": 0.8568,
+    "longmemeval": 0.7716,
+    "macro": 0.8142
    }
   },
   {
@@ -602,9 +602,9 @@
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.8177,
-    "longmemeval": 0.8661,
-    "macro": 0.8419
+    "locomo": 0.8142,
+    "longmemeval": 0.8716,
+    "macro": 0.8429
    }
   },
   {
@@ -616,9 +616,9 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8428,
-    "longmemeval": 0.8241,
-    "macro": 0.8335
+    "locomo": 0.8489,
+    "longmemeval": 0.8368,
+    "macro": 0.8428
    }
   },
   {
@@ -630,9 +630,9 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8454,
-    "longmemeval": 0.7534,
-    "macro": 0.7994
+    "locomo": 0.8497,
+    "longmemeval": 0.7824,
+    "macro": 0.816
    }
   },
   {
@@ -644,9 +644,9 @@
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.8199,
-    "longmemeval": 0.877,
-    "macro": 0.8484
+    "locomo": 0.8182,
+    "longmemeval": 0.8716,
+    "macro": 0.8449
    }
   },
   {
@@ -658,9 +658,9 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8477,
-    "longmemeval": 0.8241,
-    "macro": 0.8359
+    "locomo": 0.8537,
+    "longmemeval": 0.8368,
+    "macro": 0.8453
    }
   },
   {
@@ -672,9 +672,9 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.848,
-    "longmemeval": 0.7426,
-    "macro": 0.7953
+    "locomo": 0.8523,
+    "longmemeval": 0.7716,
+    "macro": 0.8119
    }
   },
   {
@@ -686,51 +686,51 @@
     "neighbours": 0
    },
    "recall": {
-    "locomo": 0.835,
-    "longmemeval": 0.8625,
-    "macro": 0.8488
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8516,
-    "longmemeval": 0.8241,
-    "macro": 0.8378
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.859,
-    "longmemeval": 0.7734,
-    "macro": 0.8162
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.3,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.839,
+    "locomo": 0.8313,
     "longmemeval": 0.8734,
-    "macro": 0.8562
+    "macro": 0.8523
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8567,
+    "longmemeval": 0.8259,
+    "macro": 0.8413
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8624,
+    "longmemeval": 0.7824,
+    "macro": 0.8224
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.3,
+    "half_life_days": 365.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8353,
+    "longmemeval": 0.8879,
+    "macro": 0.8616
    }
   },
   {
@@ -742,9 +742,9 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8541,
-    "longmemeval": 0.8241,
-    "macro": 0.8391
+    "locomo": 0.8593,
+    "longmemeval": 0.8259,
+    "macro": 0.8426
    }
   },
   {
@@ -756,233 +756,233 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.859,
-    "longmemeval": 0.7625,
-    "macro": 0.8107
+    "locomo": 0.8642,
+    "longmemeval": 0.7716,
+    "macro": 0.8179
    }
   },
   {
    "config": {
     "session_weight": 0.6,
     "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8437,
+    "longmemeval": 0.877,
+    "macro": 0.8603
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8585,
+    "longmemeval": 0.8295,
+    "macro": 0.844
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8623,
+    "longmemeval": 0.8042,
+    "macro": 0.8333
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8478,
+    "longmemeval": 0.8734,
+    "macro": 0.8606
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8619,
+    "longmemeval": 0.8295,
+    "macro": 0.8457
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 0.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.864,
+    "longmemeval": 0.7933,
+    "macro": 0.8286
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8348,
+    "longmemeval": 0.877,
+    "macro": 0.8559
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8544,
+    "longmemeval": 0.8458,
+    "macro": 0.8501
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 0.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8475,
+    "longmemeval": 0.7906,
+    "macro": 0.8191
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 0
+   },
+   "recall": {
+    "locomo": 0.8371,
+    "longmemeval": 0.877,
+    "macro": 0.857
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 1
+   },
+   "recall": {
+    "locomo": 0.8586,
+    "longmemeval": 0.8458,
+    "macro": 0.8522
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 90.0,
+    "recency_floor": 0.5,
+    "window_boost": 1.0,
+    "neighbours": 2
+   },
+   "recall": {
+    "locomo": 0.8526,
+    "longmemeval": 0.7797,
+    "macro": 0.8161
+   }
+  },
+  {
+   "config": {
+    "session_weight": 0.6,
+    "half_life_days": 365.0,
     "recency_floor": 0.5,
     "window_boost": 0.0,
     "neighbours": 0
    },
    "recall": {
     "locomo": 0.8435,
-    "longmemeval": 0.8607,
-    "macro": 0.8521
+    "longmemeval": 0.8734,
+    "macro": 0.8584
    }
   },
   {
    "config": {
     "session_weight": 0.6,
-    "half_life_days": 0.0,
+    "half_life_days": 365.0,
     "recency_floor": 0.5,
     "window_boost": 0.0,
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8574,
-    "longmemeval": 0.8168,
-    "macro": 0.8371
+    "locomo": 0.8578,
+    "longmemeval": 0.8295,
+    "macro": 0.8437
    }
   },
   {
    "config": {
     "session_weight": 0.6,
-    "half_life_days": 0.0,
+    "half_life_days": 365.0,
     "recency_floor": 0.5,
     "window_boost": 0.0,
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8558,
-    "longmemeval": 0.8078,
-    "macro": 0.8318
+    "locomo": 0.8616,
+    "longmemeval": 0.7987,
+    "macro": 0.8301
    }
   },
   {
    "config": {
     "session_weight": 0.6,
-    "half_life_days": 0.0,
+    "half_life_days": 365.0,
     "recency_floor": 0.5,
     "window_boost": 1.0,
     "neighbours": 0
    },
    "recall": {
     "locomo": 0.8475,
-    "longmemeval": 0.8571,
-    "macro": 0.8523
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8609,
-    "longmemeval": 0.8168,
-    "macro": 0.8388
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 0.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8575,
-    "longmemeval": 0.7969,
-    "macro": 0.8272
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8295,
-    "longmemeval": 0.8571,
-    "macro": 0.8433
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8486,
-    "longmemeval": 0.8332,
-    "macro": 0.8409
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8434,
-    "longmemeval": 0.796,
-    "macro": 0.8197
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8318,
-    "longmemeval": 0.8571,
-    "macro": 0.8444
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8546,
-    "longmemeval": 0.8332,
-    "macro": 0.8439
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 90.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8485,
-    "longmemeval": 0.7851,
-    "macro": 0.8168
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8413,
-    "longmemeval": 0.8571,
-    "macro": 0.8492
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 1
-   },
-   "recall": {
-    "locomo": 0.8562,
-    "longmemeval": 0.8168,
-    "macro": 0.8365
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 0.0,
-    "neighbours": 2
-   },
-   "recall": {
-    "locomo": 0.8534,
-    "longmemeval": 0.8024,
-    "macro": 0.8279
-   }
-  },
-  {
-   "config": {
-    "session_weight": 0.6,
-    "half_life_days": 365.0,
-    "recency_floor": 0.5,
-    "window_boost": 1.0,
-    "neighbours": 0
-   },
-   "recall": {
-    "locomo": 0.8453,
-    "longmemeval": 0.8534,
-    "macro": 0.8494
+    "longmemeval": 0.8697,
+    "macro": 0.8586
    }
   },
   {
@@ -994,9 +994,9 @@
     "neighbours": 1
    },
    "recall": {
-    "locomo": 0.8605,
-    "longmemeval": 0.8168,
-    "macro": 0.8387
+    "locomo": 0.8621,
+    "longmemeval": 0.8295,
+    "macro": 0.8458
    }
   },
   {
@@ -1008,9 +1008,9 @@
     "neighbours": 2
    },
    "recall": {
-    "locomo": 0.8551,
-    "longmemeval": 0.7951,
-    "macro": 0.8251
+    "locomo": 0.8633,
+    "longmemeval": 0.7915,
+    "macro": 0.8274
    }
   }
  ],
@@ -1023,109 +1023,109 @@
    "neighbours": 0
   },
   "recall": {
-   "locomo": 0.839,
-   "longmemeval": 0.8734,
-   "macro": 0.8562
+   "locomo": 0.8353,
+   "longmemeval": 0.8879,
+   "macro": 0.8616
   }
  },
  "recency_grid": [
   {
    "half_life_days": 7.0,
    "recall": {
-    "locomo": 0.2343,
-    "longmemeval": 0.7824,
-    "macro": 0.5083
+    "locomo": 0.2338,
+    "longmemeval": 0.8042,
+    "macro": 0.519
    }
   },
   {
    "half_life_days": 30.0,
    "recall": {
-    "locomo": 0.5387,
-    "longmemeval": 0.8571,
-    "macro": 0.6979
+    "locomo": 0.5331,
+    "longmemeval": 0.8716,
+    "macro": 0.7024
    }
   },
   {
    "half_life_days": 90.0,
    "recall": {
-    "locomo": 0.7012,
-    "longmemeval": 0.877,
+    "locomo": 0.6958,
+    "longmemeval": 0.8824,
     "macro": 0.7891
    }
   },
   {
    "half_life_days": 365.0,
    "recall": {
-    "locomo": 0.7366,
-    "longmemeval": 0.8734,
-    "macro": 0.805
+    "locomo": 0.7335,
+    "longmemeval": 0.8788,
+    "macro": 0.8062
    }
   },
   {
    "half_life_days": 1825.0,
    "recall": {
-    "locomo": 0.7295,
-    "longmemeval": 0.8842,
-    "macro": 0.8069
+    "locomo": 0.7315,
+    "longmemeval": 0.8897,
+    "macro": 0.8106
    }
   }
  ],
  "recency_best": {
   "half_life_days": 1825.0,
   "recall": {
-   "locomo": 0.7295,
-   "longmemeval": 0.8842,
-   "macro": 0.8069
+   "locomo": 0.7315,
+   "longmemeval": 0.8897,
+   "macro": 0.8106
   }
  },
  "window_share_grid": [
   {
    "recent_share": 0.05,
    "recall": {
-    "locomo": 0.7256,
-    "longmemeval": 0.8842,
-    "macro": 0.8049
+    "locomo": 0.725,
+    "longmemeval": 0.8697,
+    "macro": 0.7974
    }
   },
   {
    "recent_share": 0.1,
    "recall": {
-    "locomo": 0.7213,
-    "longmemeval": 0.8625,
-    "macro": 0.7919
+    "locomo": 0.7211,
+    "longmemeval": 0.8643,
+    "macro": 0.7927
    }
   },
   {
    "recent_share": 0.25,
    "recall": {
-    "locomo": 0.7136,
+    "locomo": 0.7173,
     "longmemeval": 0.8643,
-    "macro": 0.789
+    "macro": 0.7908
    }
   },
   {
    "recent_share": 0.5,
    "recall": {
-    "locomo": 0.6864,
+    "locomo": 0.6937,
     "longmemeval": 0.8571,
-    "macro": 0.7717
+    "macro": 0.7754
    }
   },
   {
    "recent_share": 0.75,
    "recall": {
-    "locomo": 0.6358,
-    "longmemeval": 0.79,
-    "macro": 0.7129
+    "locomo": 0.6434,
+    "longmemeval": 0.8045,
+    "macro": 0.7239
    }
   }
  ],
  "window_share_best": {
   "recent_share": 0.05,
   "recall": {
-   "locomo": 0.7256,
-   "longmemeval": 0.8842,
-   "macro": 0.8049
+   "locomo": 0.725,
+   "longmemeval": 0.8697,
+   "macro": 0.7974
   }
  }
 }

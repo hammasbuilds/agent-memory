@@ -15,39 +15,39 @@
   "lexical_visibility": {
    "abstention": {
     "evidence_turns": 460,
-    "evidence_turns_sharing_no_word": 0.1565,
+    "evidence_turns_sharing_no_word": 0.15,
     "questions": 446,
-    "questions_with_no_visible_evidence": 0.1502
+    "questions_with_no_visible_evidence": 0.1435
    },
    "all types": {
     "evidence_turns": 2820,
-    "evidence_turns_sharing_no_word": 0.2738,
+    "evidence_turns_sharing_no_word": 0.2624,
     "questions": 1982,
-    "questions_with_no_visible_evidence": 0.1615
+    "questions_with_no_visible_evidence": 0.1544
    },
    "multi-hop": {
     "evidence_turns": 882,
-    "evidence_turns_sharing_no_word": 0.4116,
+    "evidence_turns_sharing_no_word": 0.3923,
     "questions": 282,
-    "questions_with_no_visible_evidence": 0.1879
+    "questions_with_no_visible_evidence": 0.1773
    },
    "open-domain": {
     "evidence_turns": 208,
-    "evidence_turns_sharing_no_word": 0.5817,
+    "evidence_turns_sharing_no_word": 0.5721,
     "questions": 92,
-    "questions_with_no_visible_evidence": 0.4022
+    "questions_with_no_visible_evidence": 0.413
    },
    "single-hop": {
     "evidence_turns": 895,
-    "evidence_turns_sharing_no_word": 0.1642,
+    "evidence_turns_sharing_no_word": 0.1553,
     "questions": 841,
-    "questions_with_no_visible_evidence": 0.1427
+    "questions_with_no_visible_evidence": 0.1332
    },
    "temporal": {
     "evidence_turns": 375,
-    "evidence_turns_sharing_no_word": 0.184,
+    "evidence_turns_sharing_no_word": 0.1787,
     "questions": 321,
-    "questions_with_no_visible_evidence": 0.134
+    "questions_with_no_visible_evidence": 0.1308
    }
   },
   "evidence_position": {
@@ -116,8 +116,8 @@
     "n": 446
    },
    "multi-hop": {
-    "elsewhere": 0.5461,
-    "in_text": 0.4428,
+    "elsewhere": 0.5351,
+    "in_text": 0.4539,
     "needs_date": 0.0111,
     "n": 271
    },
@@ -127,8 +127,8 @@
     "n": 87
    },
    "single-hop": {
-    "elsewhere": 0.1868,
-    "in_text": 0.8108,
+    "elsewhere": 0.1713,
+    "in_text": 0.8263,
     "needs_date": 0.0024,
     "n": 835
    },
@@ -145,6 +145,17 @@
    "future_sessions": 0,
    "future_answer_sessions": 0,
    "questions_with_future_answer_sessions": 0
+  },
+  "counts": {
+   "questions_without_evidence_turns": 4,
+   "turns": 5882,
+   "empty_turns_skipped_at_ingest": 0
+  },
+  "evidence_id_audit": {
+   "evidence_strings": 2815,
+   "exact": 2806,
+   "repaired": 6,
+   "unresolvable": 3
   },
   "data_quality_flags": {}
  },
@@ -170,19 +181,19 @@
    },
    "all types": {
     "evidence_turns": 896,
-    "evidence_turns_sharing_no_word": 0.0748,
+    "evidence_turns_sharing_no_word": 0.0636,
     "questions": 479,
-    "questions_with_no_visible_evidence": 0.0376
+    "questions_with_no_visible_evidence": 0.0313
    },
    "knowledge-update": {
     "evidence_turns": 144,
-    "evidence_turns_sharing_no_word": 0.0069,
+    "evidence_turns_sharing_no_word": 0,
     "questions": 72,
     "questions_with_no_visible_evidence": 0
    },
    "multi-hop": {
     "evidence_turns": 323,
-    "evidence_turns_sharing_no_word": 0.1238,
+    "evidence_turns_sharing_no_word": 0.1053,
     "questions": 121,
     "questions_with_no_visible_evidence": 0.0248
    },
@@ -194,9 +205,9 @@
    },
    "single-hop": {
     "evidence_turns": 66,
-    "evidence_turns_sharing_no_word": 0.0303,
+    "evidence_turns_sharing_no_word": 0.0152,
     "questions": 64,
-    "questions_with_no_visible_evidence": 0.0312
+    "questions_with_no_visible_evidence": 0.0156
    },
    "single-hop-assistant": {
     "evidence_turns": 56,
@@ -206,9 +217,9 @@
    },
    "temporal": {
     "evidence_turns": 253,
-    "evidence_turns_sharing_no_word": 0.0632,
+    "evidence_turns_sharing_no_word": 0.0553,
     "questions": 127,
-    "questions_with_no_visible_evidence": 0.063
+    "questions_with_no_visible_evidence": 0.0472
    }
   },
   "evidence_position": {
@@ -336,6 +347,11 @@
    "future_sessions": 1474,
    "future_answer_sessions": 75,
    "questions_with_future_answer_sessions": 44
+  },
+  "counts": {
+   "questions_without_evidence_turns": 21,
+   "turns": 246607,
+   "empty_turns_skipped_at_ingest": 12
   },
   "data_quality_flags": {
    "duplicate_sessions": {
