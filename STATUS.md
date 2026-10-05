@@ -97,8 +97,8 @@ uv run ruff check . && uv run ruff format --check .
 uv run python scripts/fetch_data.py                       # data/raw/*, sha256-verified
 uv run python scripts/run_retrieval_study.py              # every results/*.json except token_calibration
 #   or stage by stage: --stage diagnostics | recency | window-share | dev | main | forgetting
-PYTHONPATH=src /d/github/rag-forge/.venv/Scripts/python.exe scripts/calibrate_tokens.py \
-    --qwen /d/github/harness-ablation/data/qwen2.5-coder-tokenizer.json.gz   # token_calibration.json
+PYTHONPATH=src python scripts/calibrate_tokens.py   # needs a Python with the tokenizers package \
+    --qwen path/to/qwen2.5-coder-tokenizer.json.gz           # token_calibration.json
 uv run python demo.py
 bash scripts/run_models.sh --dry-run                      # model arm job list
 bash scripts/run_models.sh                                # model arm (GPU; not run here)
