@@ -64,9 +64,9 @@ whether the evidence a question needs made it into a 2,048-token context.
 > only 34% / 50% of questions) or never named by the question (open-domain: 58% of its
 > evidence turns share no content word with it).**
 
-The model arm - LLM fact extraction, `nomic-embed-text` hybrid retrieval, and answer
-accuracy with `qwen2.5:14b-instruct` - is built, tested with fakes, and queued; none of
-the numbers below needed a model. See [STATUS.md](STATUS.md).
+**Status:** retrieval study complete - none of the numbers below needed a model. Model
+arm (LLM fact extraction, `nomic-embed-text` hybrid retrieval, answer accuracy with
+`qwen2.5:14b-instruct`): built and tested against a fake; GPU run pending.
 
 ## Findings
 
@@ -114,7 +114,7 @@ What the two answer keys say, and what the data-quality checks changed:
 Two things the headline is not:
 
 - **Not answer accuracy.** Evidence in context is necessary, not sufficient; whether
-  `qwen2.5:14b-instruct` answers correctly from it is the queued model arm.
+  `qwen2.5:14b-instruct` answers correctly from it is the model arm's question.
 - **Not a tuned leaderboard number.** The store's knobs were chosen on the dev split only
   ([`results/dev_sweep.json`](results/dev_sweep.json), 72 configurations, macro-averaged
   over the two datasets). On LongMemEval's dev split the winner scores below the variant
@@ -260,8 +260,13 @@ uv run python demo.py                              # part 1 needs nothing
 uv run python scripts/fetch_data.py                # LoCoMo + LongMemEval oracle & S (~295 MB)
 uv run python demo.py                              # now with part 2
 uv run python scripts/run_retrieval_study.py       # every results/*.json (~35 min, 1 core)
-bash scripts/run_models.sh --dry-run               # the queued model arm: jobs and call counts
+bash scripts/run_models.sh --dry-run               # the model arm: jobs and call counts
+bash scripts/run_models.sh                         # the model arm itself (GPU + Ollama)
 ```
+
+`results/token_calibration.json` comes from `scripts/calibrate_tokens.py`, which needs a
+Python with the `tokenizers` package and the Qwen2.5-Coder tokenizer file:
+`PYTHONPATH=src python scripts/calibrate_tokens.py --qwen path/to/qwen2.5-coder-tokenizer.json.gz`.
 
 As a library:
 
@@ -394,11 +399,11 @@ jackknife-t interval against a hand calculation.
 ## What this does NOT do
 
 - **It does not measure answer accuracy yet.** Evidence recall is an upper bound on what a
-  reader can use; the answer-accuracy arm is built and queued, not run. When it runs, the
+  reader can use; the answer-accuracy arm is built but its GPU run is pending. When it runs, the
   answering model also judges by default - self-judging is a known bias; `--judge` takes
   another model.
 - **It does not extract facts without a model.** The versioned fact store is complete and
-  tested, but facts come from `remember()` / the CLI or from the queued LLM extractor. No
+  tested, but facts come from `remember()` / the CLI or from the model arm's LLM extractor. No
   retrieval number above uses facts.
 - **Its token counts are approximate, and not equally so for every strategy.**
   Against the Qwen2.5-Coder tokeniser (same BPE vocabulary as the answer model, assumed
